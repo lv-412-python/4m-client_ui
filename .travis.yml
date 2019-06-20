@@ -1,0 +1,16 @@
+language: node_js
+
+node_js:
+  - "stable"
+
+cache:
+  directories:
+  - node_modules
+
+install:
+  - nvm install stable
+  - npm install
+
+script:
+  - eslint --config src/.eslintrc.js src
+  - npm run build
