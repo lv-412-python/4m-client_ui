@@ -1,0 +1,40 @@
+.Answers-header {
+    background-color:#795A70;
+    max-height: 2%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 1vmin);
+    color: white;
+  }
+  
+  form{
+      margin-left: 36%;
+  }
+
+  button{
+      margin-left: 20%;
+  }
+
+  table{
+    margin: auto;
+  }
+  
+  input{
+    width: 45px;
+  }
+  
+  label{
+    margin-left: 20px;
+  }
+  
+  tr {
+    background-color: #A3B5C1;
+    min-width: 100px;
+  }
+  
+  td {
+    background-color: #C8DCD2;
+    min-width: 100px;
+  }
