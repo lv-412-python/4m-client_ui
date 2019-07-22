@@ -5,6 +5,8 @@ import { BrowserRouter, Link} from 'react-router-dom';
 import Main from './containers/main/main';
 import Login from './containers/login/login';
 import Registration from './containers/registration/registration';
+import FormList from './containers/forms/formList';
+//import Header from "./containers/forms/header";
 
 const Routers = () => {
   return (
@@ -19,6 +21,7 @@ const Routers = () => {
         <Route path='/' exact component={Main}/>
         <Route path='/login' component={Login}/>
         <Route path='/registration' component={Registration}/>
+        <Route path="/form" component={FormList}/>
       </Switch>
     </BrowserRouter>
   );
