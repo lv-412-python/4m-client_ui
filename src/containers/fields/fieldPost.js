@@ -7,7 +7,8 @@ class PostField extends Component
         'title': null,
         'has_autocomplete': false,
         'has_choice': false,
-        'is_multichoice': false
+        'is_multichoice': false,
+        'choices': []
     };
 
     handleInputChange = (event) => {
@@ -21,19 +22,33 @@ class PostField extends Component
     };
 
     handleSubmit = (event) =>  {
+        event.preventDefault();
         axios.post('http://172.17.0.2:5053/field', this.state).
             then(function (response) { console.log(response) }).
             catch(function (error) { console.log(error) });
-        alert('Submitted: ' + this.state.value);
-        event.preventDefault();
+        alert('Submitted: ' + this.state.title);
+    };
+
+    addChoice = () => {
+        this.setState((prevState) => ({
+            choices: [...prevState.choices, {"title": ""}],
+        }));
+    };
+
+    handleChoiceChange = (e) => {
+        const {id, value} = e.target;
+       let choices = [...this.state.choices];
+        choices[id].title = value;
+       this.setState({choices});
     };
 
     render() {
+        let {choices} = this.state;
         return (
           <form onSubmit={this.handleSubmit}>
               <label>
                 Title:
-                  <input type="text" name="title" value={this.state.value} onChange={this.handleInputChange} />
+                  <input type="text" name="title" value={this.state.title} onChange={this.handleInputChange} />
               </label>
               <label>
                 Has autocomplete:
@@ -49,12 +64,27 @@ class PostField extends Component
                          checked={this.state.has_choice}
                          onChange={this.handleInputChange} />
               </label>
+              <button onClick={this.addChoice} type="button">+</button>
+              {
+                  choices.map((val, idx) => {
+                      return (
+                          <div key={idx}>
+                              <label htmlFor={idx}>Choice {idx+1}:</label>
+                                  <input type="text"
+                                         id={idx}
+                                         value={choices[idx].title}
+                                         onChange={this.handleChoiceChange}
+                                  />
+                          </div>
+                      );
+                  })
+              }
               <label>
-                Is multichoice:
+                  Is multichoice:
                   <input name="is_multichoice"
-                         type="checkbox"
-                         checked={this.state.is_multichoice}
-                         onChange={this.handleInputChange} />
+                      type="checkbox"
+                      checked={this.state.is_multichoice}
+                      onChange={this.handleInputChange} />
               </label>
             <input type="submit" value="Submit" />
           </form>
