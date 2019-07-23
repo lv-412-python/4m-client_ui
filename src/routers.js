@@ -1,6 +1,6 @@
 import React from 'react';
-import {Route, Switch} from 'react-router';
-import {BrowserRouter, Link} from 'react-router-dom';
+import { Route, Switch } from 'react-router';
+import { BrowserRouter, Link} from 'react-router-dom';
 
 import Main from './containers/main/main';
 import Login from './containers/login/login';
@@ -9,6 +9,8 @@ import answersTable from './containers/answersList/answersTable';
 import FormList from './containers/forms/formList';
 import FormItem from './containers/forms/formItem';
 import NewForm from './containers/forms/newForm';
+import PostField from './containers/fields/fieldPost';
+import FieldsList from './containers/fields/fieldsList';
 
 const Routers = () => {
     return (
@@ -22,6 +24,8 @@ const Routers = () => {
                 <div id="header-users">
                     <Link to='/login'>Login</Link>
                     <Link to='/registration'>Registration</Link>
+                    <Link to='/field'>New field</Link>
+                    <Link to='/all'>All fields</Link>
                 </div>
             </div>
             <Switch>
@@ -32,6 +36,8 @@ const Routers = () => {
                 <Route path="/form/:id" component={FormItem}/>
                 <Route path="/form" component={FormList}/>
                 <Route path="/new" component={NewForm}/>
+                <Route path='/field' component={PostField}/>
+                <Route path='/all' component={FieldsList}/>
             </Switch>
         </BrowserRouter>
     );
