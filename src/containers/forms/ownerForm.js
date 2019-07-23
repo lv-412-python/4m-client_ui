@@ -1,15 +1,19 @@
 import React from 'react';
 
 const OwnerForm = props => (
-    // eslint-disable-next-line react/prop-types
-    <form onSubmit={props.getForms}>
-        <label>Owner id:
-            <input type="number" min="1" name="owner" />
-        </label>
-        <div>
-            <button>Get Forms</button>
+    <div className='container'>
+        <div className='row'>
+            {/* eslint-disable-next-line react/prop-types */}
+            <form onSubmit={props.getForms} className='owner_form col-6'>
+                <label>Owner id:
+                    <input className='owner_input' type="number" min="1" name="owner" />
+                </label>
+                <div>
+                    <button className='btn btn-dark'>Get Forms</button>
+                </div>
+            </form>
         </div>
-    </form>
+    </div>
 );
 
 export default OwnerForm;
