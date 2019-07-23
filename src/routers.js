@@ -4,6 +4,8 @@ import { BrowserRouter, Link} from 'react-router-dom';
 
 import Main from './containers/main/main';
 import Login from './containers/login/login';
+import Logout from './containers/login/logout';
+import Status from './containers/login/status';
 import Registration from './containers/registration/registration';
 import answersTable from './containers/answersList/answersTable';
 import FormList from './containers/forms/formList';
@@ -25,13 +27,17 @@ const Routers = () => {
                 </div>
                 <div id="header-users">
                     <Link to='/login'>Login</Link>
-                    <Link to='/registration'>Registration</Link>
+                    <li><Link to='/logout'>Logout</Link></li>
+                    <li><Link to='/registration'>Registration</Link></li>
+                    <li><Link to='/status'>Status</Link></li>
                 </div>
             </div>
             <Switch>
                 <Route path='/' exact component={Main}/>
                 <Route path='/login' component={Login}/>
+                <Route path='/logout' component={Logout}/>
                 <Route path='/registration' component={Registration}/>
+                <Route path='/status' component={Status}/>
                 <Route path='/answers' component={answersTable}/>
                 <Route path="/form/:id" component={FormItem}/>
                 <Route path="/form" component={FormList}/>
