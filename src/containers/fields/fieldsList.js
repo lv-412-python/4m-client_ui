@@ -10,7 +10,8 @@ class FieldsList extends Component
     };
 
     getData = () => {
-      axios.get('http://172.17.0.2:5053/field').then(response => {
+        const url = 'http://172.24.0.2/field';
+      axios.get(url).then(response => {
         const fields = response.data;
         this.setState({fields});
       });
@@ -21,7 +22,6 @@ class FieldsList extends Component
     }
 
     render () {
-      console.log(this.state.fields);
       return (
         <div>
           {this.state.fields.map(field => <FieldItem key={field.title}

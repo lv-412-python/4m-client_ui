@@ -23,9 +23,10 @@ class PostField extends Component
 
     handleSubmit = (event) =>  {
         event.preventDefault();
-        axios.post('http://172.17.0.2:5053/field', this.state).
-            then(function (response) { console.log(response) }).
-            catch(function (error) { console.log(error) });
+        const url = 'http://172.24.0.2/field';
+        axios.post(url, this.state).
+            then(response => { console.log(response) }).
+            catch(error => { console.log(error) });
         alert('Submitted: ' + this.state.title);
     };
 
@@ -37,19 +38,46 @@ class PostField extends Component
 
     handleChoiceChange = (e) => {
         const {id, value} = e.target;
-       let choices = [...this.state.choices];
+        let choices = [...this.state.choices];
         choices[id].title = value;
-       this.setState({choices});
+        this.setState({choices});
+    };
+
+    deleteChoice = (e) => {
+        let choices = [...this.state.choices];
+        choices.splice(e.target.id, 1);
+        this.setState({choices});
+    };
+
+    renderButton = () => {
+        return (<div><button onClick={this.addChoice} type="button">+</button>
+              {
+                  this.state.choices.map((val, idx) => {
+                      return (
+                          <div key={idx}>
+                              <label>Choice {idx+1}:</label>
+                                  <input type="text"
+                                         id={idx}
+                                         value={this.state.choices[idx].title}
+                                         onChange={this.handleChoiceChange}
+                                  />
+                                  <button onClick={this.deleteChoice} id={idx} type="button">-</button>
+                          </div>
+                      );
+                  })
+              }
+        </div>);
     };
 
     render() {
-        let {choices} = this.state;
         return (
           <form onSubmit={this.handleSubmit}>
               <label>
                 Title:
                   <input type="text" name="title" value={this.state.title} onChange={this.handleInputChange} />
               </label>
+              <br />
+              <br />
               <label>
                 Has autocomplete:
                   <input name="has_autocomplete"
@@ -57,6 +85,8 @@ class PostField extends Component
                          checked={this.state.has_autocomplete}
                          onChange={this.handleInputChange} />
               </label>
+              <br />
+              <br />
               <label>
                 Has choices:
                   <input name="has_choice"
@@ -64,21 +94,9 @@ class PostField extends Component
                          checked={this.state.has_choice}
                          onChange={this.handleInputChange} />
               </label>
-              <button onClick={this.addChoice} type="button">+</button>
-              {
-                  choices.map((val, idx) => {
-                      return (
-                          <div key={idx}>
-                              <label htmlFor={idx}>Choice {idx+1}:</label>
-                                  <input type="text"
-                                         id={idx}
-                                         value={choices[idx].title}
-                                         onChange={this.handleChoiceChange}
-                                  />
-                          </div>
-                      );
-                  })
-              }
+              {this.state.has_choice? this.renderButton(): null}
+              <br />
+              <br />
               <label>
                   Is multichoice:
                   <input name="is_multichoice"
@@ -86,6 +104,8 @@ class PostField extends Component
                       checked={this.state.is_multichoice}
                       onChange={this.handleInputChange} />
               </label>
+              <br />
+              <br />
             <input type="submit" value="Submit" />
           </form>
         );
