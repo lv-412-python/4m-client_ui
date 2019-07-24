@@ -1,3 +1,15 @@
+:root {
+  font-family: 'Open Sans';
+  scroll-behavior: smooth;
+}
+
+body {
+  max-width: 1050px;
+  margin: auto;
+  margin-top: 10px;
+  background-color: #F6FAF9;  
+}
+
 .Answers-header {
     background-color:#795A70;
     max-height: 2%;
@@ -9,6 +21,39 @@
     color: white;
   }
   
+  #header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    text-decoration: none;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+
+  .header-pages{
+    color: #8E83BB;
+    font-weight: 550;
+    padding: 10px;
+  }
+
+  .header-pages:hover{
+    color: #8E83BB;
+    border: 1px #8E83BB solid;
+    font-weight: 550;
+    padding: 10px;
+  }
+
+
+  #header a{
+    margin-left: 5px;
+    color: #8E83BB;
+    text-decoration: none;
+  }
+
+  #logo{
+    font-size: 6vh;
+  }
+
   form{
       margin-left: 36%;
   }

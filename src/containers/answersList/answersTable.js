@@ -3,31 +3,28 @@ import axios from 'axios';
 
 import FormAnswers from './formAnswers';
 
-class AnswersList extends React.Component {
+class AnswersTable extends React.Component {
     state = {
         answers: undefined,
         status: undefined
     }
 
-    getAnswers = (e) => {
+    getAnswers = e => {
         e.preventDefault();
         const form_id = e.target.elements.form_id.value;
         const group_id = e.target.elements.group_id.value || undefined;
-        const answer_url = `http://127.0.0.1:5000/answers/`
+        const answer_url = `http://172.19.0.7/answers/`;
         axios.get(answer_url, {params:{form_id:form_id, group_id:group_id}} ,{crossDomain:true}).then(response => {
         const answers = response.data;
         const status = response.status;
-        this.setState({status})
+        this.setState({status});
         this.setState({answers});
-         })
+         });
     }
 
     render() {
         return (
             <div>
-                <header className="Answers-header">
-                     <h1>Answers</h1>
-                </header>
                 <FormAnswers getAnswers={this.getAnswers} />
                 {(this.state.answers && 
                     <table>
@@ -43,7 +40,7 @@ class AnswersList extends React.Component {
                                         <td>{answer.group_id}</td>
                                         <td>{answer.field_id}</td>
                                         <td>{answer.reply}</td>
-                                    </tr>)
+                                    </tr>);
                             })}
                         </tbody>
                 </table>)}
@@ -52,5 +49,5 @@ class AnswersList extends React.Component {
     }
 }
 
-export default AnswersList;
+export default AnswersTable;
 
