@@ -5,7 +5,9 @@ import axios from 'axios';
 class FieldItem extends Component
 {
     state = {
+        // eslint-disable-next-line react/prop-types
         'id': this.props.id,
+        // eslint-disable-next-line react/prop-types
         'title': this.props.title,
         'has_choice': null,
         'is_multichoice': null,
@@ -51,6 +53,7 @@ class FieldItem extends Component
           const url = `http://172.24.0.2/field/${this.state.id}`;
           axios.delete(url).
             then(() => { window.location.reload() }).
+          // eslint-disable-next-line no-console
             catch(error => { console.log(error) });
           alert('Deleted: ' + this.state.title);
     };
