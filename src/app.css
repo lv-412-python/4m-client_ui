@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Slab:400,700');
+
 :root {
-  font-family: 'Open Sans';
+  font-family: 'Roboto Slab', serif;
   scroll-behavior: smooth;
 }
 
@@ -83,3 +85,89 @@ body {
     background-color: #C8DCD2;
     min-width: 100px;
   }
+
+/*colors = #4C3633  #795A70  #8F86A6  #A3B5C1  #C8DCD2*/
+
+body {
+    font-family: 'Roboto Slab', serif;
+    background-color: #F6FAF9;
+}
+
+input[type="number"] {
+    background-color: transparent;
+    border: 0;
+    border-bottom: solid 1px black;
+    width: 30%;
+    padding-bottom: 4px;
+    font-weight: lighter;
+    letter-spacing: 2px;
+    margin-bottom: 30px;
+    margin-right: 20px;
+    font-size: 20px;
+}
+
+input[type="text"] {
+    outline: none;
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 30px black inset;
+    -webkit-text-fill-color: #fff !important;
+}
+
+.owner_form {
+    width: 50%;
+    padding: 10px;
+    display: inline-block;
+    text-align: center;
+    font-size: xx-large;
+}
+
+.form_item {
+    width: 50%;
+    background-color: #E5F3F3;
+    font-size: xx-large;
+    display: block;
+}
+
+.form_list_item {
+    background-color: #BACEE3;
+    border: 10px solid #E5F3F3;
+    border-radius: 30px;
+    font-size: xx-large;
+    margin-bottom: 20px;
+}
+
+.btn_new {
+    background-color: #F6FAF9;
+    position: relative;
+    left: 250px !important;
+    width: 50%;
+    padding: 10px;
+    text-align: center;
+}
+
+.form_title {
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    color: #8E83BB;
+    text-decoration: none;
+}
+
+.new_form {
+    width: 50%;
+    padding: 10px;
+    position: relative;
+    left: 250px !important;
+    text-align: left;
+    font-size: xx-large;
+}
+
+.owner_input {
+    font-size: x-large;
+    size: initial;
+}
