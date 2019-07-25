@@ -1,5 +1,5 @@
 {
-  "name": "4m-client_ui",
+  "name": "client-ui-repo",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lv-412-python/4m-client_ui.git"
+    "url": "git+https://github.com/lv-412-python/client-ui-repo.git"
   },
   "author": "lv-412",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/lv-412-python/4m-client_ui/issues"
+    "url": "https://github.com/lv-412-python/client-ui-repo/issues"
   },
-  "homepage": "https://github.com/lv-412-python/4m-client_ui#readme",
+  "homepage": "https://github.com/lv-412-python/client-ui-repo#readme",
   "devDependencies": {
     "@babel/core": "^7.4.5",
     "@babel/plugin-proposal-class-properties": "^7.4.4",
