@@ -63,7 +63,7 @@ class FieldItem extends Component
             <div>
               <p>
                 {this.state.title}
-                <button onClick={this.getMoreInfo} type="button">Get more info</button>
+                <button className='btn btn-dark' onClick={this.getMoreInfo} type="button">Get more info</button>
                 {
                     this.state.show_info && (
                         <ul>
@@ -76,7 +76,7 @@ class FieldItem extends Component
                         </ul>
                     )
                 }
-                <button onClick={this.delete} type="button">Delete</button>
+                <button className='btn btn-dark' onClick={this.delete} type="button">Delete</button>
               </p>
            </div>
         );

@@ -29,8 +29,8 @@ class FormItem extends Component {
         return (
             <div className='container'>
                 <div className='row'>
-                    <div className='col-6 form_item'>
-                        <p>{this.state.title}</p>
+                    <div className='col-12 form_item text_form'>
+                        <p className='title_form'>{this.state.title}</p>
                         <p>{this.state.description}</p>
                         <p>{this.state.fields}</p>
                     </div>

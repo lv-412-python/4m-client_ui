@@ -20,12 +20,12 @@ const Routers = () => {
                     <Link id="logo" to='/'>4M</Link>
                     <Link className="header-pages" to='/form'>My forms</Link>
                     <Link className="header-pages" to='/answers'>Answers</Link>
+                    <Link className="header-pages" to='/field'>New field</Link>
+                    <Link className="header-pages" to='/all'>All fields</Link>
                 </div>
                 <div id="header-users">
                     <Link to='/login'>Login</Link>
                     <Link to='/registration'>Registration</Link>
-                    <Link to='/field'>New field</Link>
-                    <Link to='/all'>All fields</Link>
                 </div>
             </div>
             <Switch>
