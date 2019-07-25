@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import axios from 'axios';
 
 class FormItem extends Component {
@@ -20,17 +20,19 @@ class FormItem extends Component {
             console.log(error.data);
         });
     };
-    componentDidMount(){
+
+    componentDidMount() {
         this.getData();
     }
+
     render() {
         return (
             <div className='container'>
                 <div className='row'>
                     <div className='col-6 form_item'>
-                        <p>{ this.state.title }</p>
-                        <p>{ this.state.description }</p>
-                        <p>{ this.state.fields }</p>
+                        <p>{this.state.title}</p>
+                        <p>{this.state.description}</p>
+                        <p>{this.state.fields}</p>
                     </div>
                 </div>
             </div>

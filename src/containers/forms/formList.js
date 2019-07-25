@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import axios from 'axios';
 import OwnerForm from './ownerForm';
 import FormListItem from "src/containers/forms/formListItem";
@@ -31,19 +31,20 @@ class FormList extends Component {
             <div className='container'>
                 <div className='row'>
                     <div className='col-12 new_form'>
-                        <OwnerForm getForms={this.getForms} />
+                        <OwnerForm getForms={this.getForms}/>
                         {(this.state.forms &&
                             <div>
-                                {this.state.forms.map( form => {
+                                {this.state.forms.map(form => {
                                     return (<FormListItem key={form.form_id}
                                                           title={form.title}
                                                           id={form.form_id}
-                                                          description={form.description} />);})
+                                                          description={form.description}/>);
+                                })
                                 }
                             </div>)}
                     </div>
                 </div>
-                <ButtonNew />
+                <ButtonNew/>
             </div>
         );
     }

@@ -1,19 +1,18 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto+Slab:400,700');
 
 :root {
-  font-family: 'Roboto Slab', serif;
-  scroll-behavior: smooth;
+    font-family: 'Roboto Slab', serif;
+    scroll-behavior: smooth;
 }
 
 body {
-  max-width: 1050px;
-  margin: auto;
-  margin-top: 10px;
-  background-color: #F6FAF9;  
+    max-width: 1050px;
+    margin: 10px auto auto;
+    background-color: #F6FAF9;
 }
 
 .Answers-header {
-    background-color:#795A70;
+    background-color: #795A70;
     max-height: 2%;
     display: flex;
     flex-direction: column;
@@ -21,70 +20,70 @@ body {
     justify-content: center;
     font-size: calc(10px + 1vmin);
     color: white;
-  }
-  
-  #header{
+}
+
+#header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     text-decoration: none;
     align-items: center;
     margin-bottom: 40px;
-  }
+}
 
-  .header-pages{
+.header-pages {
     color: #8E83BB;
     font-weight: 550;
     padding: 10px;
-  }
+}
 
-  .header-pages:hover{
+.header-pages:hover {
     color: #8E83BB;
     border: 1px #8E83BB solid;
-    font-weight: 550;
+    font-weight: 500;
     padding: 10px;
-  }
+}
 
 
-  #header a{
+#header a {
     margin-left: 5px;
     color: #8E83BB;
     text-decoration: none;
-  }
+}
 
-  #logo{
+#logo {
     font-size: 6vh;
-  }
+}
 
-  form{
-      margin-left: 36%;
-  }
+/*form {*/
+/*    margin-left: 36%;*/
+/*}*/
 
-  button{
-      margin-left: 20%;
-  }
+/*button {*/
+/*    margin-left: 20%;*/
+/*}*/
 
-  table{
-    margin: auto;
-  }
-  
-  input{
-    width: 45px;
-  }
-  
-  label{
-    margin-left: 20px;
-  }
-  
-  tr {
+/*table {*/
+/*  margin: auto;*/
+/*}*/
+
+/*input {*/
+/*  width: 45px;*/
+/*}*/
+
+/*label{*/
+/*  margin-left: 20px;*/
+/*}*/
+
+tr {
     background-color: #A3B5C1;
     min-width: 100px;
-  }
-  
-  td {
+}
+
+td {
     background-color: #C8DCD2;
     min-width: 100px;
-  }
+}
 
 /*colors = #4C3633  #795A70  #8F86A6  #A3B5C1  #C8DCD2*/
 
