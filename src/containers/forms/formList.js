@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import OwnerForm from './ownerForm';
+import FormListItem from "src/containers/forms/formListItem";
+import ButtonNew from "src/containers/forms/buttonNewForm";
 
 class FormList extends Component {
     state = {
         forms: undefined,
-        status: undefined
+        status: undefined,
+        title: undefined,
+        description: undefined,
+        id: undefined
     };
 
     getForms = (e) => {
@@ -20,21 +25,25 @@ class FormList extends Component {
             this.setState({forms});
         });
     };
+
     render() {
         return (
-            <div>
-                <OwnerForm getForms={this.getForms} />
-                {(this.state.forms &&
-                <table>
-                    {this.state.forms.map((form) => {
-                        return (
-                            <div key={form.id}>
-                                <p>{form.title}</p>
-                                <p>{form.description}</p>
-                            </div>
-                        );
-                    })}
-                </table>)}
+            <div className='container'>
+                <div className='row'>
+                    <div className='col-12 new_form'>
+                        <OwnerForm getForms={this.getForms} />
+                        {(this.state.forms &&
+                            <div>
+                                {this.state.forms.map( form => {
+                                    return (<FormListItem key={form.form_id}
+                                                          title={form.title}
+                                                          id={form.form_id}
+                                                          description={form.description} />);})
+                                }
+                            </div>)}
+                    </div>
+                </div>
+                <ButtonNew />
             </div>
         );
     }

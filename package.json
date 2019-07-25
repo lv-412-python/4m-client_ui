@@ -36,11 +36,13 @@
     "webpack-dev-server": "^3.7.2"
   },
   "dependencies": {
+    "axios": "latest",
+    "bootstrap": "^4.3.1",
+    "prop-types": "latest",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router": "^5.0.1",
     "react-router-dom": "^5.0.1",
-    "axios": "latest",
-    "prop-types": "latest"
+    "style-loader": "^0.23.1"
   }
 }

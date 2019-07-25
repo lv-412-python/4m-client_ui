@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './app.css';
 import Routers from "src/routers";
 
 const app = (
@@ -7,4 +9,3 @@ const app = (
 );
 
 ReactDOM.render(app, document.getElementById('root'));
-export default app;

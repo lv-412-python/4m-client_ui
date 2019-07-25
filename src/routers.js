@@ -6,11 +6,11 @@ import Main from './containers/main/main';
 import Login from './containers/login/login';
 import Registration from './containers/registration/registration';
 import FormList from './containers/forms/formList';
+import FormItem from './containers/forms/formItem';
 import NewForm from './containers/forms/newForm';
 
 const Routers = () => {
   return (
-
     <BrowserRouter>
       <ul>
         <li><Link to='/'>Main</Link></li>
@@ -21,6 +21,7 @@ const Routers = () => {
         <Route path='/' exact component={Main}/>
         <Route path='/login' component={Login}/>
         <Route path='/registration' component={Registration}/>
+        <Route path="/form/:id" component={FormItem}/>
         <Route path="/form" component={FormList}/>
         <Route path="/new" component={NewForm}/>
       </Switch>
