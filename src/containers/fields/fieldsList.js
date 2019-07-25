@@ -10,7 +10,7 @@ class FieldsList extends Component
     };
 
     getData = () => {
-        const url = 'http://172.24.0.2/field';
+        const url = 'http://127.0.0.1:80/field';
       axios.get(url).then(response => {
         const fields = response.data;
         this.setState({fields});

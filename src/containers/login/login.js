@@ -32,7 +32,7 @@ class Login extends Component {
         axios.post(url, user, { crossDomain: true }
         ).then( response => {
             document.cookie = 'session=' + response.data['token'];
-            window.location = "http://127.0.0.1:80/";
+            // window.location = "http://127.0.0.1:3000/";
         }).catch( error => {
             alert(error.response.data['error']);
         });

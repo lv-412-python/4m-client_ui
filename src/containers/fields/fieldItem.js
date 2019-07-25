@@ -21,7 +21,7 @@ class FieldItem extends Component
     }
 
     getData = () => {
-        const url = `http://172.24.0.2/field/${this.state.id}`;
+        const url = `http://127.0.0.1:80/field/${this.state.id}`;
         axios.get(url).then(response => {
             const field = response.data;
             let object = null;
@@ -50,7 +50,7 @@ class FieldItem extends Component
     };
 
     delete = () => {
-          const url = `http://172.24.0.2/field/${this.state.id}`;
+          const url = `http://127.0.0.1:80/field/${this.state.id}`;
           axios.delete(url).
             then(() => { window.location.reload() }).
           // eslint-disable-next-line no-console

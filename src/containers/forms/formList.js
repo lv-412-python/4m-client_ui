@@ -16,7 +16,7 @@ class FormList extends Component {
     getForms = (e) => {
         e.preventDefault();
         const owner = e.target.elements.owner.value;
-        const forms_url = `http://127.0.0.1:5050/form`;
+        const forms_url = `http://127.0.0.1:80/form`;
         axios.get(forms_url, {params: {owner: owner}},
             {crossDomain: true}).then(response => {
             const forms = response.data;

@@ -13,7 +13,7 @@ class AnswersTable extends React.Component {
         e.preventDefault();
         const form_id = e.target.elements.form_id.value;
         const group_id = e.target.elements.group_id.value || undefined;
-        const answer_url = `http://172.19.0.7/answers/`;
+        const answer_url = `http://127.0.0.1:80/answers/`;
         axios.get(answer_url, {params: {form_id: form_id, group_id: group_id}}, {crossDomain: true}).then(response => {
             const answers = response.data;
             const status = response.status;

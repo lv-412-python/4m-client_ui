@@ -11,7 +11,7 @@ class FormItem extends Component {
     };
     getData = () => {
         // eslint-disable-next-line react/prop-types
-        axios.get(`http://127.0.0.1:5050/form/${this.props.match.params.id}`).then(response => {
+        axios.get(`http://127.0.0.1:80/form/${this.props.match.params.id}`).then(response => {
             // eslint-disable-next-line no-console
             console.log(response.data);
             this.setState({...response.data});

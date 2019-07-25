@@ -12,7 +12,7 @@ class Logout extends Component {
         axios.post(url,  {crossDomain:true}
         ).then(function () {
             cookie.remove('session', { path: '/' });
-            window.location = "http://127.0.0.1:80/";
+            // window.location = "http://127.0.0.1:3000/";
         });
 
         event.preventDefault();

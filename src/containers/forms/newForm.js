@@ -29,7 +29,7 @@ class NewForm extends Component {
 
     handleSubmit = () => {
         const data = this.state;
-        axios.post('http://127.0.0.1:5050/form', data).
+        axios.post('http://127.0.0.1:80/form', data).
         then(function (response) {
             // eslint-disable-next-line no-console
             console.info(response);
