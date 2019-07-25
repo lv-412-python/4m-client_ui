@@ -52,7 +52,7 @@ class PostField extends Component
     };
 
     renderButton = () => {
-        return (<div><button onClick={this.addChoice} type="button">+</button>
+        return (<div><button className='btn btn-outline-dark' onClick={this.addChoice} type="button">+</button>
               {
                   this.state.choices.map((val, idx) => {
                       return (
@@ -63,7 +63,8 @@ class PostField extends Component
                                          value={this.state.choices[idx].title}
                                          onChange={this.handleChoiceChange}
                                   />
-                                  <button onClick={this.deleteChoice} id={idx} type="button">-</button>
+                                  <button className='btn btn-outline-dark' onClick={this.deleteChoice} id={idx}
+                                          type="button">-</button>
                           </div>
                       );
                   })
@@ -108,7 +109,7 @@ class PostField extends Component
               </label>
               <br />
               <br />
-            <input type="submit" value="Submit" />
+            <input className='btn btn-outline-dark' type="submit" value="Submit" />
           </form>
         );
     }

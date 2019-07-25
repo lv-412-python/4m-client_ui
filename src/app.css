@@ -126,7 +126,7 @@ input:-webkit-autofill {
     width: 50%;
     background-color: #E5F3F3;
     font-size: xx-large;
-    display: block;
+    display: inline-block !important;
 }
 
 .form_list_item {
@@ -169,4 +169,12 @@ a:hover {
 .owner_input {
     font-size: x-large;
     size: initial;
+}
+
+.text_form {
+    text-align: center;
+}
+
+.title_form {
+    font-weight: bold;
 }
