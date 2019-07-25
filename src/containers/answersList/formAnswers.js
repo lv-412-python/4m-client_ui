@@ -1,6 +1,7 @@
 import React from 'react';
 
 const AnswersForm = props => (
+    // eslint-disable-next-line react/prop-types
         <form onSubmit={props.getAnswers}>
             <label>Form id:
                 <input type="number" min="1" name="form_id" />

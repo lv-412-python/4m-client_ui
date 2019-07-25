@@ -7,7 +7,7 @@ class AnswersTable extends React.Component {
     state = {
         answers: undefined,
         status: undefined
-    }
+    };
 
     getAnswers = e => {
         e.preventDefault();
@@ -20,7 +20,7 @@ class AnswersTable extends React.Component {
         this.setState({status});
         this.setState({answers});
          });
-    }
+    };
 
     render() {
         return (
@@ -36,7 +36,7 @@ class AnswersTable extends React.Component {
                             </tr>
                             {this.state.answers.map((answer) => {
                                 return (
-                                    <tr>
+                                    <tr key={answer.reply}>
                                         <td>{answer.group_id}</td>
                                         <td>{answer.field_id}</td>
                                         <td>{answer.reply}</td>
