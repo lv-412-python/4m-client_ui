@@ -1,25 +1,14 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto+Slab:400,700');
+@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
 
 :root {
-    font-family: 'Roboto Slab', serif;
     scroll-behavior: smooth;
+    font-family: 'Muli', sans-serif;
 }
 
 body {
-    max-width: 1050px;
+    max-width: 1000px;
     margin: 10px auto auto;
-    background-color: #F6FAF9;
-}
-
-.Answers-header {
-    background-color: #795A70;
-    max-height: 2%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 1vmin);
-    color: white;
+    background-color: #fff;
 }
 
 #header {
@@ -32,22 +21,19 @@ body {
 }
 
 .header-pages {
-    color: #8E83BB;
-    font-weight: 550;
+    font-weight: 500;
     padding: 10px;
 }
 
 .header-pages:hover {
-    color: #8E83BB;
     border: 1px #8E83BB solid;
-    font-weight: 500;
     padding: 10px;
 }
 
 
 #header a {
     margin-left: 5px;
-    color: #8E83BB;
+    color: black;
     text-decoration: none;
 }
 
@@ -55,42 +41,55 @@ body {
     font-size: 6vh;
 }
 
-/*form {*/
-/*    margin-left: 36%;*/
-/*}*/
+.divAnswers {
+    margin-left: 230px;;
+}
 
-/*button {*/
-/*    margin-left: 20%;*/
-/*}*/
+.tableAnswers {
+    margin-top: 20px;
+    margin-left: 110px;
+}
 
-/*table {*/
-/*  margin: auto;*/
-/*}*/
-
-/*input {*/
-/*  width: 45px;*/
-/*}*/
-
-/*label{*/
-/*  margin-left: 20px;*/
-/*}*/
+.answersBtn {
+    margin-left: 180px;
+}
 
 tr {
-    background-color: #A3B5C1;
+    background-color: black;
+    color: white;
     min-width: 100px;
+    border-bottom:1pt solid black;
 }
 
 td {
-    background-color: #C8DCD2;
-    min-width: 100px;
+    height: 60px;
+    background-color: rgb(227, 233, 230);
+    color: black;
+    min-width: 110px;
 }
 
+tr:hover {
+    height: 70px;   
+}
+
+form.demoForm {
+    margin-left: 10%;
+    padding-left: 15%; 
+}
+
+ select {
+    background-color: rgb(255, 255, 255);
+    margin-left: 20px;
+    padding: 5px 35px 5px 5px;
+    font-size: 16px;
+    height: 34px;
+  }
+
+  #demoFormSubmit{
+      margin-top: 20px;
+      margin-left: 22%;
+  }
 /*colors = #4C3633  #795A70  #8F86A6  #A3B5C1  #C8DCD2*/
-
-body {
-    font-family: 'Roboto Slab', serif;
-    background-color: #F6FAF9;
-}
 
 input[type="number"] {
     background-color: transparent;

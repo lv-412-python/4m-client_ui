@@ -13,6 +13,7 @@ import FormItem from './containers/forms/formItem';
 import NewForm from './containers/forms/newForm';
 import PostField from './containers/fields/fieldPost';
 import FieldsList from './containers/fields/fieldsList';
+import DemoForm from './containers/demoForm/demoForm'
 
 const Routers = () => {
     return (
@@ -24,12 +25,13 @@ const Routers = () => {
                     <Link className="header-pages" to='/answers'>Answers</Link>
                     <Link className="header-pages" to='/field'>New field</Link>
                     <Link className="header-pages" to='/all'>All fields</Link>
+                    <Link className="header-pages" to='/demoForm'>DemoForm</Link>
                 </div>
                 <div id="header-users">
-                    <Link to='/login'>Login</Link>
-                    <li><Link to='/logout'>Logout</Link></li>
-                    <li><Link to='/registration'>Registration</Link></li>
-                    <li><Link to='/status'>Status</Link></li>
+                        <Link to='/login'>Login</Link>
+                        <Link to='/logout'>Logout</Link>
+                        <Link to='/registration'>Registration</Link>
+                        <Link to='/status'>Status</Link>
                 </div>
             </div>
             <Switch>
@@ -44,6 +46,7 @@ const Routers = () => {
                 <Route path="/new" component={NewForm}/>
                 <Route path='/field' component={PostField}/>
                 <Route path='/all' component={FieldsList}/>
+                <Route path='/demoForm' component={DemoForm}/>
             </Switch>
         </BrowserRouter>
     );

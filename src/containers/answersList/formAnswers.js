@@ -10,7 +10,7 @@ const AnswersForm = props => (
             <input type="number" min="1" name="group_id"/>
         </label>
         <div>
-            <button className='btn btn-outline-dark'>Get Answers</button>
+            <button className='btn btn-outline-dark answersBtn'>Get Answers</button>
         </div>
     </form>
 );
