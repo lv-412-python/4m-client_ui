@@ -2,19 +2,17 @@ import React, { Component } from 'react';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 
-const initialState = {
-    email: "",
-    password: "",
-    first_name: "",
-    last_name: "",
-    emailErr: "",
-    passwordErr: "",
-    first_nameErr: "",
-    last_nameErr: ""
-}
-
 class Registration extends Component {
-    state = initialState;
+    state = {
+        email: "",
+        password: "",
+        first_name: "",
+        last_name: "",
+        emailErr: "",
+        passwordErr: "",
+        first_nameErr: "",
+        last_nameErr: ""
+    }
 
     validateForm() {
         return this.state['email'].length > 0 && this.state['password'].length > 0
@@ -33,11 +31,13 @@ class Registration extends Component {
         let first_nameErr = "";
         let last_nameErr = "";
 
-        if (!this.state.first_name.match(/^[A-Za-z]+$/)) {
+        if (!this.state.first_name.match(/^[A-Za-z]+$/) ||
+            this.state.first_name.length < 3) {
             first_nameErr = "invalid value";
         }
 
-        if (!this.state.last_name.match(/^[A-Za-z]+$/)) {
+        if (!this.state.last_name.match(/^[A-Za-z]+$/) ||
+            this.state.last_name.length < 2) {
             last_nameErr = "invalid value";
         }
 
@@ -45,7 +45,7 @@ class Registration extends Component {
             emailErr = "invalid email";
         }
 
-        if (!this.state.password.length < 6) {
+        if (this.state.password.length < 6) {
             passwordErr = "password is too short";
         }
 
@@ -59,7 +59,7 @@ class Registration extends Component {
 
     handleSubmit = event => {
         event.preventDefault();
-        const isValid = this.Validate();
+        const isValid = this.validate();
         if (isValid) {
             const user = {
               "email": this.state.email,
@@ -68,18 +68,21 @@ class Registration extends Component {
               "last_name": this.state.last_name
             };
 
-            const url = "http://127.0.0.1:5050/users/register";
+            const url = "http://127.0.0.1/users/register";
 
             axios.post(url, user, { withCredentials:true }
             ).then( response => {
-                alert(response.data['isLoggedIn']);
-                // document.cookie = 'session=' + response.data['token'];
-                // window.location = "http://127.0.0.1:80/";
+                alert(response.data.message);
             }).catch( error => {
-                alert(error.response.data['error']);
+                alert(error.response.data.error);
             });
 
-            this.setState(initialState);
+            this.setState({
+                emailErr: "",
+                passwordErr: "",
+                first_nameErr: "",
+                last_nameErr: ""
+            });
         }
     }
 
@@ -96,7 +99,7 @@ class Registration extends Component {
                             value={this.state.first_name}
                             onChange={this.handleChange}
                         />
-                        <div class="errorMsg">{this.state.first_nameErr}</div>
+                        <div className="errorMsg">{this.state.first_nameErr}</div>
                     </Form.Group>
                     <Form.Group controlId="last_name">
                         <Form.Label>Last Name</Form.Label><br />
@@ -106,7 +109,7 @@ class Registration extends Component {
                             value={this.state.last_name}
                             onChange={this.handleChange}
                         />
-                        <div class="errorMsg">{this.state.last_nameErr}</div>
+                        <div className="errorMsg">{this.state.last_nameErr}</div>
                     </Form.Group>
                     <Form.Group controlId="email">
                         <Form.Label>Email</Form.Label><br />
@@ -116,7 +119,7 @@ class Registration extends Component {
                             value={this.state.email}
                             onChange={this.handleChange}
                         />
-                        <div class="errorMsg">{this.state.emailErr}</div>
+                        <div className="errorMsg">{this.state.emailErr}</div>
                     </Form.Group>
                     <Form.Group controlId="password">
                         <Form.Label>Password</Form.Label><br />
@@ -125,7 +128,7 @@ class Registration extends Component {
                             onChange={this.handleChange}
                             type="password"
                         />
-                        <div class="errorMsg">{this.state.passwordErr}</div>
+                        <div className="errorMsg">{this.state.passwordErr}</div>
                     </Form.Group>
                     <input
 

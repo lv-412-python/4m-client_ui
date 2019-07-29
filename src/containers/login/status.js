@@ -12,16 +12,13 @@ class Status extends Component {
     };
 
     componentWillMount() {
-        const url = "http://127.0.0.1:5050/users/status";
+        const url = "http://127.0.0.1/users/status";
 
         axios.get(url, { withCredentials:true }
-            // headers:{
-            //     'Set-Cookie': document.cookie }
-            // }
         ).then(response=> {
             this.setState({...response.data});
-        }).catch(function (error) {
-            alert(error.response.data['error']);
+        }).catch(error => {
+            alert(error.response.data.error);
         });
     }
 
