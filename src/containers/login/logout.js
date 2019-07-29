@@ -12,7 +12,6 @@ class Logout extends Component {
         axios.post(url,  { withCredentials:true }
         ).then(response => {
             cookie.remove('session', { path: '/' });
-            alert('isLoggedIn: ' + response.data['isLoggedIn']);
         });
 
         event.preventDefault();
