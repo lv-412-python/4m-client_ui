@@ -31,7 +31,7 @@ const Routers = () => {
                         <Link to='/login'>Login</Link>
                         <Link to='/logout'>Logout</Link>
                         <Link to='/registration'>Registration</Link>
-                        <Link to='/status'>Status</Link>
+                        <Link to='/status'>Profile</Link>
                 </div>
             </div>
             <Switch>

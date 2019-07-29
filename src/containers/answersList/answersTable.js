@@ -23,24 +23,6 @@ class AnswersTable extends React.Component {
         });
     };
 
-    // getFieldTitles = () => {
-    //     const fields_url = `http://127.0.0.1:80/field?field_id=7&field_id=8&field_id=9`;
-    //     axios.get(fields_url, {crossDomain: true}).then(response => {
-    //         const titles = {}
-    //         response.data.map(function(field){
-    //             titles.field_id = field.title;
-    //         });
-    //         // console.log(titles);
-    //         // const status = response.status;
-    //         this.state.answers = this.state.answers.map(function(answer){
-    //             var id = answer.field_id
-    //             answer.field_id = titles[id];
-    //         });
-    //         console.log("+++++++++++++++=THIS IS IT++++++++++++++++++");
-    //         console.log(this.state.answers);
-    //     });
-    // }
-
     render() {
         return (
             <div className="divAnswers">
@@ -69,4 +51,3 @@ class AnswersTable extends React.Component {
 }
 
 export default AnswersTable;
-
