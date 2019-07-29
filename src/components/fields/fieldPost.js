@@ -23,7 +23,7 @@ class PostField extends Component
 
     handleSubmit = (event) =>  {
         event.preventDefault();
-        const url = 'http://172.24.0.2/field';
+        const url = 'http://127.0.0.1/field';
         axios.post(url, this.state).
         // eslint-disable-next-line no-console
             then(response => { console.log(response) }).

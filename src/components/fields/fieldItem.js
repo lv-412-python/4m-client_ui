@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { confirmAlert } from 'react-confirm-alert';
+import { withRouter } from 'react-router-dom';
 
 
 class FieldItem extends Component
@@ -16,12 +18,12 @@ class FieldItem extends Component
         'show_info': false
     };
 
-    componentDidMount(){
+    componentDidMount() {
         this.getData();
     }
 
     getData = () => {
-        const url = `http://172.24.0.2/field/${this.state.id}`;
+        const url = `http://127.0.0.1/field/${this.state.id}`;
         axios.get(url).then(response => {
             const field = response.data;
             let object = null;
@@ -50,12 +52,30 @@ class FieldItem extends Component
     };
 
     delete = () => {
-          const url = `http://172.24.0.2/field/${this.state.id}`;
-          axios.delete(url).
-            then(() => { window.location.reload() }).
-          // eslint-disable-next-line no-console
-            catch(error => { console.log(error) });
-          alert('Deleted: ' + this.state.title);
+        confirmAlert({
+            title: 'Confirm to delete',
+            message: 'Are you sure to delete this field?',
+            buttons: [
+                {
+                    label: 'Yes',
+                    onClick: () => {
+                        const url = `http://127.0.0.1/field/${this.state.id}`;
+                        axios.delete(url).
+                        then(() => { window.location.reload() }).
+                        // eslint-disable-next-line no-console
+                        catch(error => { console.log(error) });
+                    }
+                },
+                {
+                    label: 'No'
+                }
+                ]
+        });
+    };
+
+    routeChange = () => {
+        const path = `/edit/${this.state.id}`;
+        this.props.history.push(path);
     };
 
     render() {
@@ -76,6 +96,7 @@ class FieldItem extends Component
                         </ul>
                     )
                 }
+                <button className='btn btn-dark' onClick={this.routeChange} type="button">Edit</button>
                 <button className='btn btn-dark' onClick={this.delete} type="button">Delete</button>
               </p>
            </div>
@@ -83,4 +104,4 @@ class FieldItem extends Component
     }
 }
 
-export default FieldItem;
+export default withRouter(FieldItem);
