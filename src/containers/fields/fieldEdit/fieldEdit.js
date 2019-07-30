@@ -4,7 +4,8 @@ import axios from 'axios';
 
 class FieldEdit extends Component {
     state = {
-        'id': this.props.match.params.id,
+        // eslint-disable-next-line react/prop-types
+        'id': this.props.id,
         'title': null,
         'has_choice': null,
         'is_multichoice': null,
@@ -14,7 +15,7 @@ class FieldEdit extends Component {
 
     componentDidMount() {
         const url = `http://127.0.0.1/field/${this.state.id}`;
-        const field = axios.get(url).then(response => {
+        axios.get(url).then(response => {
             const field = response.data;
             let object = null;
             if (field.has_choice)
@@ -60,11 +61,9 @@ class FieldEdit extends Component {
         event.preventDefault();
         const url = `http://127.0.0.1/field/${this.state.id}`;
         axios.put(url, this.state).
-        // eslint-disable-next-line no-console
-            then(response => { console.log(response) }).
+            then(() => { window.location.reload() }).
         // eslint-disable-next-line no-console
             catch(error => { console.log(error) });
-        alert('Submitted: ' + this.state.title);
     };
 
     render () {
@@ -73,8 +72,6 @@ class FieldEdit extends Component {
                 Title:
                   <input type="text" name="title" value={this.state.title} onChange={this.handleInputChange} />
               </label>
-              <br />
-              <br />
               <label>
                 Has autocomplete:
                   <input name="has_autocomplete"
@@ -82,8 +79,6 @@ class FieldEdit extends Component {
                          checked={this.state.has_autocomplete}
                          onChange={this.handleInputChange} />
               </label>
-              <br />
-              <br />
               <label>
                 Has choices:
                   <input name="has_choice"
@@ -93,8 +88,6 @@ class FieldEdit extends Component {
             {
                 this.state.has_choice ? this.state.choices.map((el, id) => <input key={id} type="text" id={id} value={el.title} onChange={this.handleChoiceChange} />): null
             }
-              <br />
-              <br />
               <label>
                   Is multichoice:
                   <input name="is_multichoice"
@@ -102,8 +95,6 @@ class FieldEdit extends Component {
                       checked={this.state.is_multichoice}
                       onChange={this.handleInputChange} />
               </label>
-              <br />
-              <br />
             <input className='btn btn-outline-dark' type="submit" value="Save" />
           </form>);
     }
