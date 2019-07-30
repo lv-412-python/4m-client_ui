@@ -7,11 +7,12 @@ import cookie from 'react-cookies';
 class Logout extends Component {
 
     handleSubmit = event => {
-        const url = "http://127.0.0.1:5050/users/logout";
+        const url = "http://127.0.0.1/users/logout";
 
         axios.post(url,  { withCredentials:true }
         ).then(response => {
             cookie.remove('session', { path: '/' });
+            alert(response.data.message);
         });
 
         event.preventDefault();
