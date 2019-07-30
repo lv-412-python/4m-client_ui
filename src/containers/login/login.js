@@ -27,14 +27,13 @@ class Login extends Component {
           "password": this.state.password
         };
 
-        const url = "http://127.0.0.1:80/users/login";
+        const url = "http://127.0.0.1/users/login";
 
-        axios.post(url, user, { crossDomain: true }
+        axios.post(url, user, { withCredentials:true }
         ).then( response => {
-            document.cookie = 'session=' + response.data['token'];
-            // window.location = "http://127.0.0.1:3000/";
+            alert(response.data.message);
         }).catch( error => {
-            alert(error.response.data['error']);
+            alert(error.response.data.error);
         });
     }
 
