@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './ownerForm.css';
+
 const OwnerForm = props => (
     <div className='container'>
         <div className='row'>

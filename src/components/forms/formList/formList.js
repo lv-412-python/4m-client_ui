@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import OwnerForm from './ownerForm';
-import FormListItem from "src/containers/forms/formListItem";
-import ButtonNew from "src/containers/forms/buttonNewForm";
+import OwnerForm from '../ownerForm/ownerForm';
+import FormListItem from "src/components/forms/formListItem/formListItem";
+import ButtonNew from "src/components/forms/buttonNewForm/buttonNewForm";
+
+import './formList.css';
 
 class FormList extends Component {
     state = {
