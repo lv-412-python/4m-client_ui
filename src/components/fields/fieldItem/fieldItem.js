@@ -3,6 +3,7 @@ import axios from 'axios';
 import { confirmAlert } from 'react-confirm-alert';
 import { withRouter } from 'react-router-dom';
 import FieldEdit from '../fieldEdit/fieldEdit';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 
 class FieldItem extends Component
@@ -17,12 +18,15 @@ class FieldItem extends Component
         'has_autocomplete': null,
         'choices': [],
         'show_info': false,
-        'edit': false
+        'edit': false,
+
     };
 
     componentDidMount() {
         this.getData();
     }
+
+
 
     getData = () => {
         const url = `http://127.0.0.1/field/${this.state.id}`;
@@ -81,28 +85,30 @@ class FieldItem extends Component
 
     render() {
         return (
-            <div>
-                <p>{this.state.title}</p>
-                <div>
-                    <button className='btn btn-dark' onClick={this.getMoreInfo} type="button">Get more info</button>
-                    <button className='btn btn-dark' onClick={this.edit} type="button">Edit</button>
-                    <button className='btn btn-dark' onClick={this.delete} type="button">Delete</button>
-                    {
-                        this.state.show_info && (
-                            <ul>
-                                <li>Has autocomplete: { this.state.has_autocomplete? "True": "False" }</li>
-                                <li>Has choices: { this.state.has_choice? "True": "False" }</li>
-                                {
-                                    this.state.has_choice ? this.state.choices.map((el, id) => <ul key={id}><li>{el.title}</li> </ul>): null
-                                }
-                                <li>Is multichoice: { this.state.is_multichoice? "True": "False" }</li>
-                            </ul>
-                        )
-                    }
-                    {
-                        this.state.edit && <FieldEdit id={this.state.id} />
-                    }
+            <div className='field_list_element'>
+                <div className='my_buttons'>
+                    <div className='field_title'>{this.state.title}</div>
+                    <div className="my_buttons">
+                        <button className='btn btn-dark' onClick={this.getMoreInfo} type="button">Get more info</button>
+                        <button className='btn btn-dark' onClick={this.edit} type="button">Edit</button>
+                        <button className='btn btn-dark' onClick={this.delete} type="button">Delete</button>
+                    </div>
                 </div>
+                {
+                    this.state.show_info && (
+                        <ul>
+                            <li>Has autocomplete: { this.state.has_autocomplete? "True": "False" }</li>
+                            <li>Has choices: { this.state.has_choice? "True": "False" }</li>
+                            {
+                                this.state.has_choice ? this.state.choices.map((el, id) => <ul key={id}><li>{el.title}</li> </ul>): null
+                            }
+                            <li>Is multichoice: { this.state.is_multichoice? "True": "False" }</li>
+                        </ul>
+                    )
+                }
+                {
+                    this.state.edit && <FieldEdit id={this.state.id} />
+                }
             </div>
         );
     }
