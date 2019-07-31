@@ -1,14 +1,15 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto+Slab:400,700');
+@import url('https://fonts.googleapis.com/css?family=B612&display=swap');
 
 :root {
-    font-family: 'Roboto Slab', serif;
+    font-family: 'B612', sans-serif;
     scroll-behavior: smooth;
 }
 
 body {
-    max-width: 1050px;
-    margin: 10px auto auto;
-    background-color: #F6FAF9;
+    /*max-width: 1050px;*/
+    margin: auto;
+    background-color: #333333;
+    font-family: 'B612', sans-serif;
 }
 
 .Answers-header {
@@ -44,37 +45,6 @@ body {
     padding: 10px;
 }
 
-
-#header a {
-    margin-left: 5px;
-    color: #8E83BB;
-    text-decoration: none;
-}
-
-#logo {
-    font-size: 6vh;
-}
-
-/*form {*/
-/*    margin-left: 36%;*/
-/*}*/
-
-/*button {*/
-/*    margin-left: 20%;*/
-/*}*/
-
-/*table {*/
-/*  margin: auto;*/
-/*}*/
-
-/*input {*/
-/*  width: 45px;*/
-/*}*/
-
-/*label{*/
-/*  margin-left: 20px;*/
-/*}*/
-
 tr {
     background-color: #A3B5C1;
     min-width: 100px;
@@ -83,13 +53,6 @@ tr {
 td {
     background-color: #C8DCD2;
     min-width: 100px;
-}
-
-/*colors = #4C3633  #795A70  #8F86A6  #A3B5C1  #C8DCD2*/
-
-body {
-    font-family: 'Roboto Slab', serif;
-    background-color: #F6FAF9;
 }
 
 input[type="number"] {
@@ -150,11 +113,6 @@ input:-webkit-autofill {
     color: black;
     text-decoration: none;
     font-weight: bold;
-}
-
-a:hover {
-    color: #8E83BB;
-    text-decoration: none;
 }
 
 .new_form {
