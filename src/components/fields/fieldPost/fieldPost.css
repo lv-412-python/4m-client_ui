@@ -1,0 +1,11 @@
+.field_form {
+    display: flex;
+    flex-direction: column;
+    padding-left: 15px;
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+
+.field_form_btn {
+    width: 30%;
+}
