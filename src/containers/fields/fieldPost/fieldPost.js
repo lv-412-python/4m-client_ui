@@ -23,13 +23,16 @@ class PostField extends Component
 
     handleSubmit = (event) =>  {
         event.preventDefault();
+<<<<<<< HEAD:src/containers/fields/fieldPost.js
         const url = 'http://127.0.0.1:80/field';
+=======
+        const url = 'http://127.0.0.1/field';
+>>>>>>> a0455ce8c42a52f6c2dadaf7cedf92839c3e6460:src/containers/fields/fieldPost/fieldPost.js
         axios.post(url, this.state).
         // eslint-disable-next-line no-console
-            then(response => { console.log(response) }).
+            then(() => { window.location.reload() }).
         // eslint-disable-next-line no-console
             catch(error => { console.log(error) });
-        alert('Submitted: ' + this.state.title);
     };
 
     addChoice = () => {
@@ -74,43 +77,37 @@ class PostField extends Component
 
     render() {
         return (
-          <form onSubmit={this.handleSubmit}>
-              <label>
-                Title:
-                  <input type="text" name="title" value={this.state.title} onChange={this.handleInputChange} />
-              </label>
-              <br />
-              <br />
-              <label>
-                Has autocomplete:
-                  <input name="has_autocomplete"
-                         type="checkbox"
-                         checked={this.state.has_autocomplete}
-                         onChange={this.handleInputChange} />
-              </label>
-              <br />
-              <br />
-              <label>
-                Has choices:
-                  <input name="has_choice"
-                         type="checkbox"
-                         checked={this.state.has_choice}
-                         onChange={this.handleInputChange} />
-              </label>
-              {this.state.has_choice? this.renderButton(): null}
-              <br />
-              <br />
-              <label>
-                  Is multichoice:
-                  <input name="is_multichoice"
-                      type="checkbox"
-                      checked={this.state.is_multichoice}
-                      onChange={this.handleInputChange} />
-              </label>
-              <br />
-              <br />
-            <input className='btn btn-outline-dark' type="submit" value="Submit" />
-          </form>
+            <div className="field_form">
+              <form onSubmit={this.handleSubmit} className='field_form_items'>
+                  <label>
+                    Title:
+                      <input type="text" name="title" value={this.state.title} onChange={this.handleInputChange} />
+                  </label>
+                  <label>
+                    Has autocomplete:
+                      <input name="has_autocomplete"
+                             type="checkbox"
+                             checked={this.state.has_autocomplete}
+                             onChange={this.handleInputChange} />
+                  </label>
+                  <label>
+                    Has choices:
+                      <input name="has_choice"
+                             type="checkbox"
+                             checked={this.state.has_choice}
+                             onChange={this.handleInputChange} />
+                  </label>
+                  {this.state.has_choice? this.renderButton(): null}
+                  <label>
+                      Is multichoice:
+                      <input name="is_multichoice"
+                          type="checkbox"
+                          checked={this.state.is_multichoice}
+                          onChange={this.handleInputChange} />
+                  </label>
+                <input className='btn btn-outline-dark' type="submit" value="Submit" />
+              </form>
+            </div>
         );
     }
 }

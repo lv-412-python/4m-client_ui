@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 
+import './buttonNewForm.css';
+
 class ButtonNew extends Component {
     render() {
         return (

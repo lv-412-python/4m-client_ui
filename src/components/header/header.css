@@ -1,0 +1,35 @@
+.header {
+    background-color: #C8DCD2;
+    text-decoration: none;
+}
+
+.nav-text {
+    text-decoration: none;
+    color: #000;
+    font-size: 25px;
+}
+
+.logo {
+    font-weight: bolder;
+    font-size: 60px;
+    padding: 0 20px 0 20px;
+}
+
+a:hover {
+    color: #73A58C;
+    text-decoration: none;
+}
+
+.right-nav-items {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.left-nav-items {
+    display: flex;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+}

@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 
+import './newForm.css';
+
 class NewForm extends Component {
     state = {
         title: '',

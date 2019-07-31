@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 
+import './formItem.css';
+
 class FormItem extends Component {
     state = {
         description: undefined,
@@ -27,14 +29,10 @@ class FormItem extends Component {
 
     render() {
         return (
-            <div className='container'>
-                <div className='row'>
-                    <div className='col-12 form_item text_form'>
-                        <p className='title_form'>{this.state.title}</p>
-                        <p>{this.state.description}</p>
-                        <p>{this.state.fields}</p>
-                    </div>
-                </div>
+            <div className='form_item text_form'>
+                <p className='title_form'>{this.state.title}</p>
+                <p>{this.state.description}</p>
+                <p>{this.state.fields}</p>
             </div>
         );
     }
