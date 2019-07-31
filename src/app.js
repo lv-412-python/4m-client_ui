@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.css';
+import './components/fields/fieldsList/fieldsList.css';
+import './components/fields/fieldItem/fieldItem.css';
 import Routers from "src/routers";
 
 const app = (
