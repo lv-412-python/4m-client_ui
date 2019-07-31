@@ -73,6 +73,7 @@ class PostField extends Component
 
     render() {
         return (
+            <div className="field_form col align-self-start">
               <form onSubmit={this.handleSubmit} className='field_form'>
                   <label>
                     Title:
@@ -102,6 +103,7 @@ class PostField extends Component
                   </label>
                 <input className='btn btn-outline-dark field_form_btn' type="submit" value="Submit" />
               </form>
+            </div>
         );
     }
 }
