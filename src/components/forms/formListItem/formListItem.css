@@ -1,0 +1,18 @@
+.form_list_item {
+    background-color: #C8DCD2;
+    border-radius: 20px;
+    font-size: xx-large;
+    margin-bottom: 20px;
+    color: black;
+}
+
+.form_title {
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a .form_title:hover {
+    color: #73A58C;
+    text-decoration: none;
+}
