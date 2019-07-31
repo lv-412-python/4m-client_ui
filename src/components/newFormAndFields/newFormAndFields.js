@@ -6,10 +6,10 @@ import NewForm from '../forms/newForm/newForm';
 class FormField extends Component {
     render() {
         return (
-            <div>
-                <FieldsList />
-                <NewForm />
-            </div>
+          <div>
+              <FieldsList />
+              <NewForm />
+          </div>
         );
     }
 }
