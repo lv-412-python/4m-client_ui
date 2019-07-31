@@ -29,23 +29,20 @@ class FieldsList extends Component {
     render() {
         return (
             <div className="field_list col align-self-start">
-                <div className='new_field'>
-                    <h4>Fields</h4>
-                    <div className="field_list">
-                        <div className='new_field background_color'>
-                            <h4 className='padding-10px'>Fields</h4>
-                            <button className='btn btn-dark new_field_btn' onClick={this.newField} type="button">+
-                            </button>
-                        </div>
-                        <div className='background_color'>
-                            {
-                                this.state.new_field && <FieldPost/>
-                            }
-                        </div>
-                        {this.state.fields.map(field => <FieldItem key={field.title}
-                                                                   title={field.title}
-                                                                   id={field.id}/>).reverse()}
+                <div className="field_list">
+                    <div className='new_field background_color'>
+                        <h4 className='padding-10px'>Fields</h4>
+                        <button className='btn btn-dark new_field_btn' onClick={this.newField} type="button">+
+                        </button>
                     </div>
+                    <div className='background_color'>
+                        {
+                            this.state.new_field && <FieldPost/>
+                        }
+                    </div>
+                    {this.state.fields.map(field => <FieldItem key={field.title}
+                                                               title={field.title}
+                                                               id={field.id}/>).reverse()}
                 </div>
             </div>
         );
