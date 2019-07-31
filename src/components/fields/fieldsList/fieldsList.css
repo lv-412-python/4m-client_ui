@@ -1,0 +1,15 @@
+.field_list {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    max-width: 400px;
+    min-width: 200px;
+    color: black;
+}
+
+.new_field {
+    background-color: #BFBFBF;
+    display: flex;
+    justify-content: center;
+    margin-top: 150px;
+}

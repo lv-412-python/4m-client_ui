@@ -29,15 +29,17 @@ class FieldsList extends Component
 
     render () {
       return (
-        <div>
-            Fields
+        <div className="field_list">
+            <div className='new_field'>
+                <h4>Fields</h4>
+            </div>
             <button className='btn btn-dark' onClick={this.newField} type="button">+</button>
-                {
-                    this.state.new_field && <FieldPost />
-                }
-          {this.state.fields.map(field => <FieldItem key={field.title}
-                                                  title={field.title}
-                                                  id={field.id} />)}
+            {
+                this.state.new_field && <FieldPost />
+            }
+            {this.state.fields.map(field => <FieldItem key={field.title}
+                                                           title={field.title}
+                                                           id={field.id} />)}
         </div>
       );
     }
