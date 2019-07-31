@@ -25,14 +25,8 @@ class FormListItem extends Component {
         return (
             <div className='all_forms'>
                 <div className='form_list_item' key={this.state.id}>
-<<<<<<< HEAD
                     <a className='form_title' onClick={this.toForm} href='#'>{this.state.title}</a>
                     <p className='form_description'>{this.state.description}</p>
-=======
-                    <a className='form_title' onClick={this.toForm}>{this.state.title}</a>
-                    <br/>
-                    <p>{this.state.description}</p>
->>>>>>> added Answers form.
                 </div>
             </div>
         );

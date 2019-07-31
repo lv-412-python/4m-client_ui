@@ -12,6 +12,11 @@ textarea {
     display: flex;
     justify-content: space-around;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    align-self: center;
+    width: 465px;
+>>>>>>> added Answers form.
 =======
     align-self: center;
     width: 465px;
@@ -21,7 +26,10 @@ textarea {
 .form_input {
     border-radius: 7px;
 <<<<<<< HEAD
+<<<<<<< HEAD
     width: 465px;
+=======
+>>>>>>> added Answers form.
 =======
 >>>>>>> added Answers form.
 }

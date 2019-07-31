@@ -1,22 +1,13 @@
 .form_list_item {
-<<<<<<< HEAD
     display: flex;
     flex-direction: column;
     background-color: white;
-=======
-    border: solid #ffeee6 7px;
-    background-color: #ff9966;
->>>>>>> added Answers form.
     border-radius: 20px;
     font-size: xx-large;
     margin: 20px;
     padding: 5px 20px 0 20px;
     color: black;
-<<<<<<< HEAD
     width: 600px;
-=======
-    width: 500px;
->>>>>>> added Answers form.
 }
 
 .form_title {

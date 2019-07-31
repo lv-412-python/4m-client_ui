@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
 
 const TextInputField = props => (
-    <label>{props.title}:
-            <input type="text" name={props.title}/>
-    </label>
+    <div>
+        <label>{props.title}:
+            <input type="text" onChange={props.handleInputChange} name={props.name.replace(/ /g,"_")}/>
+        </label>
+    </div>
 );
 
 export default TextInputField;
