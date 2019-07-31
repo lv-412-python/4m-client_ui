@@ -1,0 +1,19 @@
+.form_item {
+    background-color: #BFBFBF;
+    font-size: xx-large;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 20px;
+    color: black;
+    margin-top: 20px;
+}
+
+.text_form {
+    text-align: left;
+}
+
+.title_form {
+    font-weight: bold;
+}

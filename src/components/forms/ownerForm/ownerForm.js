@@ -1,8 +1,9 @@
 import React from 'react';
 
+import './ownerForm.css';
+
 const OwnerForm = props => (
-    <div className='container'>
-        <div className='row'>
+        <div className='owner_total'>
             {/* eslint-disable-next-line react/prop-types */}
             <form onSubmit={props.getForms} className='owner_form col-6'>
                 <label>Owner id:
@@ -13,7 +14,6 @@ const OwnerForm = props => (
                 </div>
             </form>
         </div>
-    </div>
 );
 
 export default OwnerForm;

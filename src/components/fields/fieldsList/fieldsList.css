@@ -1,0 +1,28 @@
+.field_list {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    max-width: 400px;
+    min-width: 200px;
+    color: black;
+}
+
+.new_field {
+    display: flex;
+    justify-content: center;
+    margin-top: 150px;
+}
+
+.padding-10px{
+    padding-top: 10px;
+}
+
+.background_color {
+    background-color: #BFBFBF;
+}
+
+.new_field_btn {
+    width: 40px;
+    position: relative;
+    left: 65px;
+}
