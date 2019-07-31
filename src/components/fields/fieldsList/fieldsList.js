@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import FieldItem from '../fieldItem/fieldItem';
-import FieldPost from "src/containers/fields/fieldPost/fieldPost";
+import FieldPost from "src/components/fields/fieldPost/fieldPost";
 
 
 class FieldsList extends Component

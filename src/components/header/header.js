@@ -13,9 +13,9 @@ class Header extends Component {
                             aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"/>
                     </button>
-                    {/*<div className="collapse navbar-collapse" id="navbarSupportedContent">*/}
+                    <span className="collapse navbar-collapse" id="navbarSupportedContent">
                     <div className="left-nav-items">
-                        <ul className="navbar-nav">
+                        <ul className="navbar-nav ml-auto">
                             <li className="nav-item">
                                 <a className="nav-link nav-text" href="/form">Forms</a>
                             </li>
@@ -40,6 +40,7 @@ class Header extends Component {
                             </li>
                         </ul>
                     </div>
+                    </span>
                 </nav>
             </div>
         );
