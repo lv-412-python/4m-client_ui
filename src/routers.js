@@ -10,8 +10,8 @@ import answersTable from './components/answersList/answersTable';
 import FormList from './components/forms/formList/formList';
 import FormItem from './components/forms/formItem/formItem';
 import NewForm from './components/forms/newForm/newForm';
-import PostField from './components/fields/fieldPost';
-import FieldsList from './components/fields/fieldsList';
+import PostField from './components/fields/fieldPost/fieldPost';
+import FieldsList from './components/fields/fieldsList/fieldsList';
 import Header from './components/header/header';
 import Main from './containers/main/main';
 
