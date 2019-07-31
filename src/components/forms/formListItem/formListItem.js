@@ -24,14 +24,10 @@ class FormListItem extends Component {
 
     render() {
         return (
-            <div className='container'>
-                <div className='row'>
-                    <div className='col-6 form_list_item' key={this.state.id}>
-                        <a className='form_title' onClick={this.toForm}>{this.state.title}</a>
-                        <br/>
-                        <p>{this.state.description}</p>
-                    </div>
-                </div>
+            <div className='form_list_item' key={this.state.id}>
+                <a className='form_title' onClick={this.toForm}>{this.state.title}</a>
+                <br/>
+                <p>{this.state.description}</p>
             </div>
         );
     }
