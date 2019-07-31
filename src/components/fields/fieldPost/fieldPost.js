@@ -73,7 +73,11 @@ class PostField extends Component {
     renderButton = () => {
         return (
             <div>
+<<<<<<< HEAD
                 <button className='btn btn-outline-dark plus_btn' onClick={this.addChoice} type="button">+</button>
+=======
+                <button className='btn btn-outline-dark' onClick={this.addChoice} type="button">+</button>
+>>>>>>> added Answers form.
                 {
                     this.state.choices.map((val, idx) => {
                         return (
@@ -84,7 +88,11 @@ class PostField extends Component {
                                        value={this.state.choices[idx].title}
                                        onChange={this.handleChoiceChange}
                                 />
+<<<<<<< HEAD
                                 <button className='btn btn-outline-dark minus_btn' onClick={this.deleteChoice} id={idx}
+=======
+                                <button className='btn btn-outline-dark' onClick={this.deleteChoice} id={idx}
+>>>>>>> added Answers form.
                                         type="button">-
                                 </button>
                             </div>
@@ -117,7 +125,32 @@ class PostField extends Component {
                     <label>
                         Title:
                         <input className='title_input' type="text" name="title" value={this.state.title}
+<<<<<<< HEAD
+=======
                                onChange={this.handleInputChange}/>
+                    </label>
+                    <label>
+                        <input name="has_autocomplete"
+                               type="checkbox"
+                               checked={this.state.has_autocomplete}
+                               onChange={this.handleInputChange}/>
+                        Has autocomplete
+                    </label>
+                    <label>
+                        <input name="has_choice"
+                               type="checkbox"
+                               checked={this.state.has_choice}
+                               onChange={this.handleInputChange}/>
+                        Has choices
+                    </label>
+                    {this.state.has_choice ? this.renderButton() : null}
+                    <label>
+                        <input name="is_multichoice"
+                               type="checkbox"
+                               checked={this.state.is_multichoice}
+>>>>>>> added Answers form.
+                               onChange={this.handleInputChange}/>
+                        Is multichoice
                     </label>
                     {
                         this.state.dropdown &&

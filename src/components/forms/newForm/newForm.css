@@ -11,11 +11,19 @@
 textarea {
     display: flex;
     justify-content: space-around;
+<<<<<<< HEAD
+=======
+    align-self: center;
+    width: 465px;
+>>>>>>> added Answers form.
 }
 
 .form_input {
     border-radius: 7px;
+<<<<<<< HEAD
     width: 465px;
+=======
+>>>>>>> added Answers form.
 }
 
 .submit_btn {
