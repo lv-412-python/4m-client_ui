@@ -51,26 +51,22 @@ class NewForm extends Component {
                         <input type='text' value={title} name='title' className='form_input'
                                onChange={this.handleChangeInput}/>
                     </label>
-                    <br/>
                     <label>
                         <p>Description:</p>
                         <textarea value={description} name='description' className='form_input'
                                   onChange={this.handleChangeInput}/>
                     </label>
-                    <br/>
                     <label>
                         <p>Owner:</p>
                         <input type='text' value={owner} name='owner' className='form_input'
                                onChange={this.handleChangeOwner}/>
                     </label>
-                    <br/>
                     <label>
                         <p>Fields:</p>
                         <input type='text' value={fields} name='fields' className='form_input'
                                onChange={this.handleChangeFields}/>
                     </label>
                 </form>
-                <br/>
                 <div className='submit'>
                     <input className='btn btn-dark submit_btn' type='button' value="Submit"
                            onClick={this.handleSubmit}/>
