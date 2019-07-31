@@ -5,7 +5,7 @@ import './buttonNewForm.css';
 class ButtonNew extends Component {
     render() {
         return (
-            <div>
+            <div className='create_new'>
                 <form action='/new'>
                     <button className='btn-lg btn-outline-dark text-center btn_new'>Create new form</button>
                 </form>

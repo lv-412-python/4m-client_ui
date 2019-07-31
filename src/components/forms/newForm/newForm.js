@@ -31,12 +31,10 @@ class NewForm extends Component {
 
     handleSubmit = () => {
         const data = this.state;
-        axios.post('http://127.0.0.1:5050/form', data).
-        then(function (response) {
+        axios.post('http://127.0.0.1:5050/form', data).then(function (response) {
             // eslint-disable-next-line no-console
             console.info(response);
-        }).
-        catch(function (error) {
+        }).catch(function (error) {
             // eslint-disable-next-line no-console
             console.error(error);
         });
@@ -46,38 +44,34 @@ class NewForm extends Component {
     render() {
         const {title, description, owner, fields} = this.state;
         return (
-            <div className='container'>
-                <div className='row'>
-                    <form className='col-12 new_form'>
-                        <label>
-                            <p>Title:</p>
-                            <input type='text' value={title} name='title'
-                                   onChange={this.handleChangeInput}/>
-                        </label>
-                        <br/>
-                        <label>
-                            <p>Description:</p>
-                            <textarea value={description} name='description'
-                                      onChange={this.handleChangeInput}/>
-                        </label>
-                        <br/>
-                        <label>
-                            <p>Owner:</p>
-                            <input type='text' value={owner} name='owner'
-                                   onChange={this.handleChangeOwner}/>
-                        </label>
-                        <br/>
-                        <label>
-                            <p>Fields:</p>
-                            <input type='text' value={fields} name='fields'
-                                   onChange={this.handleChangeFields}/>
-                        </label>
-                        <br/>
-                        <input className='btn btn-outline-dark' type='button' value="Submit"
-                               onClick={this.handleSubmit}/>
-                    </form>
-                </div>
-            </div>
+            <form className='new_form'>
+                <label>
+                    <p>Title:</p>
+                    <input type='text' value={title} name='title'
+                           onChange={this.handleChangeInput}/>
+                </label>
+                <br/>
+                <label>
+                    <p>Description:</p>
+                    <textarea value={description} name='description'
+                              onChange={this.handleChangeInput}/>
+                </label>
+                <br/>
+                <label>
+                    <p>Owner:</p>
+                    <input type='text' value={owner} name='owner'
+                           onChange={this.handleChangeOwner}/>
+                </label>
+                <br/>
+                <label>
+                    <p>Fields:</p>
+                    <input type='text' value={fields} name='fields'
+                           onChange={this.handleChangeFields}/>
+                </label>
+                <br/>
+                <input className='btn btn-outline-dark' type='button' value="Submit"
+                       onClick={this.handleSubmit}/>
+            </form>
         );
     }
 }
