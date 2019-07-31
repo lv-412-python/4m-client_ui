@@ -10,9 +10,11 @@ import answersTable from './components/answersList/answersTable';
 import FormList from './components/forms/formList/formList';
 import FormItem from './components/forms/formItem/formItem';
 import FormField from './components/newFormAndFields/newFormAndFields';
+import GroupList from './components/groups/groupList/groupsList';
 import Header from './components/header/header';
 import Footer from './components/footer/footer';
 import Main from './containers/main/main';
+
 
 const Routers = () => {
     return (
@@ -29,6 +31,7 @@ const Routers = () => {
                     <Route path="/form/:id" component={FormItem}/>
                     <Route path="/form" component={FormList}/>
                     <Route path="/new" component={FormField}/>
+                    <Route path='/group' component={GroupList}/>
                 </Switch>
             </div>
             <Footer/>
