@@ -67,7 +67,8 @@ class FieldEdit extends Component {
     };
 
     render () {
-        return (<form onSubmit={this.handleSubmit}>
+        return (
+            <form onSubmit={this.handleSubmit} className='field_form'>
               <label>
                 Title:
                   <input type="text" name="title" value={this.state.title} onChange={this.handleInputChange} />
@@ -86,7 +87,9 @@ class FieldEdit extends Component {
                          checked={this.state.has_choice} />
               </label>
             {
-                this.state.has_choice ? this.state.choices.map((el, id) => <input key={id} type="text" id={id} value={el.title} onChange={this.handleChoiceChange} />): null
+                this.state.has_choice ? this.state.choices.map((el, id) =>
+                        <div key={id}>Choice {id+1}:
+                            <input key={id} type="text" id={id} value={el.title} onChange={this.handleChoiceChange} /></div>): null
             }
               <label>
                   Is multichoice:
@@ -95,7 +98,7 @@ class FieldEdit extends Component {
                       checked={this.state.is_multichoice}
                       onChange={this.handleInputChange} />
               </label>
-            <input className='btn btn-outline-dark' type="submit" value="Save" />
+            <input className='btn btn-outline-dark field_form_btn' type="submit" value="Save" />
           </form>);
     }
 }

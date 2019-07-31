@@ -73,8 +73,7 @@ class PostField extends Component
 
     render() {
         return (
-            <div className="field_form">
-              <form onSubmit={this.handleSubmit} className='field_form_items'>
+              <form onSubmit={this.handleSubmit} className='field_form'>
                   <label>
                     Title:
                       <input type="text" name="title" value={this.state.title} onChange={this.handleInputChange} />
@@ -101,9 +100,8 @@ class PostField extends Component
                           checked={this.state.is_multichoice}
                           onChange={this.handleInputChange} />
                   </label>
-                <input className='btn btn-outline-dark' type="submit" value="Submit" />
+                <input className='btn btn-outline-dark field_form_btn' type="submit" value="Submit" />
               </form>
-            </div>
         );
     }
 }
