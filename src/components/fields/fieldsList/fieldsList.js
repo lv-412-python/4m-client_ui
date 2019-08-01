@@ -40,7 +40,7 @@ class FieldsList extends Component {
                             this.state.new_field && <FieldPost/>
                         }
                     </div>
-                    {this.state.fields.map(field => <FieldItem key={field.title}
+                    {this.state.fields.map(field => <FieldItem key={field.id}
                                                                title={field.title}
                                                                id={field.id}/>).reverse()}
                 </div>

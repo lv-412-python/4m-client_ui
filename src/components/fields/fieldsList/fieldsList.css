@@ -18,7 +18,8 @@
 }
 
 .background_color {
-    background-color: #BFBFBF;
+    background-color: white;
+    border-radius: 10px;
 }
 
 .new_field_btn {

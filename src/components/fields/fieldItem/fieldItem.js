@@ -15,11 +15,9 @@ class FieldItem extends Component
         'title': this.props.title,
         'has_choice': null,
         'is_multichoice': null,
-        'has_autocomplete': null,
         'choices': [],
         'show_info': false,
         'edit': false,
-
     };
 
     componentDidMount() {
@@ -38,7 +36,6 @@ class FieldItem extends Component
                 object = {
                     has_choice:field.has_choice,
                     is_multichoice: field.is_multichoice,
-                    has_autocomplete: field.has_autocomplete,
                     choices: field.choices,
                     };
             }
@@ -46,7 +43,6 @@ class FieldItem extends Component
                 object = {
                     has_choice:field.has_choice,
                     is_multichoice: field.is_multichoice,
-                    has_autocomplete: field.has_autocomplete,
                     };
             }
             this.setState(object);
@@ -101,15 +97,19 @@ class FieldItem extends Component
                     </div>
                 </div>
                 {
-                    this.state.show_info && (
-                        <ul className='padding-10px'>
-                            <li>Has autocomplete: { this.state.has_autocomplete? "True": "False" }</li>
-                            <li>Has choices: { this.state.has_choice? "True": "False" }</li>
-                            {
-                                this.state.has_choice ? this.state.choices.map((el, id) => <ul key={id}><li>{el.title}</li> </ul>): null
-                            }
-                            <li>Is multichoice: { this.state.is_multichoice? "True": "False" }</li>
-                        </ul>
+                    this.state.show_info &&
+                    ( this.state.has_choice ?
+                            <ul className='padding-10px'>
+                                <li>type: dropdown</li>
+                                <li>Choices: </li>
+                                {
+                                    this.state.choices.map((el, id) => <ul key={id}><li>{el.title}</li> </ul>)
+                                }
+                                <li>Is multichoice: { this.state.is_multichoice? "True": "False" }</li>
+                            </ul>:
+                            <ul className='padding-10px'>
+                                <li>type: text</li>
+                             </ul>
                     )
                 }
                 {

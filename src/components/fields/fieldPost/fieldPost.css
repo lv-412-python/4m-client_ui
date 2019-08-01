@@ -23,3 +23,8 @@ button {
 .title_input {
     border-radius: 7px;
 }
+
+.checkbox_position{
+    display: flex;
+    flex-direction: row;
+}
