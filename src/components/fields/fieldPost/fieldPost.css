@@ -8,4 +8,18 @@
 
 .field_form_btn {
     width: 30%;
+    border-radius: 7px;
+}
+
+input {
+    margin: 10px;
+    border-radius: 7px;
+}
+
+button {
+    border-radius: 7px;
+}
+
+.title_input {
+    border-radius: 7px;
 }

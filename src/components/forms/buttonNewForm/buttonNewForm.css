@@ -4,7 +4,8 @@
 }
 
 .btn_new {
-    background-color: #C8DCD2;
+    background-color: #ff9966;
+    border-radius: 10px;
     padding: 10px;
     text-align: center;
 }

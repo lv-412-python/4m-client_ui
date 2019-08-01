@@ -89,7 +89,8 @@ class FieldEdit extends Component {
             {
                 this.state.has_choice ? this.state.choices.map((el, id) =>
                         <div key={id}>Choice {id+1}:
-                            <input key={id} type="text" id={id} value={el.title} onChange={this.handleChoiceChange} /></div>): null
+                            <input key={id} type="text" id={id} value={el.title} onChange={this.handleChoiceChange} />
+                        </div>): null
             }
               <label>
                   Is multichoice:

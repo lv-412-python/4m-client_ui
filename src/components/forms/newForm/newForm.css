@@ -5,18 +5,26 @@
     justify-content: space-between;
     font-size: xx-large;
     margin-top: 100px;
+    text-align: center;
+}
+
+textarea {
+    display: flex;
+    justify-content: space-around;
+    align-self: center;
+    width: 465px;
 }
 
 .form_input {
-    background-color: #BFBFBF;
+    border-radius: 7px;
 }
 
 .submit_btn {
     font-size: 20px;
     margin-bottom: 40px;
-    background-color: #C8DCD2;
+    background-color: #ff9966;
     color: black;
-    border-radius: 7px;
+    border-radius: 10px;
 }
 
 .submit {

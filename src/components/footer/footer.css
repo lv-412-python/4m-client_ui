@@ -1,0 +1,25 @@
+footer {
+    background-color: #ffeee6;
+    color: black;
+    margin-top: -100px;
+    height: 100px;
+    text-align: center;
+    align-self: flex-end;
+    flex-shrink: 0;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.footer_links {
+    font-weight: bold;
+    margin: 5px;
+    padding: 5px;
+}
+
+a:hover {
+    color: #ff7433;
+    text-decoration: none;
+}
