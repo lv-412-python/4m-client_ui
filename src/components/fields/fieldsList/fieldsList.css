@@ -1,16 +1,26 @@
 .field_list {
     display: flex;
-    justify-content: space-around;
     flex-direction: column;
-    max-width: 400px;
-    min-width: 200px;
+    width: 465px;
     color: black;
+    margin: 0;
 }
 
 .new_field {
     display: flex;
-    justify-content: center;
+    align-items: center;
     margin-top: 150px;
+    text-align: center;
+}
+
+.new_field_btn {
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-self: flex-end;
+    margin-left: 363px;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
 .padding-10px{
@@ -18,11 +28,13 @@
 }
 
 .background_color {
-    background-color: #BFBFBF;
+    background-color: white;
+    border-radius: 10px;
 }
 
-.new_field_btn {
-    width: 40px;
-    position: relative;
-    left: 65px;
+
+.fields {
+    text-align: center;
+    margin: 0;
+    padding: 0;
 }

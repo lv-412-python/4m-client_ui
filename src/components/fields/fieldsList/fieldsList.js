@@ -3,6 +3,8 @@ import axios from 'axios';
 import FieldItem from '../fieldItem/fieldItem';
 import FieldPost from "src/components/fields/fieldPost/fieldPost";
 
+import './fieldsList.css';
+
 
 class FieldsList extends Component {
     state = {
@@ -28,22 +30,21 @@ class FieldsList extends Component {
 
     render() {
         return (
-            <div className="field_list col align-self-start">
-                <div className="field_list">
-                    <div className='new_field background_color'>
-                        <h4 className='padding-10px'>Fields</h4>
-                        <button className='btn btn-dark new_field_btn' onClick={this.newField} type="button">+
-                        </button>
+            <div className="field_list">
+                <div className='new_field background_color'>
+                    <h4 className='fields'>Fields</h4>
+                    <div className='new_field_btn'>
+                    <button className='btn btn-dark' onClick={this.newField} type="button">+</button>
                     </div>
-                    <div className='background_color'>
-                        {
-                            this.state.new_field && <FieldPost/>
-                        }
-                    </div>
-                    {this.state.fields.map(field => <FieldItem key={field.title}
-                                                               title={field.title}
-                                                               id={field.id}/>).reverse()}
                 </div>
+                <div className='background_color'>
+                    {
+                        this.state.new_field && <FieldPost/>
+                    }
+                </div>
+                {this.state.fields.map(field => <FieldItem key={field.id}
+                                                           title={field.title}
+                                                           id={field.id}/>).reverse()}
             </div>
         );
     }
