@@ -4,15 +4,20 @@
 
 .my_buttons {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+    flex-direction: row;
+    align-items: stretch;
+    min-width: 100%;
 }
 
 .field_title {
-    display: flex;
-    align-self: center;
     padding-left: 12px;
 }
 
 .btn {
     border-radius: 0;
+}
+
+.field_btn {
+    min-width: 33.3%;
 }

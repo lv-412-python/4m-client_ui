@@ -9,7 +9,6 @@ class FieldEdit extends Component {
         'title': null,
         'has_choice': null,
         'is_multichoice': null,
-        'has_autocomplete': null,
         'choices': [],
     };
 
@@ -24,16 +23,14 @@ class FieldEdit extends Component {
                     title: field.title,
                     has_choice:field.has_choice,
                     is_multichoice: field.is_multichoice,
-                    has_autocomplete: field.has_autocomplete,
-                    choices: field.choices,
+                    choices: field.choices
                     };
             }
             else {
                 object = {
                     title: field.title,
                     has_choice:field.has_choice,
-                    is_multichoice: field.is_multichoice,
-                    has_autocomplete: field.has_autocomplete,
+                    is_multichoice: field.is_multichoice
                     };
             }
             this.setState(object);
@@ -73,33 +70,25 @@ class FieldEdit extends Component {
                 Title:
                   <input type="text" name="title" value={this.state.title} onChange={this.handleInputChange} />
               </label>
-              <label>
-                Has autocomplete:
-                  <input name="has_autocomplete"
-                         type="checkbox"
-                         checked={this.state.has_autocomplete}
-                         onChange={this.handleInputChange} />
-              </label>
-              <label>
-                Has choices:
-                  <input name="has_choice"
-                         type="checkbox"
-                         checked={this.state.has_choice} />
-              </label>
-            {
-                this.state.has_choice ? this.state.choices.map((el, id) =>
-                        <div key={id}>Choice {id+1}:
-                            <input key={id} type="text" id={id} value={el.title} onChange={this.handleChoiceChange} />
-                        </div>): null
-            }
-              <label>
-                  Is multichoice:
-                  <input name="is_multichoice"
-                      type="checkbox"
-                      checked={this.state.is_multichoice}
-                      onChange={this.handleInputChange} />
-              </label>
-            <input className='btn btn-outline-dark field_form_btn' type="submit" value="Save" />
+                {
+                    this.state.has_choice &&
+                        <div>
+                            {
+                                this.state.choices.map((el, id) =>
+                                    <div key={id}>Choice {id + 1}: <input key={id} type="text" id={id} value={el.title}
+                                           onChange={this.handleChoiceChange}/>
+                                    </div>)
+                            }
+                            <label>
+                                Is multichoice:
+                                <input name="is_multichoice"
+                                       type="checkbox"
+                                       checked={this.state.is_multichoice}
+                                       onChange={this.handleInputChange}/>
+                            </label>
+                        </div>
+                }
+                <input className='btn btn-outline-dark field_form_btn' type="submit" value="Save" />
           </form>);
     }
 }

@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 
+import './fieldPost.css';
+
 class PostField extends Component {
     state = {
         'text': true,
@@ -117,17 +119,19 @@ class PostField extends Component {
                         <input className='title_input' type="text" name="title" value={this.state.title}
                                onChange={this.handleInputChange}/>
                     </label>
-                    {this.state.dropdown &&
-                    <div>
-                        {this.renderButton()}
-                        <label>
-                            <input name="is_multichoice"
-                                   type="checkbox"
-                                   checked={this.state.is_multichoice}
-                                   onChange={this.handleInputChange}/>
-                            Is multichoice
-                        </label>
-                    </div>}
+                    {
+                        this.state.dropdown &&
+                            <div>
+                                { this.renderButton() }
+                                <label>
+                                    Is multichoice:
+                                    <input name="is_multichoice"
+                                           type="checkbox"
+                                           checked={this.state.is_multichoice}
+                                           onChange={this.handleInputChange}/>
+                                </label>
+                            </div>
+                    }
                     <input className='btn btn-outline-dark field_form_btn' type="submit" value="Submit"/>
                 </form>
             </div>

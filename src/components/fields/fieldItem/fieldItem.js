@@ -5,6 +5,8 @@ import { withRouter } from 'react-router-dom';
 import FieldEdit from '../fieldEdit/fieldEdit';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 
+import './fieldItem.css';
+
 
 class FieldItem extends Component
 {
@@ -88,14 +90,7 @@ class FieldItem extends Component
     render() {
         return (
             <div className='field_list_element background_color'>
-                <div className='my_buttons'>
-                    <div className='field_title'>{this.state.title}</div>
-                    <div className="my_buttons">
-                        <button className='btn btn-dark' onClick={this.getMoreInfo} type="button">Get more info</button>
-                        <button className='btn btn-dark' onClick={this.edit} type="button">Edit</button>
-                        <button className='btn btn-dark' onClick={this.delete} type="button">Delete</button>
-                    </div>
-                </div>
+                <div className='field_title'>{this.state.title}</div>
                 {
                     this.state.show_info &&
                     ( this.state.has_choice ?
@@ -109,12 +104,17 @@ class FieldItem extends Component
                             </ul>:
                             <ul className='padding-10px'>
                                 <li>type: text</li>
-                             </ul>
+                            </ul>
                     )
                 }
                 {
                     this.state.edit && <FieldEdit id={this.state.id} />
                 }
+                <div className='my_buttons'>
+                    <button className='btn btn-dark field_btn' onClick={this.getMoreInfo} type="button">Get more info</button>
+                    <button className='btn btn-dark field_btn' onClick={this.edit} type="button">Edit</button>
+                    <button className='btn btn-dark field_btn' onClick={this.delete} type="button">Delete</button>
+                </div>
             </div>
         );
     }
