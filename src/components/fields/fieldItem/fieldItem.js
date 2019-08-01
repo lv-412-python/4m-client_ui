@@ -54,11 +54,17 @@ class FieldItem extends Component
     };
 
     getMoreInfo = () => {
-        this.setState({show_info: !this.state.show_info});
+        this.state.edit ? this.setState({
+            edit: false,
+            show_info: !this.state.show_info}):
+            this.setState({show_info: !this.state.show_info});
     };
 
     edit = () => {
-        this.setState({edit: !this.state.edit});
+        this.state.show_info? this.setState({
+            show_info: false,
+            edit: !this.state.edit}):
+            this.setState({edit: !this.state.edit});
     };
 
     delete = () => {
@@ -85,7 +91,7 @@ class FieldItem extends Component
 
     render() {
         return (
-            <div className='field_list_element'>
+            <div className='field_list_element background_color'>
                 <div className='my_buttons'>
                     <div className='field_title'>{this.state.title}</div>
                     <div className="my_buttons">
@@ -96,7 +102,7 @@ class FieldItem extends Component
                 </div>
                 {
                     this.state.show_info && (
-                        <ul>
+                        <ul className='padding-10px'>
                             <li>Has autocomplete: { this.state.has_autocomplete? "True": "False" }</li>
                             <li>Has choices: { this.state.has_choice? "True": "False" }</li>
                             {

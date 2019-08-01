@@ -6,7 +6,7 @@ class Header extends Component {
     render() {
         return (
             <div className="header">
-                <nav className='navbar navbar-expand-lg navbar-fixed-top'>
+                <nav className='navbar fixed-top navbar-expand-lg'>
                     <a className='logo'>4M</a>
                     <button className="navbar-toggler" type="button" data-toggle="collapse"
                             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"

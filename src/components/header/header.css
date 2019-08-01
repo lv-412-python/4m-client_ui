@@ -1,7 +1,10 @@
 .header {
-    background-color: #C8DCD2;
     text-decoration: none;
     color: black;
+}
+
+.navbar {
+    background-color: #C8DCD2;
 }
 
 .nav-text {
