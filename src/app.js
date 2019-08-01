@@ -8,7 +8,9 @@ import './components/fields/fieldPost/fieldPost.css';
 import Routers from "src/routers";
 
 const app = (
-    <Routers />
+    <div>
+        <Routers />
+    </div>
 );
 
 ReactDOM.render(app, document.getElementById('root'));

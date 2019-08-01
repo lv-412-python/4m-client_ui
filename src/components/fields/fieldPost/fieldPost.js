@@ -51,26 +51,27 @@ class PostField extends Component {
     };
 
     renderButton = () => {
-        return (<div>
-            <button className='btn btn-outline-dark' onClick={this.addChoice} type="button">+</button>
-            {
-                this.state.choices.map((val, idx) => {
-                    return (
-                        <div key={idx}>
-                            <label>Choice {idx + 1}:</label>
-                            <input type="text"
-                                   id={idx}
-                                   value={this.state.choices[idx].title}
-                                   onChange={this.handleChoiceChange}
-                            />
-                            <button className='btn btn-outline-dark' onClick={this.deleteChoice} id={idx}
-                                    type="button">-
-                            </button>
-                        </div>
-                    );
-                })
-            }
-        </div>);
+        return (
+            <div>
+                <button className='btn btn-outline-dark' onClick={this.addChoice} type="button">+</button>
+                {
+                    this.state.choices.map((val, idx) => {
+                        return (
+                            <div key={idx}>
+                                <label>Choice {idx + 1}:</label>
+                                <input type="text"
+                                       id={idx}
+                                       value={this.state.choices[idx].title}
+                                       onChange={this.handleChoiceChange}
+                                />
+                                <button className='btn btn-outline-dark' onClick={this.deleteChoice} id={idx}
+                                        type="button">-
+                                </button>
+                            </div>
+                        );
+                    })
+                }
+            </div>);
     };
 
     render() {
@@ -79,29 +80,30 @@ class PostField extends Component {
                 <form onSubmit={this.handleSubmit} className='field_form'>
                     <label>
                         Title:
-                        <input type="text" name="title" value={this.state.title} onChange={this.handleInputChange}/>
+                        <input className='title_input' type="text" name="title" value={this.state.title}
+                               onChange={this.handleInputChange}/>
                     </label>
                     <label>
-                        Has autocomplete:
                         <input name="has_autocomplete"
                                type="checkbox"
                                checked={this.state.has_autocomplete}
                                onChange={this.handleInputChange}/>
+                        Has autocomplete
                     </label>
                     <label>
-                        Has choices:
                         <input name="has_choice"
                                type="checkbox"
                                checked={this.state.has_choice}
                                onChange={this.handleInputChange}/>
+                        Has choices
                     </label>
                     {this.state.has_choice ? this.renderButton() : null}
                     <label>
-                        Is multichoice:
                         <input name="is_multichoice"
                                type="checkbox"
                                checked={this.state.is_multichoice}
                                onChange={this.handleInputChange}/>
+                        Is multichoice
                     </label>
                     <input className='btn btn-outline-dark field_form_btn' type="submit" value="Submit"/>
                 </form>

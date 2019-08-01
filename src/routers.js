@@ -11,6 +11,7 @@ import FormList from './components/forms/formList/formList';
 import FormItem from './components/forms/formItem/formItem';
 import FormField from './components/newFormAndFields/newFormAndFields';
 import Header from './components/header/header';
+import Footer from './components/footer/footer';
 import Main from './containers/main/main';
 
 const Routers = () => {
@@ -30,6 +31,7 @@ const Routers = () => {
                     <Route path="/new" component={FormField}/>
                 </Switch>
             </div>
+            <Footer/>
         </BrowserRouter>
     );
 };

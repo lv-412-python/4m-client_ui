@@ -1,9 +1,11 @@
 .form_list_item {
-    background-color: #C8DCD2;
+    border: solid #ffeee6 7px;
+    background-color: #ff9966;
     border-radius: 20px;
     font-size: xx-large;
     margin-bottom: 20px;
     color: black;
+    width: 500px;
 }
 
 .form_title {
@@ -15,4 +17,12 @@
 a .form_title:hover {
     color: #73A58C;
     text-decoration: none;
+}
+
+.all_forms {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
