@@ -7,8 +7,7 @@ class NewForm extends Component {
     state = {
         title: '',
         description: '',
-        owner: '',
-        fields: []
+        owner: ''
     };
 
     handleChangeInput = e => {
@@ -21,17 +20,12 @@ class NewForm extends Component {
         this.setState({owner: parseInt(value, 10)});
     };
 
-    handleChangeFields = e => {
-        let val = e.target.value;
-        let value = val.split(',').map(function (item) {
-            return item;
-        });
-        this.setState({fields: value});
-    };
-
     handleSubmit = () => {
+        // eslint-disable-next-line react/prop-types
+        let value = this.props.selectedItems.map(value => value.id);
         const data = this.state;
-        axios.post('http://127.0.0.1:5050/form', data).then(function (response) {
+        data.fields = value;
+        axios.post('http://127.0.0.1/form', data).then(function (response) {
             // eslint-disable-next-line no-console
             console.info(response);
         }).catch(function (error) {
@@ -42,7 +36,7 @@ class NewForm extends Component {
     };
 
     render() {
-        const {title, description, owner, fields} = this.state;
+        const {title, description, owner} = this.state;
         return (
             <div>
                 <form className='new_form col align-self-end'>
@@ -63,8 +57,14 @@ class NewForm extends Component {
                     </label>
                     <label>
                         <p>Fields:</p>
-                        <input type='text' value={fields} name='fields' className='form_input'
-                               onChange={this.handleChangeFields}/>
+                        {/* eslint-disable-next-line react/prop-types */}
+                        {this.props.selectedItems.map(value => {
+                            return (
+                                <div key={value.id}>
+                                    <p>{value.title}</p>
+                                </div>
+                            );
+                        })}
                     </label>
                 </form>
                 <div className='submit'>

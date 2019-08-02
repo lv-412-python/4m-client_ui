@@ -111,7 +111,7 @@ class FieldItem extends Component
                     ( this.state.has_choice ?
                             <ul className='padding-10px'>
                                 <li>type: dropdown</li>
-                                <li>Choices: </li>
+                                <li>Options: </li>
                                 {
                                     this.state.choices.map((el, id) => <ul key={id}><li>{el.title}</li> </ul>)
                                 }

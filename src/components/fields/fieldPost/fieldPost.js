@@ -73,7 +73,7 @@ class PostField extends Component {
     renderButton = () => {
         return (
             <div>
-                <button className='btn btn-outline-dark' onClick={this.addChoice} type="button">+</button>
+                <button className='btn btn-outline-dark plus_btn' onClick={this.addChoice} type="button">+</button>
                 {
                     this.state.choices.map((val, idx) => {
                         return (
@@ -84,7 +84,7 @@ class PostField extends Component {
                                        value={this.state.choices[idx].title}
                                        onChange={this.handleChoiceChange}
                                 />
-                                <button className='btn btn-outline-dark' onClick={this.deleteChoice} id={idx}
+                                <button className='btn btn-outline-dark minus_btn' onClick={this.deleteChoice} id={idx}
                                         type="button">-
                                 </button>
                             </div>
@@ -124,11 +124,11 @@ class PostField extends Component {
                             <div>
                                 { this.renderButton() }
                                 <label>
-                                    Is multichoice:
                                     <input name="is_multichoice"
                                            type="checkbox"
                                            checked={this.state.is_multichoice}
                                            onChange={this.handleInputChange}/>
+                                    Is multichoice
                                 </label>
                             </div>
                     }

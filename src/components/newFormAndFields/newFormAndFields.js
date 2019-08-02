@@ -3,7 +3,6 @@ import NewFormHeader from './newFormHeader/newFormHeader';
 import FieldsList from '../fields/fieldsList/fieldsList';
 import NewForm from '../forms/newForm/newForm';
 
-
 class FormField extends Component {
     state = {
         selectedItems: []
