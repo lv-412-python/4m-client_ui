@@ -26,8 +26,6 @@ class FieldItem extends Component
         this.getData();
     }
 
-
-
     getData = () => {
         const url = `http://127.0.0.1/field/${this.state.id}`;
         axios.get(url).then(response => {

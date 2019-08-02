@@ -8,6 +8,21 @@ class FormField extends Component {
         selectedItems: []
     };
 
+    removeField = (id) => {
+        let index = null;
+        const {selectedItems} = this.state;
+        for (let i = 0; i < selectedItems.length; i++)
+        {
+            if (selectedItems[i].id == id)
+            {
+                index = i;
+                break;
+            }
+        }
+        selectedItems.splice(index, 1);
+        this.setState({selectedItems});
+    };
+
     setSelectedItems = (item) => {
         let exits = false;
         for(let el of this.state.selectedItems) {
@@ -33,7 +48,7 @@ class FormField extends Component {
                 <NewFormHeader/>
                 <div className='new row justify-content-around'>
                     <FieldsList setSelectedItems = {this.setSelectedItems}/>
-                    <NewForm selectedItems={this.state.selectedItems} />
+                    <NewForm selectedItems={this.state.selectedItems} removeField={this.removeField} />
                 </div>
             </div>
         );

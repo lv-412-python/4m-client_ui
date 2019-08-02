@@ -34,6 +34,11 @@ class NewForm extends Component {
         });
         alert('Posted new form: ' + this.state.title);
     };
+    passItem = (e) => {
+        const id = e.currentTarget.dataset.div_id;
+        // eslint-disable-next-line react/prop-types
+        this.props.removeField(id);
+    };
 
     render() {
         const {title, description, owner} = this.state;
@@ -60,7 +65,7 @@ class NewForm extends Component {
                         {/* eslint-disable-next-line react/prop-types */}
                         {this.props.selectedItems.map(value => {
                             return (
-                                <div key={value.id} className='field_in_form'>
+                                <div key={value.id} data-div_id={value.id} className='field_in_form' onDoubleClick={this.passItem} >
                                     <p className='field_in_form_title'>{value.title}</p>
                                     <div>
                                     {
