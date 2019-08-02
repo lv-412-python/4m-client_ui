@@ -105,7 +105,9 @@ class FieldItem extends Component
     render() {
         return (
             <div className='field_list_element background_color'>
-                <div className='field_title' onDoubleClick={this.passItem}>{this.state.title}</div>
+                <div className='field_title'
+                     title="Double click to add it to the form."
+                     onDoubleClick={this.passItem}>{this.state.title}</div>
                 {
                     this.state.show_info &&
                     ( this.state.has_choice ?
