@@ -60,8 +60,22 @@ class NewForm extends Component {
                         {/* eslint-disable-next-line react/prop-types */}
                         {this.props.selectedItems.map(value => {
                             return (
-                                <div key={value.id}>
-                                    <p>{value.title}</p>
+                                <div key={value.id} className='field_in_form'>
+                                    <p className='field_in_form_title'>{value.title}</p>
+                                    <div>
+                                    {
+                                        // eslint-disable-next-line react/prop-types
+                                        ( value.has_choice ?
+                                                <ul className='field_options'>
+                                                    {
+                                                        // eslint-disable-next-line react/prop-types
+                                                        value.choices.map((el, id) =>
+                                                            <ul key={id}><li>{el.title}</li></ul>)
+                                                    }
+                                                    </ul> : null
+                                        )
+                                    }
+                                    </div>
                                 </div>
                             );
                         })}

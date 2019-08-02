@@ -31,3 +31,18 @@ textarea {
     justify-content: center;
     align-items: center;
 }
+
+.field_in_form {
+    background-color: white;
+    border-radius: 10px;
+    width: 465px;
+    color: black;
+}
+
+.field_options {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    font-size: 25px;
+    padding-bottom: 5px;
+}
