@@ -10,6 +10,18 @@ class FormField extends Component {
     };
 
     setSelectedItems = (item) => {
+        let exits = false;
+        for(let el of this.state.selectedItems) {
+            if (el.id === item.id)
+            {
+                exits = true;
+                break;
+            }
+        }
+        if (exits)
+        {
+            return;
+        }
         this.setState({
             selectedItems: [...this.state.selectedItems, item],
         });
