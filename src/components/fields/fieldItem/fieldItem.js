@@ -12,14 +12,14 @@ class FieldItem extends Component
 {
     state = {
         // eslint-disable-next-line react/prop-types
-        'id': this.props.id,
+        id: this.props.id,
         // eslint-disable-next-line react/prop-types
-        'title': this.props.title,
-        'has_choice': null,
-        'is_multichoice': null,
-        'choices': [],
-        'show_info': false,
-        'edit': false,
+        title: this.props.title,
+        has_choice: null,
+        is_multichoice: null,
+        choices: [],
+        show_info: false,
+        edit: false,
     };
 
     componentDidMount() {
@@ -87,10 +87,25 @@ class FieldItem extends Component
         });
     };
 
+    passItem = () => {
+        const {
+            id, title, has_choice, is_multichoice, choices
+        } = this.state;
+        // eslint-disable-next-line react/prop-types
+        this.props.setSelectedItems(
+            {
+                id:id,
+                title:title,
+                has_choice:has_choice,
+                is_multichoice:is_multichoice,
+                choices:choices
+            });
+    };
+
     render() {
         return (
             <div className='field_list_element background_color'>
-                <div className='field_title'>{this.state.title}</div>
+                <div className='field_title' onDoubleClick={this.passItem}>{this.state.title}</div>
                 {
                     this.state.show_info &&
                     ( this.state.has_choice ?
