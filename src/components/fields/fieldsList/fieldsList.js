@@ -8,8 +8,8 @@ import './fieldsList.css';
 
 class FieldsList extends Component {
     state = {
-        'fields': [],
-        'new_field': false
+        fields: [],
+        new_field: false,
     };
 
     getData = () => {
@@ -44,7 +44,9 @@ class FieldsList extends Component {
                 </div>
                 {this.state.fields.map(field => <FieldItem key={field.id}
                                                            title={field.title}
-                                                           id={field.id}/>).reverse()}
+                                                           id={field.id}
+                                                           /* eslint-disable-next-line react/prop-types */
+                                                           setSelectedItems={this.props.setSelectedItems} />).reverse()}
             </div>
         );
     }
