@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import {confirmAlert} from "react-confirm-alert";
 
+import 'react-confirm-alert/src/react-confirm-alert.css';
 import './formItem.css';
 
 class FormItem extends Component {
@@ -9,8 +11,10 @@ class FormItem extends Component {
         fields: undefined,
         form_id: undefined,
         owner: undefined,
-        title: undefined
+        title: undefined,
+        edit: false
     };
+
     getData = () => {
         // eslint-disable-next-line react/prop-types
         axios.get(`http://127.0.0.1/form/${this.props.match.params.id}`).then(response => {
@@ -27,12 +31,47 @@ class FormItem extends Component {
         this.getData();
     }
 
+    edit = () => {
+        this.setState({edit: !this.state.edit});
+    };
+
+    delete = () => {
+        confirmAlert({
+            title: 'Confirm to delete',
+            message: 'Are you sure you want to delete this form?',
+            buttons: [
+                {
+                    label: 'Yes',
+                    onClick: () => {
+                        const url = `http://127.0.0.1/form/${this.state.form_id}`;
+                        axios.delete(url).then(() => {
+                            window.location.reload();
+                        }).
+                        catch(error => {
+                            // eslint-disable-next-line no-console
+                            console.log(error);
+                        });
+                    }
+                },
+                {
+                    label: 'No'
+                }
+            ]
+        });
+    };
+
     render() {
         return (
-            <div className='form_item text_form'>
-                <p className='title_form'>{this.state.title}</p>
-                <p>{this.state.description}</p>
-                <p>{this.state.fields}</p>
+            <div>
+                <div className='form_item text_form'>
+                    <p className='title_form'>{this.state.title}</p>
+                    <p>{this.state.description}</p>
+                    <p>{this.state.fields}</p>
+                </div>
+                <div className='btns'>
+                    <button className='btn btn-dark edit_btn' onClick={this.edit} type="button">Edit</button>
+                    <button className='btn btn-dark del_btn' onClick={this.delete} type="button">Delete</button>
+                </div>
             </div>
         );
     }
