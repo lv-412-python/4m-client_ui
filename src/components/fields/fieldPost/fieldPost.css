@@ -8,7 +8,8 @@
 
 .field_form_btn {
     width: 30%;
-    border-radius: 7px;
+    border-radius: 10px;
+    font-size: 20px;
 }
 
 input {
@@ -22,4 +23,17 @@ button {
 
 .title_input {
     border-radius: 7px;
+}
+
+.checkbox_position{
+    display: flex;
+    flex-direction: row;
+}
+
+.plus_btn {
+    border-radius: 50%;
+}
+
+.minus_btn {
+    border-radius: 50%;
 }
