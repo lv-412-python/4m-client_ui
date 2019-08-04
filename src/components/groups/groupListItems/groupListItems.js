@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
 
-
 class GroupListItem extends Component{
-    state = {
-        title = this.props.title,
-        members = this.props.members,
-        forms = this.props.forms
-    }
+
     render() {
-        returt(
+        // eslint-disable-next-line react/prop-types
+        var getGroup = this.props.getGroup;
+        return(
             <div>
-                <h1>{this.state.title}</h1>
-                <p>{ this.state.members }</p>
-                <p> {this.state.forms} </p>
+                 {/* eslint-disable-next-line react/prop-types */}
+                <a href="" onClick={getGroup} value={this.props.id}>
+                 {/* eslint-disable-next-line react/prop-types */}
+                    { this.props.title }
+                </a>
             </div>
         );
     }
 }
+
+export default GroupListItem;
