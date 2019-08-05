@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import axios from 'axios';
 
 import TextInputField from '../inputComponents/TextInputField';
-import { element } from 'prop-types';
 
 
 class answersForm extends Component {
@@ -10,27 +9,28 @@ class answersForm extends Component {
         form: {},
         form_title: "",
         fields: undefined,
-        answers: undefined,
-        answersResponse: {}
+        answers: {},
+        result: []
     };
     
     getForms = (e) => {
         e.preventDefault();
-        const form_id = e.target.elements.form_id.value
+        const form_id = e.target.elements.form_id.value;
         const forms_url = `http://127.0.0.1/form/${form_id}`;
         axios.get(forms_url,
-            {crossDomain: true
+            {crossDomain: true,
+            withCredentials:true
             }).then(response => {
             const form = response.data;
-            console.log(form);
             this.setState({form},()=>this.getFields());
         }).catch(error => {
+            // eslint-disable-next-line no-console
             console.error(error);
         });
     }
 
     getFields = () => {
-        const filter = this.state.form.fields.join("&field_id=")
+        const filter = this.state.form.fields.join("&field_id=");
         const fields_url = `http://127.0.0.1/field?field_id=${filter}`;
         axios.get(fields_url,
             {crossDomain: true
@@ -39,30 +39,39 @@ class answersForm extends Component {
         });
     }
 
+    postAnswers = () => {
+        const data = this.state.result;
+        axios.post('http://127.0.0.1/answers', data, {withCredentials:true}).then(function (response) {
+            // eslint-disable-next-line no-console
+            console.info(response);
+            }).catch(function (error) {
+            // eslint-disable-next-line no-console
+            console.error(error);
+            });
+        alert('Posted new form: ' + this.state.title);
+    }
+
     handleInputChange = (e) => {
         const {name , value} = e.target;
-        let answersResponse = this.state.answersResponse
-
-        answersResponse[name]=value;
-        this.setState({answersResponse});
+        let answers = this.state.answers;
+        answers[name] = 
+        { 
+            "form_id": this.state.form.form_id,
+            "user_id": 10,
+            "field_id": name,
+            "reply": value
+        };
+        this.setState({answers});
     };
 
     createAnswersResponseJSON = (e) => {
         e.preventDefault();
-        // const responseJSON = this.state.fields.map(field =>{
-        //     const field_id = field.id;
-        //     const inputFieldName = field.title.replace(/ /g,"_");
-        //     const reply = e.target.elements.inputFieldName.value;
-        //     return({
-        //         "form_id": this.state.form.form_id,
-        //         "group_id": 10,
-        //         "user_id": 10,
-        //         "field_id": field_id,
-        //         "reply": reply
-        //     })
-        // })
-        console.log(this.state.answersResponse);
-    }
+        let result = [];
+        Object.keys(this.state.answers).map( key => {
+            result.push(this.state.answers[key]);
+        });
+        this.setState({result}, ()=>this.postAnswers());
+    };
 
     render(){
         return(
@@ -83,7 +92,8 @@ class answersForm extends Component {
                                     <TextInputField key={field.id} 
                                                     handleInputChange={this.handleInputChange} 
                                                     title={field.title} 
-                                                    name={field.title}/>
+                                                    name={field.title}
+                                                    field_id={field.id}/>
                                 );
                             })}
                             <div>
@@ -92,9 +102,6 @@ class answersForm extends Component {
                         </div>
                     )}
                 </form>
-                {/* <div>
-                    <button className='btn btn-light' onClick={this.createAnswersResponseJSON}>Show Field answers</button>
-                </div> */}
             </div>
         );
     }

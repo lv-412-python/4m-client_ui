@@ -33,6 +33,7 @@ const Routers = () => {
                     <Route path="/new" component={FormField}/>
                     <Route path='/group' component={Group}/>
                     <Route path='/new-group' component={CreateGroup}/>
+                    <Route path="/answersForm" component={answersForm}/>
                 </Switch>
             </div>
             <Footer/>
