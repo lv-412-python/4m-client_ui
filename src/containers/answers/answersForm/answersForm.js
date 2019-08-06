@@ -6,6 +6,7 @@ import TextInputField from '../inputComponents/TextInputField';
 
 class AnswersForm extends Component {
     state = {
+        user_id: undefined,
         form: {},
         form_title: "",
         fields: undefined,
@@ -13,8 +14,20 @@ class AnswersForm extends Component {
         result: []
     };
     
+    getUser = () => {
+        const auth_status_url = 'http://127.0.0.1/users/status';
+        axios.get(auth_status_url, {withCredentials: true}).
+            then(response => {this.setState({
+                user_id: response.data.user_id
+                }); 
+            }).
+            // eslint-disable-next-line no-console
+            catch(error => { console.log(error) });
+    };
+
     getForms = (e) => {
         e.preventDefault();
+        this.getUser();
         const form_id = e.target.elements.form_id.value;
         const forms_url = `http://127.0.0.1/form/${form_id}`;
         axios.get(forms_url,
@@ -56,7 +69,7 @@ class AnswersForm extends Component {
         answers[name] = 
         { 
             "form_id": this.state.form.form_id,
-            "user_id": 10,
+            "user_id": this.state.user_id,
             "field_id": name,
             "reply": value
         };
