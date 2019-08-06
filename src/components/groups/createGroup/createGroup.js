@@ -5,12 +5,14 @@ import UsersAutocomplete from '../userAutocomplete/userAutocomplete';
 
 
 class CreateGroup extends Component {
+    
     state = {
         'forms': undefined,
         'title': undefined,
         'members': [],
         "checked_forms": new Set(),
-        "users": [],
+        "user_id": [],
+        "user_email": [],
         "owner_id": undefined
     };
 
@@ -27,9 +29,16 @@ class CreateGroup extends Component {
         const url_to_users = 'http://127.0.0.1/users';
         axios.get(url_to_users, { withCredentials:true }).
         // eslint-disable-next-line no-console
-            then(response => { 
+            then(response => {
+                let user_email = [];
+                let user_id = [];
+                response.data.forEach((user) => {
+                    user_id.push(user.user_id);
+                    user_email.push(user.email);
+                });
                 this.setState({
-                    users: response.data
+                    user_email: user_email,
+                    user_id: user_id
                 }); 
             }).
         // eslint-disable-next-line no-console
@@ -42,10 +51,8 @@ class CreateGroup extends Component {
         axios.get(auth_status_url, {withCredentials: true}).
             then(response => {this.setState({
                 owner_id: response.data.user_id
-                }, ()=>{this.getForms()}); 
+                }, () => {this.getForms()}); 
             }).
-            then(() => {this.getUsers()}).
-            then(() => {this.getForms()}).
             // eslint-disable-next-line no-console
             catch(error => { console.log(error) });
     };
@@ -106,13 +113,9 @@ class CreateGroup extends Component {
     handleMembersChange = (e) => {
         const {id, value} = e.target;
         let members = [...this.state.members];
-        for (let i = 0; i < this.state.users.length; i++)
-        {
-            if (this.state.users[i].email === value)
-            {
-                members[id] = this.state.users[i].user_id;
-                break;
-            }
+        if(this.state.user_email.indexOf(value) >= 0){
+            let email_index = this.state.user_email.indexOf(value);
+            members[id] = this.state.user_id[email_index];
         }
         this.setState({members});
     };
@@ -132,7 +135,7 @@ class CreateGroup extends Component {
                           <div key={idx}>
                             <label>Member {idx+1}:</label>
                                 <input list="users" name="browser" id={idx} onChange={this.handleMembersChange}></input>
-                                    <UsersAutocomplete key={this.state.users} users={this.state.users} />
+                                    <UsersAutocomplete key={this.state.user_email} user_email={this.state.user_email} user_id={this.state.user_id} />
                                 <button onClick={this.deleteMembers} id={idx}
                                     type="button">-</button>
                           </div>
