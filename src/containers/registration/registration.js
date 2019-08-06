@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 
 class Registration extends Component {
@@ -86,58 +85,70 @@ class Registration extends Component {
         }
     }
 
+    googleAuthRegister = () => {
+        const url1 = "http://127.0.0.1/g/login";
+        const params_login = {
+            method: 'register'
+        };
+        axios.get(url1,{ params:params_login, crossDomain:true, withCredentials:true }
+        ).then( response => {
+            window.location = response.data.url;
+        }).catch( error => {
+            alert(error.response.data.error);
+        });
+    }
+
 
     render() {
         return (
             <div className="Register">
-                <Form>
-                    <Form.Group controlId="first_name">
-                        <Form.Label>First Name</Form.Label><br />
-                        <Form.Control
-                            autoFocus
-                            type="text"
-                            value={this.state.first_name}
-                            onChange={this.handleChange}
-                        />
-                        <div className="errorMsg">{this.state.first_nameErr}</div>
-                    </Form.Group>
-                    <Form.Group controlId="last_name">
-                        <Form.Label>Last Name</Form.Label><br />
-                        <Form.Control
-                            autoFocus
-                            type="text"
-                            value={this.state.last_name}
-                            onChange={this.handleChange}
-                        />
-                        <div className="errorMsg">{this.state.last_nameErr}</div>
-                    </Form.Group>
-                    <Form.Group controlId="email">
-                        <Form.Label>Email</Form.Label><br />
-                        <Form.Control
-                            autoFocus
-                            type="email"
-                            value={this.state.email}
-                            onChange={this.handleChange}
-                        />
-                        <div className="errorMsg">{this.state.emailErr}</div>
-                    </Form.Group>
-                    <Form.Group controlId="password">
-                        <Form.Label>Password</Form.Label><br />
-                        <Form.Control
-                            value={this.state.password}
-                            onChange={this.handleChange}
-                            type="password"
-                        />
-                        <div className="errorMsg">{this.state.passwordErr}</div>
-                    </Form.Group>
-                    <input
-
-                        disabled={!this.validateForm()}
-                        type="button"
-                        onClick={this.handleSubmit}
-                        value='Register'
+                <div className="first_name">
+                    <label>First Name</label><br />
+                    <input id="first_name"
+                        type="text"
+                        value={this.state.first_name}
+                        onChange={this.handleChange}
                     />
-                </Form>
+                    <div className="errorMsg">{this.state.first_nameErr}</div>
+                </div>
+                <div className="last_name">
+                    <label>Last Name</label><br />
+                    <input id="last_name"
+                        type="text"
+                        value={this.state.last_name}
+                        onChange={this.handleChange}
+                    />
+                    <div className="errorMsg">{this.state.last_nameErr}</div>
+                </div>
+                <div className="email">
+                    <label>Email</label><br />
+                    <input id="email"
+                        type="email"
+                        value={this.state.email}
+                        onChange={this.handleChange}
+                    />
+                    <div className="errorMsg">{this.state.emailErr}</div>
+                </div>
+                <div className="password">
+                    <label>Password</label><br />
+                    <input id="password"
+                        value={this.state.password}
+                        onChange={this.handleChange}
+                        type="password"
+                    />
+                    <div className="errorMsg">{this.state.passwordErr}</div>
+                </div>
+                <input
+                    disabled={!this.validateForm()}
+                    type="button"
+                    onClick={this.handleSubmit}
+                    value='Register'
+                />
+                <input
+                    type="button"
+                    onClick={this.googleAuthRegister}
+                    value='Register with Google'
+                />
             </div>
         );
     }
