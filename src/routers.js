@@ -11,6 +11,7 @@ import FormItem from './components/forms/formItem/formItem';
 import FormField from './components/newFormAndFields/newFormAndFields';
 import CreateGroup from './components/groups/createGroup/createGroup';
 import Group from './components/groups/group';
+import GetOneGroup from './components/groups/getOneGroup/getOneGroup';
 import Header from './components/header/header';
 import Footer from './components/footer/footer';
 import AnswersForm from './containers/answers/answersForm/answersForm';
@@ -32,6 +33,7 @@ const Routers = () => {
                     <Route path="/form" component={FormList}/>
                     <Route path="/new" component={FormField}/>
                     <Route path='/group' component={Group}/>
+                    <Route path='/group/:id' component={GetOneGroup}/>
                     <Route path='/new-group' component={CreateGroup}/>
                     <Route path='/answersForm' component={AnswersForm}/>
                 </Switch>

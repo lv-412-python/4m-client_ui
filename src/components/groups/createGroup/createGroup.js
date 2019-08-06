@@ -16,7 +16,7 @@ class CreateGroup extends Component {
     };
 
     getForms = () => {
-        const answer_url = 'http://127.0.0.1/form?owner=1';
+        const answer_url = `http://127.0.0.1/form?owner=${this.state.owner_id}`;
         axios.get(answer_url, {crossDomain: true}).then(response => {
             const forms = response.data;
             this.setState({forms});
@@ -43,7 +43,7 @@ class CreateGroup extends Component {
         axios.get(auth_status_url, {withCredentials: true}).
             then(response => {this.setState({
                 owner_id: response.data.user_id
-                }); 
+                }, ()=>{this.getForms()}); 
             }).
             // eslint-disable-next-line no-console
             catch(error => { console.log(error) });
@@ -51,7 +51,6 @@ class CreateGroup extends Component {
 
     componentDidMount() {
         this.getUsers();
-        this.getForms();
         this.getOwner();
     }
 
