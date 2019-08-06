@@ -10,18 +10,24 @@ class FieldsList extends Component {
     state = {
         fields: [],
         new_field: false,
+        owner: null
     };
 
     getData = () => {
-        const url = 'http://127.0.0.1/field';
-        axios.get(url).then(response => {
+        const url = `http://127.0.0.1/field`;
+        axios.get(url, {params: {owner: this.state.owner}}).then(response => {
             const fields = response.data;
             this.setState({fields});
         });
     };
 
     componentDidMount() {
-        this.getData();
+        const auth_status_url = 'http://127.0.0.1/users/status';
+        axios.get(auth_status_url, {withCredentials: true}).
+        then(response => {
+            this.setState({owner: response.data.user_id});
+            this.getData();
+        });
     }
 
     newField = () => {
