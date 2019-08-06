@@ -16,7 +16,7 @@ class CreateGroup extends Component {
     };
 
     getForms = () => {
-        const answer_url = 'http://127.0.0.1/form?owner=1';
+        const answer_url = `http://127.0.0.1/form?owner=${this.state.owner_id}`;
         axios.get(answer_url, {crossDomain: true}).then(response => {
             const forms = response.data;
             this.setState({forms});

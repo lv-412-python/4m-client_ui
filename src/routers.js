@@ -36,7 +36,7 @@ const Routers = () => {
                     <Route path='/answersForm' component={AnswersForm}/>
                 </Switch>
             </div>
-            <Footer/>
+            {/* <Footer/> */}
         </BrowserRouter>
     );
 };
