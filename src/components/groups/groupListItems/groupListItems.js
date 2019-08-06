@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class GroupListItem extends Component{
 
@@ -8,10 +9,17 @@ class GroupListItem extends Component{
         return(
             <div>
                  {/* eslint-disable-next-line react/prop-types */}
-                <a href="" onClick={getGroup} value={this.props.id}>
-                 {/* eslint-disable-next-line react/prop-types */}
-                    { this.props.title }
-                </a>
+                 <h5 key = {this.props.id}>
+                    <Link 
+                    // eslint-disable-next-line react/prop-types
+                    to={`group/${this.props.id}`} 
+                    onClick={getGroup}
+                    // eslint-disable-next-line react/prop-types
+                    value={this.props.id}>
+                    {/* eslint-disable-next-line react/prop-types */}
+                        { this.props.title }
+                    </Link>
+                </h5>
             </div>
         );
     }
