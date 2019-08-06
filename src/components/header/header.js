@@ -1,8 +1,30 @@
 import React, {Component} from 'react';
+import cookie from 'react-cookies';
 
 import './header.css';
 
 class Header extends Component {
+
+    state = {
+        element1: <a className="nav-link nav-text" href="/registration">Sign up</a>,
+        element2: <a className="nav-link nav-text" href="/login">Sign in</a>
+    }
+
+    componentWillMount() {
+        let condition = cookie.load("session") != undefined;
+        if (condition) {
+            this.setState({
+                element1: <a className="nav-link nav-text" href="/profile">Profile</a>,
+                element2: <a className="nav-link nav-text" href="/logout">Sign out</a>
+            });
+        } else {
+            this.setState({
+                element1: <a className="nav-link nav-text" href="/registration">Sign up</a>,
+                element2: <a className="nav-link nav-text" href="/login">Sign in</a>
+            });
+        }
+    }
+
     render() {
         return (
             <div className="header">
@@ -27,16 +49,10 @@ class Header extends Component {
                     <div className='right-nav-items'>
                         <ul className="navbar-nav">
                             <li className="nav-item active">
-                                <a className="nav-link nav-text" href="/profile">Profile</a>
+                                {this.state.element1}
                             </li>
                             <li className="nav-item active">
-                                <a className="nav-link nav-text" href="/logout">Sign out</a>
-                            </li>
-                            <li className="nav-item active">
-                                <a className="nav-link nav-text" href="/login">Sign in</a>
-                            </li>
-                            <li className="nav-item active">
-                                <a className="nav-link nav-text" href="/registration">Sign up</a>
+                                {this.state.element2}
                             </li>
                         </ul>
                     </div>

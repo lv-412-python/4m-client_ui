@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import cookie from 'react-cookies';
 
@@ -12,7 +10,9 @@ class Logout extends Component {
         axios.post(url,  { withCredentials:true }
         ).then(response => {
             cookie.remove('session', { path: '/' });
+            cookie.remove('admin', { path: '/' });
             alert(response.data.message);
+            window.location = "http://127.0.0.1:3000/login";
         });
 
         event.preventDefault();
@@ -21,14 +21,11 @@ class Logout extends Component {
     render() {
         return (
             <div className="Logout">
-                <Form onSubmit={this.handleSubmit}>
-                    <Button
-                        block
-                        type="submit"
-                    >
-                        Logout
-                    </Button>
-                </Form>
+            <input
+                type="button"
+                onClick={this.handleSubmit}
+                value='Logout'
+            />
             </div>
         );
     }
