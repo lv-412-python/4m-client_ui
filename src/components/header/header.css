@@ -4,7 +4,7 @@
 }
 
 .navbar {
-    background-color: #C8DCD2;
+    background-color: #ff9966;
 }
 
 .nav-text {
@@ -19,8 +19,8 @@
     padding: 0 20px 0 20px;
 }
 
-a:hover {
-    color: #73A58C;
+.nav-text:hover {
+    color: #ffeee6;
     text-decoration: none;
 }
 

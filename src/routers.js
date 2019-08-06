@@ -6,12 +6,17 @@ import Login from './containers/login/login';
 import Logout from './containers/login/logout';
 import Status from './containers/login/status';
 import Registration from './containers/registration/registration';
-import answersTable from './components/answersList/answersTable';
 import FormList from './components/forms/formList/formList';
 import FormItem from './components/forms/formItem/formItem';
 import FormField from './components/newFormAndFields/newFormAndFields';
+import CreateGroup from './components/groups/createGroup/createGroup';
+import Group from './components/groups/group';
+import GetOneGroup from './components/groups/getOneGroup/getOneGroup';
 import Header from './components/header/header';
+import Footer from './components/footer/footer';
+import AnswersForm from './containers/answers/answersForm/answersForm';
 import Main from './containers/main/main';
+
 
 const Routers = () => {
     return (
@@ -24,12 +29,16 @@ const Routers = () => {
                     <Route path='/logout' component={Logout}/>
                     <Route path='/registration' component={Registration}/>
                     <Route path='/profile' component={Status}/>
-                    <Route path='/answers' component={answersTable}/>
                     <Route path="/form/:id" component={FormItem}/>
                     <Route path="/form" component={FormList}/>
                     <Route path="/new" component={FormField}/>
+                    <Route path='/group' component={Group}/>
+                    <Route path='/group/:id' component={GetOneGroup}/>
+                    <Route path='/new-group' component={CreateGroup}/>
+                    <Route path='/answersForm' component={AnswersForm}/>
                 </Switch>
             </div>
+            <Footer/>
         </BrowserRouter>
     );
 };

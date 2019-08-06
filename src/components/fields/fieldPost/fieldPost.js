@@ -1,8 +1,12 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 
+import './fieldPost.css';
+
 class PostField extends Component {
     state = {
+        'text': true,
+        'dropdown': false,
         'title': null,
         'has_autocomplete': false,
         'has_choice': false,
@@ -20,10 +24,26 @@ class PostField extends Component {
         });
     };
 
+    handleTypeChange = () => {
+        this.setState({
+            text: !this.state.text,
+            dropdown: !this.state.dropdown,
+            has_autocomplete: !this.state.has_autocomplete,
+            has_choice: !this.state.has_choice
+        });
+    };
+
     handleSubmit = (event) => {
         event.preventDefault();
         const url = 'http://127.0.0.1/field';
-        axios.post(url, this.state).then(() => {
+        const data = {
+            'title': this.state.title,
+            'has_autocomplete': this.state.has_autocomplete,
+            'has_choice': this.state.has_choice,
+            'is_multichoice': this.state.is_multichoice,
+            'choices': this.state.choices
+        };
+        axios.post(url, data).then(() => {
             window.location.reload();
         }).catch(error => {
             // eslint-disable-next-line no-console
@@ -51,58 +71,67 @@ class PostField extends Component {
     };
 
     renderButton = () => {
-        return (<div>
-            <button className='btn btn-outline-dark' onClick={this.addChoice} type="button">+</button>
-            {
-                this.state.choices.map((val, idx) => {
-                    return (
-                        <div key={idx}>
-                            <label>Choice {idx + 1}:</label>
-                            <input type="text"
-                                   id={idx}
-                                   value={this.state.choices[idx].title}
-                                   onChange={this.handleChoiceChange}
-                            />
-                            <button className='btn btn-outline-dark' onClick={this.deleteChoice} id={idx}
-                                    type="button">-
-                            </button>
-                        </div>
-                    );
-                })
-            }
-        </div>);
+        return (
+            <div>
+                <button className='btn btn-outline-dark plus_btn' onClick={this.addChoice} type="button">+</button>
+                {
+                    this.state.choices.map((val, idx) => {
+                        return (
+                            <div key={idx}>
+                                <label>Choice {idx + 1}:</label>
+                                <input type="text"
+                                       id={idx}
+                                       value={this.state.choices[idx].title}
+                                       onChange={this.handleChoiceChange}
+                                />
+                                <button className='btn btn-outline-dark minus_btn' onClick={this.deleteChoice} id={idx}
+                                        type="button">-
+                                </button>
+                            </div>
+                        );
+                    })
+                }
+            </div>);
     };
 
     render() {
         return (
             <div className="col align-self-start">
                 <form onSubmit={this.handleSubmit} className='field_form'>
+                    <div className='checkbox_position'>
+                        <label>
+                            <input name="text"
+                                   type="checkbox"
+                                   checked={this.state.text}
+                                   onChange={this.handleTypeChange}/>
+                            Text
+                        </label>
+                        <label>
+                            <input name="dropdown"
+                                   type="checkbox"
+                                   checked={this.state.dropdown}
+                                   onChange={this.handleTypeChange}/>
+                            Dropdown
+                        </label>
+                    </div>
                     <label>
                         Title:
-                        <input type="text" name="title" value={this.state.title} onChange={this.handleInputChange}/>
-                    </label>
-                    <label>
-                        Has autocomplete:
-                        <input name="has_autocomplete"
-                               type="checkbox"
-                               checked={this.state.has_autocomplete}
+                        <input className='title_input' type="text" name="title" value={this.state.title}
                                onChange={this.handleInputChange}/>
                     </label>
-                    <label>
-                        Has choices:
-                        <input name="has_choice"
-                               type="checkbox"
-                               checked={this.state.has_choice}
-                               onChange={this.handleInputChange}/>
-                    </label>
-                    {this.state.has_choice ? this.renderButton() : null}
-                    <label>
-                        Is multichoice:
-                        <input name="is_multichoice"
-                               type="checkbox"
-                               checked={this.state.is_multichoice}
-                               onChange={this.handleInputChange}/>
-                    </label>
+                    {
+                        this.state.dropdown &&
+                            <div>
+                                { this.renderButton() }
+                                <label>
+                                    <input name="is_multichoice"
+                                           type="checkbox"
+                                           checked={this.state.is_multichoice}
+                                           onChange={this.handleInputChange}/>
+                                    Is multichoice
+                                </label>
+                            </div>
+                    }
                     <input className='btn btn-outline-dark field_form_btn' type="submit" value="Submit"/>
                 </form>
             </div>

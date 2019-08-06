@@ -1,5 +1,5 @@
 .form_item {
-    background-color: #BFBFBF;
+    background-color: #ffeee6;
     font-size: xx-large;
     display: flex;
     justify-content: center;
@@ -16,4 +16,28 @@
 
 .title_form {
     font-weight: bold;
+}
+
+.btns {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.edit_btn {
+    margin: 20px 20px 40px 20px;
+    font-size: 20px;
+    background-color: #ff9966;
+    color: black;
+    border-radius: 10px !important;
+    width: 150px;
+}
+
+.del_btn {
+    margin: 20px 20px 40px 20px;
+    font-size: 20px;
+    background-color: #ff9966;
+    color: black;
+    border-radius: 10px !important;
+    width: 150px;
 }

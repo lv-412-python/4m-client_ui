@@ -5,28 +5,26 @@ import { withRouter } from 'react-router-dom';
 import FieldEdit from '../fieldEdit/fieldEdit';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 
+import './fieldItem.css';
+
 
 class FieldItem extends Component
 {
     state = {
         // eslint-disable-next-line react/prop-types
-        'id': this.props.id,
+        id: this.props.id,
         // eslint-disable-next-line react/prop-types
-        'title': this.props.title,
-        'has_choice': null,
-        'is_multichoice': null,
-        'has_autocomplete': null,
-        'choices': [],
-        'show_info': false,
-        'edit': false,
-
+        title: this.props.title,
+        has_choice: null,
+        is_multichoice: null,
+        choices: [],
+        show_info: false,
+        edit: false,
     };
 
     componentDidMount() {
         this.getData();
     }
-
-
 
     getData = () => {
         const url = `http://127.0.0.1/field/${this.state.id}`;
@@ -38,7 +36,6 @@ class FieldItem extends Component
                 object = {
                     has_choice:field.has_choice,
                     is_multichoice: field.is_multichoice,
-                    has_autocomplete: field.has_autocomplete,
                     choices: field.choices,
                     };
             }
@@ -46,7 +43,6 @@ class FieldItem extends Component
                 object = {
                     has_choice:field.has_choice,
                     is_multichoice: field.is_multichoice,
-                    has_autocomplete: field.has_autocomplete,
                     };
             }
             this.setState(object);
@@ -89,32 +85,51 @@ class FieldItem extends Component
         });
     };
 
+    passItem = () => {
+        const {
+            id, title, has_choice, is_multichoice, choices
+        } = this.state;
+        // eslint-disable-next-line react/prop-types
+        this.props.setSelectedItems(
+            {
+                id:id,
+                title:title,
+                has_choice:has_choice,
+                is_multichoice:is_multichoice,
+                choices:choices
+            });
+    };
+
     render() {
         return (
             <div className='field_list_element background_color'>
-                <div className='my_buttons'>
-                    <div className='field_title'>{this.state.title}</div>
-                    <div className="my_buttons">
-                        <button className='btn btn-dark' onClick={this.getMoreInfo} type="button">Get more info</button>
-                        <button className='btn btn-dark' onClick={this.edit} type="button">Edit</button>
-                        <button className='btn btn-dark' onClick={this.delete} type="button">Delete</button>
-                    </div>
-                </div>
+                <div className='field_title'
+                     title="Double click to add it to the form."
+                     onDoubleClick={this.passItem}>{this.state.title}</div>
                 {
-                    this.state.show_info && (
-                        <ul className='padding-10px'>
-                            <li>Has autocomplete: { this.state.has_autocomplete? "True": "False" }</li>
-                            <li>Has choices: { this.state.has_choice? "True": "False" }</li>
-                            {
-                                this.state.has_choice ? this.state.choices.map((el, id) => <ul key={id}><li>{el.title}</li> </ul>): null
-                            }
-                            <li>Is multichoice: { this.state.is_multichoice? "True": "False" }</li>
-                        </ul>
+                    this.state.show_info &&
+                    ( this.state.has_choice ?
+                            <ul className='padding-10px'>
+                                <li>type: dropdown</li>
+                                <li>Options: </li>
+                                {
+                                    this.state.choices.map((el, id) => <ul key={id}><li>{el.title}</li> </ul>)
+                                }
+                                <li>Is multichoice: { this.state.is_multichoice? "True": "False" }</li>
+                            </ul>:
+                            <ul className='padding-10px'>
+                                <li>type: text</li>
+                            </ul>
                     )
                 }
                 {
                     this.state.edit && <FieldEdit id={this.state.id} />
                 }
+                <div className='my_buttons'>
+                    <button className='btn btn-dark field_btn' onClick={this.getMoreInfo} type="button">Get more info</button>
+                    <button className='btn btn-dark field_btn' onClick={this.edit} type="button">Edit</button>
+                    <button className='btn btn-dark field_btn' onClick={this.delete} type="button">Delete</button>
+                </div>
             </div>
         );
     }
