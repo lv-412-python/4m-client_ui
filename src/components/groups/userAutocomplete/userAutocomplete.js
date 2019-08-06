@@ -1,16 +1,19 @@
-import React from 'react';
+import React, {Component} from 'react';
 
 
-const UsersAutocomplete = props => (
-    <datalist id="users">
-        {
+class UsersAutocomplete extends Component {
+
+
+    render() {
+        return <datalist id="users">
+            {
             // eslint-disable-next-line react/prop-types
-            props.users.map((user) => {
-            return (<option key={user.user_id} value={user.email}></option>);
-        })
+                this.props.user_email.map((email, index) => {
+                return (<option key={index} value={email}></option>);
+                })
+            }
+                </datalist>;
     }
-    </datalist>
-);
-
+}
 
 export default UsersAutocomplete;
