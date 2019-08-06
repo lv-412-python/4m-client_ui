@@ -5,13 +5,14 @@ import './fieldPost.css';
 
 class PostField extends Component {
     state = {
-        'text': true,
-        'dropdown': false,
-        'title': null,
-        'has_autocomplete': false,
-        'has_choice': false,
-        'is_multichoice': false,
-        'choices': []
+        text: true,
+        dropdown: false,
+        title: null,
+        has_autocomplete: false,
+        has_choice: false,
+        is_multichoice: false,
+        owner: null,
+        choices: []
     };
 
     handleInputChange = (event) => {
@@ -35,19 +36,24 @@ class PostField extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        const url = 'http://127.0.0.1/field';
-        const data = {
-            'title': this.state.title,
-            'has_autocomplete': this.state.has_autocomplete,
-            'has_choice': this.state.has_choice,
-            'is_multichoice': this.state.is_multichoice,
-            'choices': this.state.choices
-        };
-        axios.post(url, data).then(() => {
-            window.location.reload();
-        }).catch(error => {
-            // eslint-disable-next-line no-console
-            console.log(error);
+        const auth_status_url = 'http://127.0.0.1/users/status';
+        axios.get(auth_status_url, {withCredentials: true}).then(response => {
+            let owner = response.data.user_id;
+            const url = 'http://127.0.0.1/field';
+            const data = {
+                'title': this.state.title,
+                'has_autocomplete': this.state.has_autocomplete,
+                'has_choice': this.state.has_choice,
+                'is_multichoice': this.state.is_multichoice,
+                'choices': this.state.choices,
+                'owner': owner
+            };
+            axios.post(url, data).then(() => {
+                window.location.reload();
+            }).catch(error => {
+                // eslint-disable-next-line no-console
+                console.log(error);
+            });
         });
     };
 

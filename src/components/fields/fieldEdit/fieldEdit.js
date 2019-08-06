@@ -56,11 +56,23 @@ class FieldEdit extends Component {
 
     handleSubmit = (event) =>  {
         event.preventDefault();
-        const url = `http://127.0.0.1/field/${this.state.id}`;
-        axios.put(url, this.state).
+        const auth_status_url = 'http://127.0.0.1/users/status';
+        axios.get(auth_status_url, {withCredentials: true}).then(response => {
+            let owner = response.data.user_id;
+            const url = `http://127.0.0.1/field/${this.state.id}`;
+            const data = {
+                'title': this.state.title,
+                'has_autocomplete': this.state.has_autocomplete,
+                'has_choice': this.state.has_choice,
+                'is_multichoice': this.state.is_multichoice,
+                'choices': this.state.choices,
+                'owner': owner
+            };
+            axios.put(url, data).
             then(() => { window.location.reload() }).
-        // eslint-disable-next-line no-console
+            // eslint-disable-next-line no-console
             catch(error => { console.log(error) });
+        });
     };
 
     render () {
