@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import OwnerForm from '../ownerForm/ownerForm';
 import FormListItem from "src/components/forms/formListItem/formListItem";
 import ButtonNew from "src/components/forms/buttonNewForm/buttonNewForm";
 
@@ -12,12 +11,24 @@ class FormList extends Component {
         status: undefined,
         title: undefined,
         description: undefined,
-        id: undefined
+        id: undefined,
+        owner: undefined
     };
 
-    getForms = (e) => {
-        e.preventDefault();
-        const owner = e.target.elements.owner.value;
+    getOwner = () => {
+        const auth_status_url = 'http://127.0.0.1/users/status';
+
+        axios.get(auth_status_url, {withCredentials: true}).
+        then(response => {this.setState({
+            owner: response.data.user_id
+        }, ()=>{this.getForms()});
+        }).
+        // eslint-disable-next-line no-console
+        catch(error => { console.log(error) });
+    };
+
+    getForms = () => {
+        const owner = this.state.owner;
         const forms_url = `http://127.0.0.1/form`;
         axios.get(forms_url, {params: {owner: owner}},
             {crossDomain: true}).then(response => {
@@ -28,10 +39,13 @@ class FormList extends Component {
         });
     };
 
+    componentDidMount() {
+        this.getOwner();
+    }
+
     render() {
         return (
             <div className='form-list'>
-                <OwnerForm getForms={this.getForms}/>
                 {(this.state.forms &&
                     <div>
                         {this.state.forms.map(form => {

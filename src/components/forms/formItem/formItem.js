@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import {confirmAlert} from "react-confirm-alert";
 
+import FormEdit from '../formEdit/formEdit';
+
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import './formItem.css';
 
@@ -9,7 +11,8 @@ class FormItem extends Component {
     state = {
         description: undefined,
         fields: undefined,
-        form_id: undefined,
+        // eslint-disable-next-line react/prop-types
+        form_id: this.props.form_id,
         owner: undefined,
         title: undefined,
         edit: false
@@ -72,6 +75,9 @@ class FormItem extends Component {
                     <button className='btn btn-dark edit_btn' onClick={this.edit} type="button">Edit</button>
                     <button className='btn btn-dark del_btn' onClick={this.delete} type="button">Delete</button>
                 </div>
+                {
+                    this.state.edit && <FormEdit id={this.state.id} />
+                }
             </div>
         );
     }

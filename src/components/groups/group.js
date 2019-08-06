@@ -10,20 +10,20 @@ class Group extends Component{
         id: undefined,
         createGroup: false,
         getOneGroup: false
-    }
+    };
 
     getGroup = (e) => {
         e.preventDefault();
         this.setState({'getOneGroup': !this.setState.getOneGroup});
         this.setState({id:e.target.attributes.value.value});
-    }
+    };
 
     createGroup = (e) => {
         e.preventDefault();
         this.setState({
             createGroup: !this.state.createGroup
         });
-    }
+    };
 
     render() {
         let someComponent;
@@ -37,7 +37,7 @@ class Group extends Component{
         return(
             <div>
                 {someComponent}
-                <ButtonNewGroup createGroup={this.createGroup}/>;
+                <ButtonNewGroup createGroup={this.createGroup}/>
             </div>
         );
     }
