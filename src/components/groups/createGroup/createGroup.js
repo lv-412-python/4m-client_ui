@@ -59,6 +59,7 @@ class CreateGroup extends Component {
 
     componentDidMount() {
         this.getOwner();
+        this.getUsers();
     }
 
     handleSubmit = (event) =>  {
