@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 import axios from 'axios';
 
 import './newForm.css';
 
 class NewForm extends Component {
     state = {
-        title: '',
-        description: '',
+        title: undefined,
+        description: undefined,
         owner: ''
     };
 
@@ -16,15 +17,17 @@ class NewForm extends Component {
     };
 
     getOwner = () => {
-        const auth_status_url = 'http://127.0.0.1/users/status';
+        const auth_status_url = 'http://127.0.0.1/users/profile';
 
-        axios.get(auth_status_url, {withCredentials: true}).
-        then(response => {this.setState({
-            owner: response.data.user_id
+        axios.get(auth_status_url, {withCredentials: true}).then(response => {
+            this.setState({
+                owner: response.data.user_id
+            });
+        }).// eslint-disable-next-line no-console
+        catch(error => {
+            // eslint-disable-next-line no-console
+            console.log(error);
         });
-        }).
-        // eslint-disable-next-line no-console
-        catch(error => { console.log(error) });
     };
 
     componentDidMount() {
@@ -43,7 +46,6 @@ class NewForm extends Component {
             // eslint-disable-next-line no-console
             console.error(error);
         });
-        alert('Posted new form: ' + this.state.title);
     };
 
     passItem = (e) => {
@@ -59,49 +61,47 @@ class NewForm extends Component {
                 <form className='new_form col align-self-end'>
                     <label>
                         <p>Title:</p>
-                        <input type='text' value={title} name='title' className='form_input'
-                               onChange={this.handleChangeInput}/>
+                        <input type='text' required value={title} name='title' className='form_input'
+                               onChange={this.handleChangeInput} autoComplete="off"/>
                     </label>
                     <label>
                         <p>Description:</p>
                         <textarea value={description} name='description' className='form_input'
-                                  onChange={this.handleChangeInput}/>
+                                  onChange={this.handleChangeInput} autoComplete="off"/>
                     </label>
-                    {/*<label>*/}
-                    {/*    <p>Owner:</p>*/}
-                    {/*    <input type='text' value={owner} name='owner' className='form_input'*/}
-                    {/*           onChange={this.handleChangeOwner}/>*/}
-                    {/*</label>*/}
                     <label>
                         <p>Fields:</p>
                         {/* eslint-disable-next-line react/prop-types */}
                         {this.props.selectedItems.map(value => {
                             return (
-                                <div key={value.id} data-div_id={value.id} className='field_in_form' onDoubleClick={this.passItem} >
+                                <div key={value.id} data-div_id={value.id} className='field_in_form'
+                                     onDoubleClick={this.passItem}>
                                     <p className='field_in_form_title'>{value.title}</p>
                                     <div>
-                                    {
-                                        // eslint-disable-next-line react/prop-types
-                                        ( value.has_choice ?
-                                                <ul className='field_options'>
-                                                    {
-                                                        // eslint-disable-next-line react/prop-types
-                                                        value.choices.map((el, id) =>
-                                                            <ul key={id}><li>{el.title}</li></ul>)
-                                                    }
+                                        {
+                                            // eslint-disable-next-line react/prop-types
+                                            (value.has_choice ?
+                                                    <ul className='field_options'>
+                                                        {
+                                                            // eslint-disable-next-line react/prop-types
+                                                            value.choices.map((el, id) =>
+                                                                <ul key={id}>
+                                                                    <li>{el.title}</li>
+                                                                </ul>)
+                                                        }
                                                     </ul> : null
-                                        )
-                                    }
+                                            )
+                                        }
                                     </div>
                                 </div>
                             );
                         })}
                     </label>
                 </form>
-                <div className='submit'>
+                <Link className='submit' to="/form">
                     <input className='btn btn-dark submit_btn' type='button' value="Submit"
                            onClick={this.handleSubmit}/>
-                </div>
+                </Link>
             </div>
         );
     }

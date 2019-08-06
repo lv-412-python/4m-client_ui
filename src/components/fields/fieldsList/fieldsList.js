@@ -22,7 +22,7 @@ class FieldsList extends Component {
     };
 
     componentDidMount() {
-        const auth_status_url = 'http://127.0.0.1/users/status';
+        const auth_status_url = 'http://127.0.0.1/users/profile';
         axios.get(auth_status_url, {withCredentials: true}).
         then(response => {
             this.setState({owner: response.data.user_id});

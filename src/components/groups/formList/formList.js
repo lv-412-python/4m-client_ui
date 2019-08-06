@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 const FormList = props => (
     <div>
         {
@@ -21,6 +20,5 @@ const FormList = props => (
     }
     </div>
 );
-
 
 export default FormList;

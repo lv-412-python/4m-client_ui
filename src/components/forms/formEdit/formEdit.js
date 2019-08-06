@@ -21,8 +21,6 @@ class FormEdit extends Component {
                 title: form.title
             };
             this.setState(object);
-            // let value = this.props.selectedItems.map(value => value.id);
-            // object.fields = value;
         });
     }
 
@@ -49,20 +47,23 @@ class FormEdit extends Component {
     render() {
         const {title, description} = this.state;
         return (
-            <div>
+            <div className='align-self-end'>
                 <form onSubmit={this.handleSubmit} className='edit_form'>
                     <label>
                         <p>Title:</p>
                         <input type='text' value={title} name='title' className='form_input'
-                               onChange={this.handleChangeInput} placeholder={title}/>
+                               onChange={this.handleChangeInput} autoComplete='off'/>
                     </label>
                     <label>
                         <p>Description:</p>
                         <textarea value={description} name='description' className='form_input'
-                                  onChange={this.handleChangeInput} placeholder={description}/>
+                                  onChange={this.handleChangeInput} autoComplete='off'/>
                     </label>
                     <label>
                         <p>Fields:</p>
+                    </label>
+                    <label>
+
                     </label>
                 </form>
                 <div className='submit'>
