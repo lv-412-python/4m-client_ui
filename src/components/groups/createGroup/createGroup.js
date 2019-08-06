@@ -9,7 +9,6 @@ class CreateGroup extends Component {
         'forms': undefined,
         'title': undefined,
         'members': [],
-        'forms_owner': undefined,
         "checked_forms": new Set(),
         "users": [],
         "owner_id": undefined
@@ -45,12 +44,13 @@ class CreateGroup extends Component {
                 owner_id: response.data.user_id
                 }, ()=>{this.getForms()}); 
             }).
+            then(() => {this.getUsers()}).
+            then(() => {this.getForms()}).
             // eslint-disable-next-line no-console
             catch(error => { console.log(error) });
     };
 
     componentDidMount() {
-        this.getUsers();
         this.getOwner();
     }
 
@@ -108,7 +108,7 @@ class CreateGroup extends Component {
         let members = [...this.state.members];
         for (let i = 0; i < this.state.users.length; i++)
         {
-            if (this.state.users[i].email == value)
+            if (this.state.users[i].email === value)
             {
                 members[id] = this.state.users[i].user_id;
                 break;
