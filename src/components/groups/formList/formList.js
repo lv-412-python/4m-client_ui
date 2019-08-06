@@ -18,7 +18,7 @@ const FormList = props => (
                 <label htmlFor={form.form_id}>{form.title}</label>
             </div>);
         }) : <div>You dont have any forms</div>
-    };
+    }
     </div>
 );
 

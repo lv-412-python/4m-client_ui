@@ -43,7 +43,7 @@ class CreateGroup extends Component {
         axios.get(auth_status_url, {withCredentials: true}).
             then(response => {this.setState({
                 owner_id: response.data.user_id
-                }); 
+                }, ()=>{this.getForms()}); 
             }).
             // eslint-disable-next-line no-console
             catch(error => { console.log(error) });
@@ -51,7 +51,6 @@ class CreateGroup extends Component {
 
     componentDidMount() {
         this.getUsers();
-        this.getForms();
         this.getOwner();
     }
 

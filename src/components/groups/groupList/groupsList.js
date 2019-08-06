@@ -2,18 +2,30 @@ import React, { Component} from "react";
 import axios from "axios";
 
 import GroupListItem from '../groupListItems/groupListItems';
-import OwnerGroups from '../ownerGroups/ownerGroup';
 
 class GroupList extends Component {
     state = {
         groups: undefined,
-        status: undefined
+        status: undefined,
+        owner_id: undefined
     }
-    getGroups = (e) => {
-        e.preventDefault();
-        const owner = e.target.elements.owner.value;
+
+    getOwner = () => {
+        const auth_status_url = 'http://127.0.0.1/users/status';
+
+        axios.get(auth_status_url, {withCredentials: true}).
+            then(response => {this.setState({
+                owner_id: response.data.user_id
+                }, ()=>{this.getGroups()}); 
+            }).
+            // eslint-disable-next-line no-console
+            catch(error => { console.log(error) });
+    };
+
+    getGroups = () => {
+        // e.preventDefault();
         const gropsUrl = 'http://localhost/group';
-        axios.get(gropsUrl, {params:{owner:owner}},
+        axios.get(gropsUrl, {params:{owner:this.state.owner_id}},
             {crossDomain: true}
             ).then(response => {
                 const groups = response.data;
@@ -23,13 +35,15 @@ class GroupList extends Component {
             });
 
     };
+    componentDidMount(){
+        this.getOwner();
+    }
 
     render() {
         return(
             <div>
                 <div className='container'>
                     <div>
-                        <OwnerGroups getGroups={this.getGroups} /> 
                         {(this.state.groups && 
                             <div>
                                 {this.state.groups.map(group =>{
