@@ -4,7 +4,6 @@ import axios from 'axios';
 
 class FieldEdit extends Component {
     state = {
-        // eslint-disable-next-line react/prop-types
         'id': this.props.id,
         'title': null,
         'has_choice': null,
@@ -56,7 +55,7 @@ class FieldEdit extends Component {
 
     handleSubmit = (event) =>  {
         event.preventDefault();
-        const auth_status_url = 'http://127.0.0.1/users/status';
+        const auth_status_url = 'http://127.0.0.1/users/profile';
         axios.get(auth_status_url, {withCredentials: true}).then(response => {
             let owner = response.data.user_id;
             const url = `http://127.0.0.1/field/${this.state.id}`;
@@ -69,7 +68,8 @@ class FieldEdit extends Component {
                 'owner': owner
             };
             axios.put(url, data).
-            then(() => { window.location.reload() }).
+            then(() => { this.props.refresh();
+                        this.props.hideEdit(); }).
             // eslint-disable-next-line no-console
             catch(error => { console.log(error) });
         });
