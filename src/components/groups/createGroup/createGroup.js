@@ -59,6 +59,7 @@ class CreateGroup extends Component {
 
     componentDidMount() {
         this.getOwner();
+        this.getUsers();
     }
 
     handleSubmit = (event) =>  {
@@ -134,10 +135,16 @@ class CreateGroup extends Component {
                       return (
                           <div key={idx}>
                             <label>Member {idx+1}:</label>
-                                <input list="users" name="browser" id={idx} onChange={this.handleMembersChange}></input>
-                                    <UsersAutocomplete key={this.state.user_email} user_email={this.state.user_email} user_id={this.state.user_id} />
-                                <button onClick={this.deleteMembers} id={idx}
-                                    type="button">-</button>
+                                <input list="users"
+                                       name="browser"
+                                       id={idx}
+                                       onChange={this.handleMembersChange}></input>
+                                    <UsersAutocomplete key={this.state.user_email}
+                                                       user_email={this.state.user_email} 
+                                                       user_id={this.state.user_id} />
+                                <button onClick={this.deleteMembers} 
+                                        id={idx}
+                                        type="button">-</button>
                           </div>
                       );
                   })
@@ -153,7 +160,9 @@ class CreateGroup extends Component {
                 <form onSubmit={this.handleSubmit}>
                     <label>
                         Group title:
-                        <input type="text" name="title" onChange={this.handleTitleChange} />
+                        <input type="text" 
+                               name="title" 
+                               onChange={this.handleTitleChange} />
                     </label>
                     <div>
                         <p>Add members</p>
@@ -161,8 +170,10 @@ class CreateGroup extends Component {
                     </div>
                     <div>
                     <p>Add forms</p>
-                        <FormList getForms={this.getForms} key={this.state.title} state={this.state} 
-                                    handleFormsChange={this.handleFormsChange}/>
+                        <FormList getForms={this.getForms} 
+                                  key={this.state.title} 
+                                  state={this.state} 
+                                  handleFormsChange={this.handleFormsChange}/>
                     </div>
                     <div>
                         <input type="submit" value="Submit"/>
