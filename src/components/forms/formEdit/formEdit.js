@@ -24,6 +24,12 @@ class FormEdit extends Component {
         });
     }
 
+    passItem = (e) => {
+        const id = e.currentTarget.dataset.div_id;
+        // eslint-disable-next-line react/prop-types
+        this.props.removeField(id);
+    };
+
     handleChangeInput = e => {
         const {name, value} = e.target;
         this.setState({[name]: value});
