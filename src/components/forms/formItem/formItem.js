@@ -29,10 +29,8 @@ class FormItem extends Component {
     removeField = (id) => {
         let index = null;
         const {selectedItems} = this.state;
-        for (let i = 0; i < selectedItems.length; i++)
-        {
-            if (selectedItems[i].id == id)
-            {
+        for (let i = 0; i < selectedItems.length; i++) {
+            if (selectedItems[i].id == id) {
                 index = i;
                 break;
             }
@@ -43,15 +41,13 @@ class FormItem extends Component {
 
     setSelectedItems = (item) => {
         let exits = false;
-        for(let el of this.state.selectedItems) {
-            if (el.id === item.id)
-            {
+        for (let el of this.state.selectedItems) {
+            if (el.id === item.id) {
                 exits = true;
                 break;
             }
         }
-        if (exits)
-        {
+        if (exits) {
             return;
         }
         this.setState({
@@ -63,41 +59,26 @@ class FormItem extends Component {
     getData = () => {
         // eslint-disable-next-line react/prop-types
         axios.get(`http://127.0.0.1/form/${this.props.form_id}`).then(response => {
-            // eslint-disable-next-line no-console
-            console.log(response.data);
             this.setState({...response.data});
-        }).then(
             axios.get(`http://127.0.0.1/field`, {
                 params: {
-                    'field_id': [1,2]
+                    'field_id': this.state.fields
                 },
                 paramsSerializer: params => {
                     return qs.stringify(params, {arrayFormat: 'repeat'});
                 }
                 // eslint-disable-next-line no-console
-            }).then(response => console.log(response.data))
-        ).catch(error => {
-            // eslint-disable-next-line no-console
-            console.log(error.data);
-        });
+            }).then(response => this.setState({selectedItems: response.data}));
+        })
+            .catch(error => {
+                // eslint-disable-next-line no-console
+                console.log(error.data);
+            });
     };
 
     componentDidMount() {
         this.getData();
-        // this.getFields();
     }
-
-    getFields = () => {
-        // const form_id = this.state;
-        // let list_id = form_id.split(',');
-        const list_id = this.state.fields.map(parseInt);
-        const fields_url = `http://127.0.0.1/field`;
-        axios.get(fields_url, {params: {field_id: list_id}},
-            {crossDomain: true}).then(response => {
-            const questions = response.data;
-            this.setState({questions});
-        });
-    };
 
     edit = () => {
         this.setState({edit: !this.state.edit});
@@ -143,8 +124,9 @@ class FormItem extends Component {
                 </div>
                 {
                     this.state.edit && <div className='new row justify-content-around'>
-                        <FieldsList setSelectedItems = {this.setSelectedItems} />
-                        <FormEdit id={this.state.id} selectedItems={this.state.selectedItems} removeField={this.removeField} owner={this.state.owner} />
+                        <FieldsList setSelectedItems={this.setSelectedItems}/>
+                        <FormEdit form_id={this.state.form_id} selectedItems={this.state.selectedItems}
+                                  removeField={this.removeField} owner={this.state.owner}/>
                     </div>
                 }
 
