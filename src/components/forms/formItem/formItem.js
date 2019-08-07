@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 import axios from 'axios';
 import {confirmAlert} from "react-confirm-alert";
 
@@ -10,17 +11,18 @@ import './formItem.css';
 class FormItem extends Component {
     state = {
         description: undefined,
-        fields: undefined,
+        fields: '',
         // eslint-disable-next-line react/prop-types
         form_id: this.props.form_id,
         owner: undefined,
         title: undefined,
-        edit: false
+        edit: false,
+        questions: undefined
     };
 
     getData = () => {
         // eslint-disable-next-line react/prop-types
-        axios.get(`http://127.0.0.1/form/${this.props.match.params.id}`).then(response => {
+        axios.get(`http://127.0.0.1/form/${this.props.form_id}`).then(response => {
             // eslint-disable-next-line no-console
             console.log(response.data);
             this.setState({...response.data});
@@ -32,7 +34,20 @@ class FormItem extends Component {
 
     componentDidMount() {
         this.getData();
+        // this.getFields();
     }
+
+    getFields = () => {
+        // const form_id = this.state;
+        // let list_id = form_id.split(',');
+        const list_id = this.state.fields.map(parseInt);
+        const fields_url = `http://127.0.0.1/field`;
+        axios.get(fields_url, {params: {field_id: list_id}},
+            {crossDomain: true}).then(response => {
+            const questions = response.data;
+            this.setState({questions});
+        });
+    };
 
     edit = () => {
         this.setState({edit: !this.state.edit});
@@ -49,8 +64,7 @@ class FormItem extends Component {
                         const url = `http://127.0.0.1/form/${this.state.form_id}`;
                         axios.delete(url).then(() => {
                             window.location.reload();
-                        }).
-                        catch(error => {
+                        }).catch(error => {
                             // eslint-disable-next-line no-console
                             console.log(error);
                         });
@@ -73,10 +87,12 @@ class FormItem extends Component {
                 </div>
                 <div className='btns'>
                     <button className='btn btn-dark edit_btn' onClick={this.edit} type="button">Edit</button>
-                    <button className='btn btn-dark del_btn' onClick={this.delete} type="button">Delete</button>
+                    <Link to='/form'>
+                        <button className='btn btn-dark del_btn' onClick={this.delete} type="button">Delete</button>
+                    </Link>
                 </div>
                 {
-                    this.state.edit && <FormEdit id={this.state.id} />
+                    this.state.edit && <FormEdit form_id={this.state.form_id} owner={this.state.owner}/>
                 }
             </div>
         );

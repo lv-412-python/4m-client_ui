@@ -6,7 +6,7 @@ import Login from './containers/login/login';
 import Logout from './containers/login/logout';
 import Status from './containers/login/status';
 import Registration from './containers/registration/registration';
-import FormList from './components/forms/formList/formList';
+import Form from './components/forms/form';
 import FormItem from './components/forms/formItem/formItem';
 import FormField from './components/newFormAndFields/newFormAndFields';
 import CreateGroup from './components/groups/createGroup/createGroup';
@@ -30,7 +30,7 @@ const Routers = () => {
                     <Route path='/registration' component={Registration}/>
                     <Route path='/profile' component={Status}/>
                     <Route path="/form/:id" component={FormItem}/>
-                    <Route path="/form" component={FormList}/>
+                    <Route path="/form" component={Form}/>
                     <Route path="/new" component={FormField}/>
                     <Route path='/group' component={Group}/>
                     <Route path='/group/:id' component={GetOneGroup}/>

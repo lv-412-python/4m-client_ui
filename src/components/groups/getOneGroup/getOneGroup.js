@@ -10,22 +10,22 @@ class GetOneGroup extends Component{
         members: undefined,
         owner_id: undefined,
         assigned_to_forms: undefined
-    }
+    };
 
     getUsers = () => {
         const url_to_users = 'http://127.0.0.1/users';
         axios.get(url_to_users, { withCredentials:true }).
         // eslint-disable-next-line no-console
-            then(response => { 
+            then(response => {
                 this.setState({
                     members: response.data
                 });
             }).
         // eslint-disable-next-line no-console
             catch(error => { console.log(error) });
-    }
+    };
 
-    
+
     getForms = () => {
         const answer_url = `http://127.0.0.1/form?owner=${this.state.owner_id}`;
         axios.get(answer_url, {crossDomain: true}).then(response => {

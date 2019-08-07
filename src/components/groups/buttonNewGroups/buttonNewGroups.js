@@ -1,32 +1,32 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 
-import  { Link } from 'react-router-dom';
-
-class ButtonNewGroup extends Component{
+class ButtonNewGroup extends Component {
     state = {
-        textButton : ''
-    }
+        textButton: ''
+    };
 
     changeText = () => {
         // eslint-disable-next-line react/prop-types
-        if(this.props.checkStatus) {
+        if (this.props.checkStatus) {
             this.setState(
                 {textButton: 'Back to grops'}
             );
-        }else{
+        } else {
             this.setState(
                 {textButton: 'New group'}
             );
         }
-        return(this.state.textButton);
-       
+        return (this.state.textButton);
+
     };
 
     componentDidMount() {
         this.changeText();
     }
-    render(){
-        return(
+
+    render() {
+        return (
             <div>
                 <Link to='/new-group'>New group</Link>
             </div>

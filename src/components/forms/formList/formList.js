@@ -9,29 +9,33 @@ class FormList extends Component {
     state = {
         forms: undefined,
         status: undefined,
-        title: undefined,
-        description: undefined,
-        id: undefined,
+        // title: undefined,
+        // description: undefined,
+        // form_id: undefined,
         owner: undefined
     };
 
     getOwner = () => {
-        const auth_status_url = 'http://127.0.0.1/users/status';
+        const auth_status_url = 'http://127.0.0.1/users/profile';
 
-        axios.get(auth_status_url, {withCredentials: true}).
-        then(response => {this.setState({
-            owner: response.data.user_id
-        }, ()=>{this.getForms()});
+        axios.get(auth_status_url, {withCredentials: true}).then(response => {
+            this.setState({
+                owner: response.data.user_id
+            }, () => {
+                this.getForms();
+            });
         }).
-        // eslint-disable-next-line no-console
-        catch(error => { console.log(error) });
+        catch(error => {
+            // eslint-disable-next-line no-console
+            console.log(error);
+        });
     };
 
     getForms = () => {
         const owner = this.state.owner;
         const forms_url = `http://127.0.0.1/form`;
         axios.get(forms_url, {params: {owner: owner}},
-            {crossDomain: true}).then(response => {
+            {withCredentials: true}, {crossDomain: true} ).then(response => {
             const forms = response.data;
             const status = response.status;
             this.setState({status});
@@ -49,14 +53,17 @@ class FormList extends Component {
                 {(this.state.forms &&
                     <div>
                         {this.state.forms.map(form => {
-                            return (<FormListItem key={form.form_id}
+                            // eslint-disable-next-line react/prop-types
+                            return (<FormListItem getForm={this.props.getForm}
+                                                  key={form.form_id}
                                                   title={form.title}
-                                                  id={form.form_id}
-                                                  description={form.description}/>);
+                                                  form_id={form.form_id}
+                                                  description={form.description}
+                            />);
                         })
                         }
                     </div>)}
-            <ButtonNew />
+                <ButtonNew/>
             </div>
         );
     }
