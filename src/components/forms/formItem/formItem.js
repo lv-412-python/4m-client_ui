@@ -4,11 +4,16 @@ import axios from 'axios';
 import {confirmAlert} from "react-confirm-alert";
 
 import FormEdit from '../formEdit/formEdit';
+import FieldsList from "src/components/fields/fieldsList/fieldsList";
 
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import './formItem.css';
 
+import qs from 'qs';
+
+
 class FormItem extends Component {
+
     state = {
         description: undefined,
         fields: '',
@@ -17,7 +22,42 @@ class FormItem extends Component {
         owner: undefined,
         title: undefined,
         edit: false,
-        questions: undefined
+        questions: undefined,
+        selectedItems: []
+    };
+
+    removeField = (id) => {
+        let index = null;
+        const {selectedItems} = this.state;
+        for (let i = 0; i < selectedItems.length; i++)
+        {
+            if (selectedItems[i].id == id)
+            {
+                index = i;
+                break;
+            }
+        }
+        selectedItems.splice(index, 1);
+        this.setState({selectedItems});
+    };
+
+    setSelectedItems = (item) => {
+        let exits = false;
+        for(let el of this.state.selectedItems) {
+            if (el.id === item.id)
+            {
+                exits = true;
+                break;
+            }
+        }
+        if (exits)
+        {
+            return;
+        }
+        this.setState({
+            selectedItems: [...this.state.selectedItems, item],
+        });
+
     };
 
     getData = () => {
@@ -26,7 +66,17 @@ class FormItem extends Component {
             // eslint-disable-next-line no-console
             console.log(response.data);
             this.setState({...response.data});
-        }).catch(error => {
+        }).then(
+            axios.get(`http://127.0.0.1/field`, {
+                params: {
+                    'field_id': [1,2]
+                },
+                paramsSerializer: params => {
+                    return qs.stringify(params, {arrayFormat: 'repeat'});
+                }
+                // eslint-disable-next-line no-console
+            }).then(response => console.log(response.data))
+        ).catch(error => {
             // eslint-disable-next-line no-console
             console.log(error.data);
         });
@@ -92,9 +142,14 @@ class FormItem extends Component {
                     </Link>
                 </div>
                 {
-                    this.state.edit && <FormEdit form_id={this.state.form_id} owner={this.state.owner}/>
+                    this.state.edit && <div className='new row justify-content-around'>
+                        <FieldsList setSelectedItems = {this.setSelectedItems} />
+                        <FormEdit id={this.state.id} selectedItems={this.state.selectedItems} removeField={this.removeField} owner={this.state.owner} />
+                    </div>
                 }
+
             </div>
+
         );
     }
 }
