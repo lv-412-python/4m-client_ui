@@ -41,3 +41,19 @@
     border-radius: 10px !important;
     width: 150px;
 }
+
+.field_in_form {
+    background-color: white;
+    border-radius: 10px;
+    width: 465px;
+    color: black;
+    text-align: center;
+}
+
+.field_options {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    font-size: 25px;
+    padding-bottom: 5px;
+}

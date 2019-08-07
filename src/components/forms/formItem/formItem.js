@@ -30,7 +30,7 @@ class FormItem extends Component {
         let index = null;
         const {selectedItems} = this.state;
         for (let i = 0; i < selectedItems.length; i++) {
-            if (selectedItems[i].id == id) {
+            if (selectedItems[i].id === id) {
                 index = i;
                 break;
             }
@@ -114,7 +114,31 @@ class FormItem extends Component {
                 <div className='form_item text_form'>
                     <p className='title_form'>{this.state.title}</p>
                     <p>{this.state.description}</p>
-                    <p>{this.state.fields}</p>
+                    <label>
+                        {this.state.selectedItems.map(value => {
+                            return (
+                                <div key={value.id} className='field_in_form'>
+                                    <p className='field_in_form_title'>{value.title}</p>
+                                    <div>
+                                        {
+                                            // eslint-disable-next-line react/prop-types
+                                            (value.has_choice ?
+                                                    <ul className='field_options'>
+                                                        {
+                                                            // eslint-disable-next-line react/prop-types
+                                                            value.choices.map((el, id) =>
+                                                                <ul key={id}>
+                                                                    <li>{el.title}</li>
+                                                                </ul>)
+                                                        }
+                                                    </ul> : null
+                                            )
+                                        }
+                                    </div>
+                                </div>
+                            );
+                        })}
+                    </label>
                 </div>
                 <div className='btns'>
                     <button className='btn btn-dark edit_btn' onClick={this.edit} type="button">Edit</button>
