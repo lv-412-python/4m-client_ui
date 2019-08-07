@@ -24,6 +24,7 @@ module.exports = {
   ],
   'rules': {
       "semi": [2, "always", { "omitLastInOneLineBlock": true}],
+      "react/prop-types": 0,
   },
   "settings": {
     "react": {

@@ -7,6 +7,7 @@ import './fieldsList.css';
 
 
 class FieldsList extends Component {
+
     state = {
         fields: [],
         new_field: false,
@@ -21,8 +22,12 @@ class FieldsList extends Component {
         });
     };
 
+    setNewFieldFalse = () => {
+        this.setState({new_field: false});
+    };
+
     componentDidMount() {
-        const auth_status_url = 'http://127.0.0.1/users/status';
+        const auth_status_url = 'http://127.0.0.1/users/profile';
         axios.get(auth_status_url, {withCredentials: true}).
         then(response => {
             this.setState({owner: response.data.user_id});
@@ -45,14 +50,14 @@ class FieldsList extends Component {
                 </div>
                 <div className='background_color'>
                     {
-                        this.state.new_field && <FieldPost/>
+                        this.state.new_field && <FieldPost refresh={this.getData} newFieldFalse={this.setNewFieldFalse} />
                     }
                 </div>
                 {this.state.fields.map(field => <FieldItem key={field.id}
                                                            title={field.title}
                                                            id={field.id}
-                                                           /* eslint-disable-next-line react/prop-types */
-                                                           setSelectedItems={this.props.setSelectedItems} />).reverse()}
+                                                           setSelectedItems={this.props.setSelectedItems}
+                                                           refresh={this.getData} />).reverse()}
             </div>
         );
     }

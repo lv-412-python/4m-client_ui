@@ -11,9 +11,7 @@ import './fieldItem.css';
 class FieldItem extends Component
 {
     state = {
-        // eslint-disable-next-line react/prop-types
         id: this.props.id,
-        // eslint-disable-next-line react/prop-types
         title: this.props.title,
         has_choice: null,
         is_multichoice: null,
@@ -73,7 +71,7 @@ class FieldItem extends Component
                     onClick: () => {
                         const url = `http://127.0.0.1/field/${this.state.id}`;
                         axios.delete(url).
-                        then(() => { window.location.reload() }).
+                        then(() => { this.props.refresh() }).
                         // eslint-disable-next-line no-console
                         catch(error => { console.log(error) });
                     }
@@ -89,7 +87,6 @@ class FieldItem extends Component
         const {
             id, title, has_choice, is_multichoice, choices
         } = this.state;
-        // eslint-disable-next-line react/prop-types
         this.props.setSelectedItems(
             {
                 id:id,
@@ -123,7 +120,7 @@ class FieldItem extends Component
                     )
                 }
                 {
-                    this.state.edit && <FieldEdit id={this.state.id} />
+                    this.state.edit && <FieldEdit refresh={this.props.refresh} hideEdit={this.edit} id={this.state.id} />
                 }
                 <div className='my_buttons'>
                     <button className='btn btn-dark field_btn' onClick={this.getMoreInfo} type="button">Get more info</button>

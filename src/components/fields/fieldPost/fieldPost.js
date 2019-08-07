@@ -4,6 +4,7 @@ import axios from 'axios';
 import './fieldPost.css';
 
 class PostField extends Component {
+
     state = {
         text: true,
         dropdown: false,
@@ -36,7 +37,7 @@ class PostField extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        const auth_status_url = 'http://127.0.0.1/users/status';
+        const auth_status_url = 'http://127.0.0.1/users/profile';
         axios.get(auth_status_url, {withCredentials: true}).then(response => {
             let owner = response.data.user_id;
             const url = 'http://127.0.0.1/field';
@@ -49,7 +50,8 @@ class PostField extends Component {
                 'owner': owner
             };
             axios.post(url, data).then(() => {
-                window.location.reload();
+                this.props.newFieldFalse();
+                this.props.refresh();
             }).catch(error => {
                 // eslint-disable-next-line no-console
                 console.log(error);
