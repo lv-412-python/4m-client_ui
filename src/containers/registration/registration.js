@@ -148,7 +148,8 @@ class Registration extends Component {
                     type="button"
                     onClick={this.googleAuthRegister}
                     value='Register with Google'
-                />
+                /><br />
+                <a href="/login">I already have an account.</a>
             </div>
         );
     }

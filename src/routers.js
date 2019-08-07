@@ -7,6 +7,8 @@ import Logout from './containers/login/logout';
 import Status from './containers/login/status';
 import Registration from './containers/registration/registration';
 import Form from './components/forms/form';
+import ResetPassword from './containers/resetPasswd/resetPasswd';
+import SetNewPassword from './containers/resetPasswd/setNewPasswd';
 import FormItem from './components/forms/formItem/formItem';
 import FormField from './components/newFormAndFields/newFormAndFields';
 import CreateGroup from './components/groups/createGroup/createGroup';
@@ -29,6 +31,8 @@ const Routers = () => {
                     <Route path='/logout' component={Logout}/>
                     <Route path='/registration' component={Registration}/>
                     <Route path='/profile' component={Status}/>
+                    <Route path='/reset_password' component={ResetPassword}/>
+                    <Route path='/set_new_password' component={SetNewPassword}/>
                     <Route path="/form/:id" component={FormItem}/>
                     <Route path="/form" component={Form}/>
                     <Route path="/new" component={FormField}/>

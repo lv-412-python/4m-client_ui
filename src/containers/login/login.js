@@ -79,7 +79,9 @@ class Login extends Component {
                     type="button"
                     onClick={this.googleAuthLogin}
                     value='Login with Google'
-                />
+                /><br />
+                <a href="/registration">I am not signed up yet.</a><br />
+                <a href="/reset_password">I have forgotten my password :(</a>
             </div>
         );
     }
