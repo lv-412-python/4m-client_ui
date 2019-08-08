@@ -8,10 +8,9 @@ class Logout extends Component {
         const url = "http://127.0.0.1/users/logout";
 
         axios.post(url,  { withCredentials:true }
-        ).then(response => {
+        ).then( () => {
             cookie.remove('session', { path: '/' });
             cookie.remove('admin', { path: '/' });
-            alert(response.data.message);
             window.location = "http://127.0.0.1:3000/login";
         });
 

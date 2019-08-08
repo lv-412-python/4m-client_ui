@@ -70,8 +70,8 @@ class Registration extends Component {
             const url = "http://127.0.0.1/users/register";
 
             axios.post(url, user, { withCredentials:true }
-            ).then( response => {
-                alert(response.data.message);
+            ).then( () => {
+                window.location = "http://127.0.0.1:3000";
             }).catch( error => {
                 alert(error.response.data.error);
             });
