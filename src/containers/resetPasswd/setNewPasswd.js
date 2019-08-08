@@ -24,7 +24,7 @@ class SetNewPassword extends Component {
         if (this.state.password != this.state.passwordTwo) {
             passwordTwoErr = "repeat password correctly";
         }
-        if (passwordErr ||passwordTwoErr) {
+        if (passwordErr || passwordTwoErr) {
             this.setState( {passwordErr, passwordTwoErr} );
             return false;
         }

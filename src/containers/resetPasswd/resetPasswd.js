@@ -44,7 +44,7 @@ class ResetPassword extends Component {
             axios.post(url, emailData, { withCredentials:true, crossDomain: true }
             ).then( response => {
                 alert(response.data.message);
-                window.location = "http://127.0.0.1:3000/set_new_password";
+                window.location = "http://127.0.0.1:3000/login";
             }).catch( error => {
                 alert(error.response.data.error);
             });
