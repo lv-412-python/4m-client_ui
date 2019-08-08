@@ -49,7 +49,7 @@ class PostField extends Component {
                 'choices': this.state.choices,
                 'owner': owner
             };
-            axios.post(url, data).then(() => {
+            axios.post(url, data, {withCredentials: true}).then(() => {
                 this.props.newFieldFalse();
                 this.props.refresh();
             }).catch(error => {

@@ -26,7 +26,7 @@ class FieldItem extends Component
 
     getData = () => {
         const url = `http://127.0.0.1/field/${this.state.id}`;
-        axios.get(url).then(response => {
+        axios.get(url, {withCredentials: true}).then(response => {
             const field = response.data;
             let object = null;
             if (field.has_choice)
@@ -70,7 +70,7 @@ class FieldItem extends Component
                     label: 'Yes',
                     onClick: () => {
                         const url = `http://127.0.0.1/field/${this.state.id}`;
-                        axios.delete(url).
+                        axios.delete(url, {withCredentials: true}).
                         then(() => { this.props.refresh() }).
                         // eslint-disable-next-line no-console
                         catch(error => { console.log(error) });
