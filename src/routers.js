@@ -16,7 +16,7 @@ import Group from './components/groups/group';
 import GetOneGroup from './components/groups/getOneGroup/getOneGroup';
 import Header from './components/header/header';
 import Footer from './components/footer/footer';
-import AnswersForm from './containers/answers/answersForm/answersForm';
+import AnswersForm from './components/answers/answersForm/answersForm';
 import Main from './containers/main/main';
 
 
