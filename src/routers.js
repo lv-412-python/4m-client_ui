@@ -9,7 +9,7 @@ import Registration from './containers/registration/registration';
 import Form from './components/forms/form';
 import ResetPassword from './containers/resetPasswd/resetPasswd';
 import SetNewPassword from './containers/resetPasswd/setNewPasswd';
-import FormItem from './components/forms/formItem/formItem';
+import FormItem from "src/components/forms/formItem/formItem";
 import FormField from './components/newFormAndFields/newFormAndFields';
 import CreateGroup from './components/groups/createGroup/createGroup';
 import Group from './components/groups/group';
