@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import Select from 'react-select';
 
 import TextInputField from '../inputComponents/TextInputField';
 
@@ -8,14 +9,14 @@ class AnswersForm extends Component {
     state = {
         user_id: undefined,
         form: {},
-        form_title: "",
-        fields: undefined,
+        fields: [],
         answers: {},
+        options: {},
         result: []
     };
-    
+
     getUser = () => {
-        const auth_status_url = 'http://127.0.0.1/users/status';
+        const auth_status_url = 'http://127.0.0.1/users/profile';
         axios.get(auth_status_url, {withCredentials: true}).
             then(response => {this.setState({
                 user_id: response.data.user_id
@@ -43,15 +44,30 @@ class AnswersForm extends Component {
     }
 
     getFields = () => {
-        const filter = this.state.form.fields.join("&field_id=");
-        const fields_url = `http://127.0.0.1/field?field_id=${filter}`;
-        axios.get(fields_url,
-            {crossDomain: true
-            }).then(response => {
-            this.setState({fields: response.data});
+        this.state.form.fields.map( field => {
+            const fields_url = `http://127.0.0.1/field/${field}`;
+            axios.get(fields_url,
+                {crossDomain: true
+                }).then(response => {
+                this.setState({fields: [...this.state.fields, response.data]}, ()=>this.createOptions());
+            });
         });
     }
 
+    createOptions = () => {
+        let options = this.state.options;
+        this.state.fields.map( field => {
+            if (field.has_choice === true){
+                let choices = [];
+                field.choices.map( choice => {
+                    choices.push({value: choice.title , label: choice.title});
+                });
+                options[field.id] = choices;
+                this.setState({options: options});
+            }
+        });
+    }
+    
     postAnswers = () => {
         const data = this.state.result;
         axios.post('http://127.0.0.1/answers', data, {withCredentials:true}).then(function (response) {
@@ -97,16 +113,26 @@ class AnswersForm extends Component {
                 <form onSubmit={this.createAnswersResponseJSON}>
                     { this.state.fields && (
                         <div>
-                            <div><h2>{ this.state.form.title }</h2></div>
-                            <div><p>{ this.state.form.description }</p></div>
+                            <h2>{ this.state.form.title }</h2>
+                            <p>{ this.state.form.description }</p>
                             { this.state.fields.map(field => {
-                                return (
-                                    <TextInputField key={field.id} 
-                                                    handleInputChange={this.handleInputChange} 
-                                                    title={field.title} 
-                                                    name={field.title}
-                                                    field_id={field.id}/>
-                                );
+                                if (field.has_choice === true) {
+                                    return(
+                                        <div key = {field.id}>
+                                            <label>
+                                                {field.title}
+                                                <Select options={this.state.options[field.id]}/>
+                                            </label>
+                                        </div>
+                                    );
+                                } else {
+                                    return (
+                                        <TextInputField key={field.id} 
+                                                        handleInputChange={this.handleInputChange} 
+                                                        title={field.title} 
+                                                        field_id={field.id}/>
+                                    );
+                                }
                             })}
                             <div>
                                 <button className='btn btn-light'>Submit Answers</button>
