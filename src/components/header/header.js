@@ -7,15 +7,19 @@ class Header extends Component {
 
     state = {
         element1: <a className="nav-link nav-text" href="/registration">Sign up</a>,
-        element2: <a className="nav-link nav-text" href="/login">Sign in</a>
-    }
+        element2: <a className="nav-link nav-text" href="/login">Sign in</a>,
+        element3: undefined,
+        element4: undefined
+    };
 
     componentWillMount() {
         let condition = cookie.load("session") != undefined;
         if (condition) {
             this.setState({
                 element1: <a className="nav-link nav-text" href="/profile">Profile</a>,
-                element2: <a className="nav-link nav-text" href="/logout">Sign out</a>
+                element2: <a className="nav-link nav-text" href="/logout">Sign out</a>,
+                element3: <a className="nav-link nav-text" href="/form">Forms</a>,
+                element4: <a className="nav-link nav-text" href="/group">Groups</a>
             });
         } else {
             this.setState({
@@ -39,10 +43,10 @@ class Header extends Component {
                     <div className="left-nav-items">
                         <ul className="navbar-nav ml-auto">
                             <li className="nav-item">
-                                <a className="nav-link nav-text" href="/form">Forms</a>
+                                {this.state.element3}
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link nav-text" href="/group">Groups</a>
+                                {this.state.element4}
                             </li>
                         </ul>
                     </div>

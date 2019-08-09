@@ -43,7 +43,7 @@ class FormEdit extends Component {
         e.preventDefault();
         axios.put(`http://127.0.0.1/form/${this.state.form_id}`, this.state).then(() => {
             window.location.reload();
-        }).// eslint-disable-next-line no-console
+        }).
         catch(error => {
             // eslint-disable-next-line no-console
             console.log(error);
