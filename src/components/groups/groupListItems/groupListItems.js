@@ -25,4 +25,4 @@ class GroupListItem extends Component {
     }
 }
 
-export default GroupListItem;
+export {GroupListItem};

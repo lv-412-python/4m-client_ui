@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
+import {GroupList, ButtonNewGroup, CreateGroup, GetOneGroup} from 'src/components/groups';
 
-import GroupList from './groupList/groupsList';
-import ButtonNewGroup from './buttonNewGroups/buttonNewGroups';
-import CreateGroup from './createGroup/createGroup';
-import GetOneGroup from './getOneGroup/getOneGroup';
 
 class Group extends Component {
     state = {
@@ -26,15 +23,10 @@ class Group extends Component {
     };
 
     render() {
-        let someComponent;
-        if (this.state.createGroup) {
-            someComponent = <CreateGroup/>;
-        } else if (this.state.getOneGroup) {
-            someComponent = <GetOneGroup id={this.state.id}/>;
-        } else {
-            someComponent = <GroupList getGroup={this.getGroup}/>;
-        }
-        return (
+        const someComponent = this.state.createGroup && <CreateGroup /> ||
+                              this.state.getOneGroup && <GetOneGroup id ={this.state.id} /> ||
+                              <GroupList getGroup={this.getGroup}/>;
+        return(
             <div>
                 {someComponent}
                 <ButtonNewGroup createGroup={this.createGroup}/>
