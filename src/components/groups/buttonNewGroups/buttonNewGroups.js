@@ -34,4 +34,4 @@ class ButtonNewGroup extends Component {
     }
 }
 
-export default ButtonNewGroup;
+export {ButtonNewGroup};

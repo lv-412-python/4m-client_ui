@@ -22,4 +22,4 @@ const FormList = props => (
     </div>
 );
 
-export default FormList;
+export {FormList};
