@@ -19,7 +19,10 @@ class NewForm extends Component {
     getOwner = () => {
         const auth_status_url = 'http://127.0.0.1/users/profile';
 
-        axios.get(auth_status_url, {withCredentials: true}).then(response => {
+        axios.get(auth_status_url, {
+            crossDomain: true,
+            withCredentials: true
+            }).then(response => {
             this.setState({
                 owner: response.data.user_id
             });
@@ -39,7 +42,10 @@ class NewForm extends Component {
         let value = this.props.selectedItems.map(value => value.id);
         const data = this.state;
         data.fields = value;
-        axios.post('http://127.0.0.1/form', data).then(function (response) {
+        axios.post('http://127.0.0.1/form', data, {
+            crossDomain: true,
+            withCredentials: true
+            }).then(function (response) {
             // eslint-disable-next-line no-console
             console.info(response);
         }).catch(function (error) {

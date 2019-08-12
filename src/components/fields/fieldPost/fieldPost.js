@@ -38,7 +38,10 @@ class PostField extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         const auth_status_url = 'http://127.0.0.1/users/profile';
-        axios.get(auth_status_url, {withCredentials: true}).then(response => {
+        axios.get(auth_status_url, {
+            crossDomain: true,
+            withCredentials: true
+            }).then(response => {
             let owner = response.data.user_id;
             const url = 'http://127.0.0.1/field';
             const data = {
@@ -49,7 +52,10 @@ class PostField extends Component {
                 'choices': this.state.choices,
                 'owner': owner
             };
-            axios.post(url, data).then(() => {
+            axios.post(url, data, {
+                crossDomain: true,
+                withCredentials: true
+                }).then(() => {
                 this.props.newFieldFalse();
                 this.props.refresh();
             }).catch(error => {

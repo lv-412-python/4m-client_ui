@@ -16,7 +16,10 @@ class FieldsList extends Component {
 
     getData = () => {
         const url = `http://127.0.0.1/field`;
-        axios.get(url, {params: {owner: this.state.owner}}).then(response => {
+        axios.get(url,{
+            crossDomain: true,
+            withCredentials: true
+            }, {params: {owner: this.state.owner}}).then(response => {
             const fields = response.data;
             this.setState({fields});
         });
@@ -28,7 +31,10 @@ class FieldsList extends Component {
 
     componentDidMount() {
         const auth_status_url = 'http://127.0.0.1/users/profile';
-        axios.get(auth_status_url, {withCredentials: true}).
+        axios.get(auth_status_url,{
+            crossDomain: true,
+            withCredentials: true
+            }).
         then(response => {
             this.setState({owner: response.data.user_id});
             this.getData();

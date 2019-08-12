@@ -17,7 +17,10 @@ class AnswersForm extends Component {
 
     getUser = () => {
         const auth_status_url = 'http://127.0.0.1/users/profile';
-        axios.get(auth_status_url, {withCredentials: true}).
+        axios.get(auth_status_url, {
+            crossDomain: true,
+            withCredentials: true
+            }).
             then(response => {this.setState({
                 user_id: response.data.user_id
                 }); 
@@ -31,8 +34,8 @@ class AnswersForm extends Component {
         this.getUser();
         const form_id = e.target.elements.form_id.value;
         const forms_url = `http://127.0.0.1/form/${form_id}`;
-        axios.get(forms_url,
-            {crossDomain: true,
+        axios.get(forms_url, {
+            crossDomain: true,
             withCredentials:true
             }).then(response => {
             const form = response.data;
@@ -46,8 +49,9 @@ class AnswersForm extends Component {
     getFields = () => {
         this.state.form.fields.map( field => {
             const fields_url = `http://127.0.0.1/field/${field}`;
-            axios.get(fields_url,
-                {crossDomain: true
+            axios.get(fields_url,{
+                crossDomain: true,
+                withCredentials: true
                 }).then(response => {
                 this.setState({fields: [...this.state.fields, response.data]}, ()=>this.createOptions());
             });
@@ -70,7 +74,10 @@ class AnswersForm extends Component {
     
     postAnswers = () => {
         const data = this.state.result;
-        axios.post('http://127.0.0.1/answers', data, {withCredentials:true}).then(function (response) {
+        axios.post('http://127.0.0.1/answers', data,{
+            crossDomain: true,
+            withCredentials: true
+            }).then(function (response) {
             // eslint-disable-next-line no-console
             console.info(response);
             }).catch(function (error) {
