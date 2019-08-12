@@ -14,7 +14,7 @@ class FormEdit extends Component {
     };
 
     componentDidMount() {
-        axios.get(`http://127.0.0.1/form/${this.state.form_id}`).then(response => {
+        axios.get(`http://127.0.0.1/form/${this.state.form_id}`, {withCredentials: true}).then(response => {
             const form = response.data;
             let object = {
                 description: form.description,
@@ -41,7 +41,7 @@ class FormEdit extends Component {
         const data = this.state;
         data.fields = value;
         e.preventDefault();
-        axios.put(`http://127.0.0.1/form/${this.state.form_id}`, this.state).then(() => {
+        axios.put(`http://127.0.0.1/form/${this.state.form_id}`, this.state, {withCredentials: true}).then(() => {
             window.location.reload();
         }).
         catch(error => {

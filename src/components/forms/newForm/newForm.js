@@ -39,7 +39,7 @@ class NewForm extends Component {
         let value = this.props.selectedItems.map(value => value.id);
         const data = this.state;
         data.fields = value;
-        axios.post('http://127.0.0.1/form', data).then(function (response) {
+        axios.post('http://127.0.0.1/form', data, {withCredentials: true}).then(function (response) {
             // eslint-disable-next-line no-console
             console.info(response);
         }).catch(function (error) {
