@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import {ImportDropdown, ImportText} from '../fieldImport/fieldImport';
+
 
 import './fieldPost.css';
 
@@ -49,7 +51,7 @@ class PostField extends Component {
                 'choices': this.state.choices,
                 'owner': owner
             };
-            axios.post(url, data).then(() => {
+            axios.post(url, data, {withCredentials: true}).then(() => {
                 this.props.newFieldFalse();
                 this.props.refresh();
             }).catch(error => {
@@ -141,6 +143,9 @@ class PostField extends Component {
                             </div>
                     }
                     <input className='btn btn-outline-dark field_form_btn' type="submit" value="Submit"/>
+                    {this.state.text ? <div><ImportText refresh={this.props.refresh}
+                                                         newFieldFalse={this.props.newFieldFalse} />
+                    </div>: <ImportDropdown refresh={this.props.refresh} newFieldFalse={this.props.newFieldFalse} />}
                 </form>
             </div>
         );

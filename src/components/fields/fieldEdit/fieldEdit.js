@@ -13,7 +13,7 @@ class FieldEdit extends Component {
 
     componentDidMount() {
         const url = `http://127.0.0.1/field/${this.state.id}`;
-        axios.get(url).then(response => {
+        axios.get(url, {withCredentials: true}).then(response => {
             const field = response.data;
             let object = null;
             if (field.has_choice)
@@ -67,7 +67,7 @@ class FieldEdit extends Component {
                 'choices': this.state.choices,
                 'owner': owner
             };
-            axios.put(url, data).
+            axios.put(url, data, {withCredentials: true}).
             then(() => { this.props.refresh();
                         this.props.hideEdit(); }).
             // eslint-disable-next-line no-console

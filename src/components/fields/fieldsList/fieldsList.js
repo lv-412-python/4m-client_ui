@@ -3,6 +3,7 @@ import axios from 'axios';
 import FieldItem from '../fieldItem/fieldItem';
 import FieldPost from "src/components/fields/fieldPost/fieldPost";
 
+
 import './fieldsList.css';
 
 
@@ -16,7 +17,8 @@ class FieldsList extends Component {
 
     getData = () => {
         const url = `http://127.0.0.1/field`;
-        axios.get(url, {params: {owner: this.state.owner}}).then(response => {
+        axios.get(url, {params: {owner: this.state.owner},
+            withCredentials: true}).then(response => {
             const fields = response.data;
             this.setState({fields});
         });
