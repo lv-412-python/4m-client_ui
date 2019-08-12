@@ -1,0 +1,114 @@
+import React, { Component } from 'react';
+import axios from 'axios';
+
+
+class AssignedToForm extends Component {
+
+    state = {
+        id: this.props.id,
+        owner_id: undefined,
+        forms: [],
+        checked_forms: this.props.assigned_to_forms
+    }
+
+    handleFormsChange = (form, event) => {
+        const checked = event.target.checked;
+        if(checked){
+            let checked_forms = [...this.state.checked_forms];
+            checked_forms.push(form.form_id);
+            this.setState({checked_forms});
+        }
+        else{
+            let checked_forms = [...this.state.checked_forms];
+            checked_forms.map((checked_form, index) => {
+                if(checked_form === form.form_id){
+                    checked_forms.splice(index, 1);
+                }
+            });
+            this.setState({checked_forms});
+        }
+    }
+
+    getOwner = () => {
+        const auth_status_url = `http://127.0.0.1/users/profile`;
+
+        axios.get(auth_status_url, {withCredentials: true}).
+            then(response => {
+                this.setState({
+                owner_id: response.data.user_id
+                }, () => {this.getForms()}); 
+            }).
+            // eslint-disable-next-line no-console
+            catch(error => { console.log(error) });
+    };
+    
+    getForms = () => {
+        const answer_url = `http://127.0.0.1/form?owner=${this.state.owner_id}`;
+        axios.get(answer_url, {crossDomain: true, withCredentials: true}).then(response => {
+            const forms = response.data;
+            this.setState({forms});
+        });
+        
+    };
+
+    componentDidMount() {
+        this.getOwner();
+    }
+    
+
+    handleSubmit = (event) => {
+        event.preventDefault();
+        let data = {
+            "assigned_to_forms": this.state.checked_forms
+        };
+        const put_url = `http://127.0.0.1/group/${this.state.id}`;
+        axios.put(put_url, data, {withCredentials: true, crossDomain: true}).
+            then(response => {
+            // eslint-disable-next-line no-console
+                console.log(response); 
+            }).
+            // eslint-disable-next-line no-console
+            catch(error => { console.log(error) });
+    }
+
+    render() {
+        return (
+            <form>
+            {    // eslint-disable-next-line react/prop-types
+                this.state.forms && this.state.forms.map((form) => {
+                    if (this.state.checked_forms.indexOf(form.form_id) >= 0) {
+                        return   (
+                            <div key={form.form_id}>
+                                <input type="checkbox"
+                                checked={true}
+                                id={form.form_id} 
+                                value={form.form_id} 
+                                onChange={(
+                                    // eslint-disable-next-line react/prop-types
+                                        (e) => this.handleFormsChange(form, e)
+                                    )}></input>
+                                <label htmlFor={form.form_id}>{form.title}</label>
+                            </div>);
+                    } else{
+                        return   (
+                            <div key={form.form_id}>
+                                <input type="checkbox" 
+                                id={form.form_id} 
+                                value={form.form_id}
+                                checked={false} 
+                                onChange={(
+                                    // eslint-disable-next-line react/prop-types
+                                        (e) => this.handleFormsChange(form, e)
+                                    )}></input>
+                                <label htmlFor={form.form_id}>{form.title}</label>
+                            </div>);
+                    }
+                    
+            })
+        }
+        <input type="submit" onClick={this.handleSubmit} value="Submit"/>
+        </form>);
+    }
+}
+
+export {AssignedToForm};

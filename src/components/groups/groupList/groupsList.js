@@ -1,7 +1,10 @@
 import React, { Component} from "react";
 import axios from "axios";
 
-import GroupListItem from '../groupListItems/groupListItems';
+// import { URL } from 'src/constants';
+
+import {GroupListItem} from 'src/components/groups';
+
 
 class GroupList extends Component {
     state = {
@@ -11,7 +14,7 @@ class GroupList extends Component {
     }
 
     getOwner = () => {
-        const auth_status_url = 'http://127.0.0.1/users/status';
+        const auth_status_url = `http://127.0.0.1/users/profile`;
 
         axios.get(auth_status_url, {withCredentials: true}).
             then(response => {this.setState({
@@ -24,9 +27,8 @@ class GroupList extends Component {
 
     getGroups = () => {
         // e.preventDefault();
-        const gropsUrl = 'http://localhost/group';
-        axios.get(gropsUrl, {params:{owner:this.state.owner_id}},
-            {crossDomain: true}
+        const gropsUrl = `http://127.0.0.1/group`;
+        axios.get(gropsUrl, {params:{owner:this.state.owner_id}, withCredentials:true}
             ).then(response => {
                 const groups = response.data;
                 const status = response.status;
@@ -44,7 +46,7 @@ class GroupList extends Component {
             <div>
                 <div className='container'>
                     <div>
-                        {(this.state.groups && 
+                        {this.state.groups && 
                             <div>
                                 {this.state.groups.map(group =>{
                                     return (<GroupListItem key={group.id}
@@ -55,7 +57,7 @@ class GroupList extends Component {
 
                                 })
                                 }
-                            </div>)}
+                            </div>}
                     </div>
                 </div>
             </div>
@@ -63,4 +65,4 @@ class GroupList extends Component {
     }
 }
 
-export default GroupList;
+export {GroupList};

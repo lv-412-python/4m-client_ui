@@ -1,25 +1,36 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-
-import GroupEdit from '../groupEdit/groupEdit';
+import { AssignedToForm, EditGroup} from 'src/components/groups';
+// import { URL } from 'src/constants';
 
 
 class GetOneGroup extends Component{
+    
     state ={
         title: undefined,
         members: undefined,
+        userEmail: undefined,
         owner_id: undefined,
-        assigned_to_forms: undefined
-    };
+        assigned_to_forms: undefined,
+        formTitle:undefined,
+        editGroup: false,
+        assignedForms: false
+    }
 
     getUsers = () => {
-        const url_to_users = 'http://127.0.0.1/users';
+        const filter = this.state.members.join("&user_id=");
+        const url_to_users = `http://127.0.0.1/users?user_id=${filter}`;
         axios.get(url_to_users, { withCredentials:true }).
         // eslint-disable-next-line no-console
-            then(response => {
-                this.setState({
-                    members: response.data
-                });
+        then(response => {
+            let userEmail = [];
+            response.data.forEach((user) => {
+                userEmail.push({value:user.user_id, label:user.email});
+
+            });
+            this.setState({
+                userEmail: userEmail
+            }); 
             }).
         // eslint-disable-next-line no-console
             catch(error => { console.log(error) });
@@ -27,64 +38,83 @@ class GetOneGroup extends Component{
 
 
     getForms = () => {
-        const answer_url = `http://127.0.0.1/form?owner=${this.state.owner_id}`;
-        axios.get(answer_url, {crossDomain: true}).then(response => {
-            const assigned_to_forms = response.data;
-            this.setState({assigned_to_forms});
+        const filter = this.state.assigned_to_forms.join("&form_id=");
+        const answer_url = `http://127.0.0.1/form?form_id=${filter}`;
+        axios.get(answer_url, {crossDomain: true, withCredentials:true}).then(response => {
+            let formTitle = [];
+            response.data.forEach((form)=>{
+                formTitle.push(form.title);
+            });
+            this.setState({formTitle});
         });
 
     };
 
-    getOwner = () => {
-        const auth_status_url = 'http://127.0.0.1/users/status';
-
-        axios.get(auth_status_url, {withCredentials: true}).
-            then(response => {this.setState({
-                owner_id: response.data.user_id
-                });
-            }).
-            // eslint-disable-next-line no-console
-            catch(error => { console.log(error) });
-    };
 
     getGroup = () =>{
         // eslint-disable-next-line react/prop-types
-        axios.get(`http://localhost/group/${this.props.id}`, {crossDomain: true}
+        axios.get(`http://127.0.0.1/group/${this.props.id}`, {crossDomain: true, withCredentials:true}
                  ).then(response => {
                      this.setState({...response.data});
-                 }).then(()=>{this.getOwner()}).then(()=>{this.getUsers()}).then(()=>{this.getForms()});
+                     this.getForms();
+                     this.getUsers();
+                    });
     };
 
     componentDidMount() {
         this.getGroup();
     }
 
+    editGroup = (e) => {
+        e.preventDefault();
+        this.setState({'editGroup': !this.setState.editGroup});
+    }
+
+    assignedForms = (e) => {
+        e.preventDefault();
+        this.setState({'assignedForms': !this.setState.assignedForms});
+    }
+
     render(){
+        const component = this.state.editGroup && 
+        <EditGroup 
+        id={this.props.id}
+        title={this.state.title}
+        owner={this.state.owner_id}
+        forms={this.state.assigned_to_forms}
+        userEmail={this.state.userEmail} /> ||
+        this.state.assignedForms && 
+        <AssignedToForm 
+        id={this.props.id} 
+        assigned_to_forms={this.state.assigned_to_forms} />;
+
+
         return(
             <div>
+                {component || <div>
                 <h1>{this.state.title}</h1>
                 <p>Members:</p>
-                {/* {this.state.members && 
-                this.state.members.map(member=>{
+                {this.state.userEmail && 
+                this.state.userEmail.map(email=>{
                     return(
                         // eslint-disable-next-line react/prop-types
-                        <li key={this.props.id}>{member}</li>
+                        <li key={email.value}>{email.label}</li>
                     );
                 })
-                } */}
+                }
                 <p>Assigned to forms:</p>
-                {/* {this.state.assigned_to_forms && 
-                this.state.assigned_to_forms.map(form =>{return(
+                {this.state.formTitle && 
+                this.state.formTitle.map(form =>{return(
                     // eslint-disable-next-line react/prop-types
-                    <li key={this.props.id}>{form}</li>);
+                    <li key={form}>{form}</li>);
                 })
-                } */}
-                <GroupEdit body={this.state}
-                // eslint-disable-next-line react/prop-types
-                           id={this.props.id}/>
+                }
+                <button onClick={this.editGroup}>Edit</button>
+                <button onClick={this.assignedForms}>Assigned to forms</button>
+        </div>}
             </div>
         );
     }
 }
 
-export default GetOneGroup;
+export {GetOneGroup};

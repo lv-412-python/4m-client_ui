@@ -1,52 +1,35 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import FormList from '../formList/formList';
-import UsersAutocomplete from '../userAutocomplete/userAutocomplete';
+import Select from 'react-select';
+import {FormList} from 'src/components/groups';
+import { URL } from 'src/constants';
 
 
 class CreateGroup extends Component {
     
     state = {
-        'forms': undefined,
-        'title': undefined,
-        'members': [],
-        "checked_forms": new Set(),
-        "user_id": [],
-        "user_email": [],
-        "owner_id": undefined
+        forms: undefined,
+        title: undefined,
+        members: [],
+        checked_forms: new Set(),
+        owner_id: undefined,
+        usersList: undefined,
+        getUsers: undefined,
+        selectedOption: null,
     };
 
     getForms = () => {
-        const answer_url = `http://127.0.0.1/form?owner=${this.state.owner_id}`;
-        axios.get(answer_url, {crossDomain: true}).then(response => {
+        const answer_url = `http://${URL}/form?owner=${this.state.owner_id}`;
+        axios.get(answer_url, {crossDomain: true, withCredentials:true}).then(response => {
             const forms = response.data;
             this.setState({forms});
         });
         
     };
 
-    getUsers = () => {
-        const url_to_users = 'http://127.0.0.1/users';
-        axios.get(url_to_users, { withCredentials:true }).
-        // eslint-disable-next-line no-console
-            then(response => {
-                let user_email = [];
-                let user_id = [];
-                response.data.forEach((user) => {
-                    user_id.push(user.user_id);
-                    user_email.push(user.email);
-                });
-                this.setState({
-                    user_email: user_email,
-                    user_id: user_id
-                }); 
-            }).
-        // eslint-disable-next-line no-console
-            catch(error => { console.log(error) });
-    }
 
     getOwner = () => {
-        const auth_status_url = 'http://127.0.0.1/users/status';
+        const auth_status_url = `http://${URL}/users/profile`;
 
         axios.get(auth_status_url, {withCredentials: true}).
             then(response => {this.setState({
@@ -63,18 +46,23 @@ class CreateGroup extends Component {
     }
 
     handleSubmit = (event) =>  {
+        const group_service_url = `http://${URL}/group`;
         event.preventDefault();
-        const group_service_url = 'http://127.0.0.1/group';
+        let members = [];
+        let forms = [...this.state.checked_forms];
+        this.state.selectedOption.map(userId=>{
+            members.push(userId.value);
+        });
         let data = {
-            "assigned_to_forms": this.state.checked_forms,
-            "title": this.state.title,
-            "members": this.state.members,
-            "owner_id": this.state.owner_id
+            title:this.state.title,
+            owner_id:this.state.owner_id,
+            members: members,
+            assigned_to_forms:forms
         };
-        axios.post(group_service_url, data).
+        axios.post(group_service_url, data, {crossDomain: true, withCredentials:true}).
             then(response => { 
              // eslint-disable-next-line no-console
-            console.log(response);
+                console.log(response);
             }).
             catch(error => { 
                 // eslint-disable-next-line no-console
@@ -104,56 +92,27 @@ class CreateGroup extends Component {
         });
     };
 
-    addMembers = () => {
-        this.setState((prevState) => ({
-            members: [...prevState.members, {"title": ""}],
-        }));
-    };
-    
 
-    handleMembersChange = (e) => {
-        const {id, value} = e.target;
-        let members = [...this.state.members];
-        if(this.state.user_email.indexOf(value) >= 0){
-            let email_index = this.state.user_email.indexOf(value);
-            members[id] = this.state.user_id[email_index];
-        }
-        this.setState({members});
-    };
+    createList = ()=>{
+        let usersList=[];
+        this.state.getUsers.map(i =>{
+            usersList.push({value: i.user_id, label: i.email});
+        });
+        this.setState({usersList});
+    }
 
-
-    deleteMembers = (e) => {
-        let members = [...this.state.members];
-        members.splice(e.target.id, 1);
-        this.setState({members});
+    getUsers =()=> {
+        axios.get('http://127.0.0.1/users', {withCredentials: true}
+        ).then(response=>{
+            this.setState({getUsers:response.data},()=>{this.createList()});
+        });
     };
 
-    renderButtonForMembers = () => {
-        return (<div><button onClick={this.addMembers} type="button">+</button>
-              {
-                  this.state.members.map((val, idx) => {
-                      return (
-                          <div key={idx}>
-                            <label>Member {idx+1}:</label>
-                                <input list="users"
-                                       name="browser"
-                                       id={idx}
-                                       onChange={this.handleMembersChange}></input>
-                                    <UsersAutocomplete key={this.state.user_email}
-                                                       user_email={this.state.user_email} 
-                                                       user_id={this.state.user_id} />
-                                <button onClick={this.deleteMembers} 
-                                        id={idx}
-                                        type="button">-</button>
-                          </div>
-                      );
-                  })
-              }
-        </div>);
-    };
+    handleChange = (selectedOption) => {
+        this.setState({ selectedOption });
+    }
 
-
-    render(){
+    render() {
         return (
             <div>
                 <h3>Create Group</h3>
@@ -165,8 +124,13 @@ class CreateGroup extends Component {
                                onChange={this.handleTitleChange} />
                     </label>
                     <div>
-                        <p>Add members</p>
-                        {this.renderButtonForMembers()}
+                        <label>Add members</label>
+                        <Select
+                        options={this.state.usersList}
+                        onChange={this.handleChange}
+                        isMulti
+                        />
+                        
                     </div>
                     <div>
                     <p>Add forms</p>
@@ -182,6 +146,6 @@ class CreateGroup extends Component {
             </div>
         );
     }
-}
 
-export default CreateGroup;
+}
+export {CreateGroup};

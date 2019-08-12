@@ -49,7 +49,7 @@ class FormEdit extends Component {
             withCredentials: true
             }).then(() => {
             window.location.reload();
-        }).// eslint-disable-next-line no-console
+        }).
         catch(error => {
             // eslint-disable-next-line no-console
             console.log(error);

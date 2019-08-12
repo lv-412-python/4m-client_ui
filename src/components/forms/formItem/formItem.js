@@ -1,16 +1,11 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
+import qs from 'qs';
 import {confirmAlert} from "react-confirm-alert";
-
-import FormEdit from '../formEdit/formEdit';
-import FieldsList from "src/components/fields/fieldsList/fieldsList";
 
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import './formItem.css';
-
-import qs from 'qs';
-
 
 class FormItem extends Component {
 
@@ -21,22 +16,8 @@ class FormItem extends Component {
         form_id: this.props.form_id,
         owner: undefined,
         title: undefined,
-        edit: false,
-        questions: undefined,
+        edit: undefined,
         selectedItems: []
-    };
-
-    removeField = (id) => {
-        let index = null;
-        const {selectedItems} = this.state;
-        for (let i = 0; i < selectedItems.length; i++) {
-            if (selectedItems[i].id === id) {
-                index = i;
-                break;
-            }
-        }
-        selectedItems.splice(index, 1);
-        this.setState({selectedItems});
     };
 
     setSelectedItems = (item) => {
@@ -85,10 +66,6 @@ class FormItem extends Component {
     componentDidMount() {
         this.getData();
     }
-
-    edit = () => {
-        this.setState({edit: !this.state.edit});
-    };
 
     delete = () => {
         confirmAlert({
@@ -150,19 +127,11 @@ class FormItem extends Component {
                     </label>
                 </div>
                 <div className='btns'>
-                    <button className='btn btn-dark edit_btn' onClick={this.edit} type="button">Edit</button>
+                    <button className='btn btn-dark edit_btn' onClick={this.props.edit} type="button">Edit</button>
                     <Link to='/form'>
                         <button className='btn btn-dark del_btn' onClick={this.delete} type="button">Delete</button>
                     </Link>
                 </div>
-                {
-                    this.state.edit && <div className='new row justify-content-around'>
-                        <FieldsList setSelectedItems={this.setSelectedItems}/>
-                        <FormEdit form_id={this.state.form_id} selectedItems={this.state.selectedItems}
-                                  removeField={this.removeField} owner={this.state.owner}/>
-                    </div>
-                }
-
             </div>
 
         );

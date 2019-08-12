@@ -9,15 +9,16 @@ import Registration from './containers/registration/registration';
 import Form from './components/forms/form';
 import ResetPassword from './containers/resetPasswd/resetPasswd';
 import SetNewPassword from './containers/resetPasswd/setNewPasswd';
-import FormItem from './components/forms/formItem/formItem';
+import FormItem from "src/components/forms/formItem/formItem";
 import FormField from './components/newFormAndFields/newFormAndFields';
-import CreateGroup from './components/groups/createGroup/createGroup';
+import {CreateGroup} from './components/groups';
 import Group from './components/groups/group';
-import GetOneGroup from './components/groups/getOneGroup/getOneGroup';
+import {GetOneGroup} from './components/groups';
 import Header from './components/header/header';
 import Footer from './components/footer/footer';
 import AnswersForm from './components/answers/answersForm/answersForm';
 import Main from './containers/main/main';
+import {EditGroup} from './components/groups';
 
 
 const Routers = () => {
@@ -40,6 +41,7 @@ const Routers = () => {
                     <Route path='/group/:id' component={GetOneGroup}/>
                     <Route path='/new-group' component={CreateGroup}/>
                     <Route path='/answersForm' component={AnswersForm}/>
+                    <Route path='/edit' component={EditGroup} />
                 </Switch>
             </div>
             <Footer/>
