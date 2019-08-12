@@ -1,7 +1,7 @@
 import React, { Component} from "react";
 import axios from "axios";
 
-// import { URL } from 'src/constants';
+import { URL } from 'src/constants';
 
 import {GroupListItem} from 'src/components/groups';
 
@@ -14,9 +14,8 @@ class GroupList extends Component {
     }
 
     getOwner = () => {
-        const auth_status_url = `http://127.0.0.1/users/profile`;
-
-        axios.get(auth_status_url, {withCredentials: true}).
+        const AUTH_STATUS_URL = `http://${URL}/users/profile`;
+        axios.get(AUTH_STATUS_URL, {withCredentials: true}).
             then(response => {this.setState({
                 owner_id: response.data.user_id
                 }, ()=>{this.getGroups()}); 
@@ -27,8 +26,8 @@ class GroupList extends Component {
 
     getGroups = () => {
         // e.preventDefault();
-        const gropsUrl = `http://127.0.0.1/group`;
-        axios.get(gropsUrl, {params:{owner:this.state.owner_id}, withCredentials:true}
+        const GET_GROUPS_URL = `http://${URL}/group`;
+        axios.get(GET_GROUPS_URL, {params:{owner:this.state.owner_id}, withCredentials:true}
             ).then(response => {
                 const groups = response.data;
                 const status = response.status;
