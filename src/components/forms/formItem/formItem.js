@@ -20,26 +20,9 @@ class FormItem extends Component {
         selectedItems: []
     };
 
-    setSelectedItems = (item) => {
-        let exits = false;
-        for (let el of this.state.selectedItems) {
-            if (el.id === item.id) {
-                exits = true;
-                break;
-            }
-        }
-        if (exits) {
-            return;
-        }
-        this.setState({
-            selectedItems: [...this.state.selectedItems, item],
-        });
-
-    };
-
     getData = () => {
         // eslint-disable-next-line react/prop-types
-        axios.get(`http://127.0.0.1/form/${this.props.form_id}`).then(response => {
+        axios.get(`http://127.0.0.1/form/${this.props.form_id}`, {withCredentials: true}).then(response => {
             this.setState({...response.data});
             axios.get(`http://127.0.0.1/field`, {
                 params: {
@@ -47,7 +30,7 @@ class FormItem extends Component {
                 },
                 paramsSerializer: params => {
                     return qs.stringify(params, {arrayFormat: 'repeat'});
-                }
+                }, withCredentials: true
                 // eslint-disable-next-line no-console
             }).then(response => this.setState({selectedItems: response.data}));
         })
@@ -70,7 +53,7 @@ class FormItem extends Component {
                     label: 'Yes',
                     onClick: () => {
                         const url = `http://127.0.0.1/form/${this.state.form_id}`;
-                        axios.delete(url).then(() => {
+                        axios.delete(url, {withCredentials: true}).then(() => {
                             window.location.reload();
                         }).catch(error => {
                             // eslint-disable-next-line no-console
@@ -83,6 +66,11 @@ class FormItem extends Component {
                 }
             ]
         });
+    };
+
+    passFields = () => {
+        this.props.setFields(this.state.selectedItems);
+        this.props.edit();
     };
 
     render() {
@@ -118,7 +106,7 @@ class FormItem extends Component {
                     </label>
                 </div>
                 <div className='btns'>
-                    <button className='btn btn-dark edit_btn' onClick={this.props.edit} type="button">Edit</button>
+                    <button className='btn btn-dark edit_btn' onClick={this.passFields} type="button">Edit</button>
                     <Link to='/form'>
                         <button className='btn btn-dark del_btn' onClick={this.delete} type="button">Delete</button>
                     </Link>
