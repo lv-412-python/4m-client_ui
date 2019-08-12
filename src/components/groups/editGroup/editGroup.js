@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Select from 'react-select';
 import axios from 'axios';
-// import { URL } from 'src/constants';
+import { URL } from 'src/constants';
 
 class EditGroup extends Component {
 
@@ -20,7 +20,8 @@ class EditGroup extends Component {
     }
 
     getUsers =()=> {
-        axios.get('http://127.0.0.1/users', {withCredentials: true}
+        const GET_USERS_URL = `http://${URL}/users`;
+        axios.get(GET_USERS_URL, {withCredentials: true}
         ).then(response=>{
             this.setState({getUsers:response.data},()=>{this.createList()});
         });
@@ -45,8 +46,8 @@ class EditGroup extends Component {
             members: members,
             assigned_to_forms:this.props.forms
         };
-        const put_url = `http://127.0.0.1/group/${this.props.id}`;
-        axios.put(put_url, body, {withCredentials: true, crossDomain: true}
+        const GROUP_PUT_URL = `http://${URL}/group/${this.props.id}`; 
+        axios.put(GROUP_PUT_URL, body, {withCredentials: true, crossDomain: true}
         ).then((response) => {
             // eslint-disable-next-line no-console
             console.log(response);

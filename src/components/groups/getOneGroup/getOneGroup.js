@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { AssignedToForm, EditGroup} from 'src/components/groups';
-// import { URL } from 'src/constants';
+import { URL } from 'src/constants';
 
 
 class GetOneGroup extends Component{
@@ -19,8 +19,8 @@ class GetOneGroup extends Component{
 
     getUsers = () => {
         const filter = this.state.members.join("&user_id=");
-        const url_to_users = `http://127.0.0.1/users?user_id=${filter}`;
-        axios.get(url_to_users, { withCredentials:true }).
+        const GET_USERS_URL = `http://${URL}/users?user_id=${filter}`;
+        axios.get(GET_USERS_URL, { withCredentials:true }).
         // eslint-disable-next-line no-console
         then(response => {
             let userEmail = [];
@@ -39,7 +39,7 @@ class GetOneGroup extends Component{
 
     getForms = () => {
         const filter = this.state.assigned_to_forms.join("&form_id=");
-        const answer_url = `http://127.0.0.1/form?form_id=${filter}`;
+        const answer_url = `http://${URL}/form?form_id=${filter}`;
         axios.get(answer_url, {crossDomain: true, withCredentials:true}).then(response => {
             let formTitle = [];
             response.data.forEach((form)=>{
@@ -53,7 +53,8 @@ class GetOneGroup extends Component{
 
     getGroup = () =>{
         // eslint-disable-next-line react/prop-types
-        axios.get(`http://127.0.0.1/group/${this.props.id}`, {crossDomain: true, withCredentials:true}
+        const GET_ONE_GROUP = `http://${URL}/group/${this.props.id}`;
+        axios.get(GET_ONE_GROUP, {crossDomain: true, withCredentials:true}
                  ).then(response => {
                      this.setState({...response.data});
                      this.getForms();
