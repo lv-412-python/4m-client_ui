@@ -1,0 +1,21 @@
+.group_list_item {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 20px;
+    /* font-size: xx-large; */
+    margin: 20px;
+    padding: 5px 20px 0 20px;
+    color: black;
+    width: 600px;
+}
+
+
+
+.all_groups {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+}

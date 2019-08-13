@@ -1,5 +1,5 @@
 import React from 'react';
-
+import "./formList.css"
 const FormList = props => (
 
     <div>
@@ -9,7 +9,8 @@ const FormList = props => (
             return   (
             <div key={form.title}>
                 <input type="checkbox" 
-                id={form.form_id} 
+                id={form.form_id}
+                className="form_list"
                 value={form.form_id} 
                 onClick={(
                     // eslint-disable-next-line react/prop-types
