@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from 'axios';
+import cookie from 'react-cookies';
 
 
 class Login extends Component {
@@ -49,6 +50,13 @@ class Login extends Component {
         });
     }
 
+    componentWillMount() {
+        if (cookie.load('error')) {
+            alert(cookie.load('error'));
+            cookie.remove('error', { path: '/' });
+        }
+    }
+
 
     render() {
         return (
@@ -73,12 +81,12 @@ class Login extends Component {
                     disabled={!this.validateForm()}
                     type="button"
                     onClick={this.handleSubmit}
-                    value='Login'
+                    value='Sign in'
                 />
                 <input
                     type="button"
                     onClick={this.googleAuthLogin}
-                    value='Login with Google'
+                    value='Sign in with Google'
                 /><br />
                 <a href="/registration">I am not signed up yet.</a><br />
                 <a href="/reset_password">I have forgotten my password :(</a>

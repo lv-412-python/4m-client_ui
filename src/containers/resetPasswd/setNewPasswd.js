@@ -47,11 +47,18 @@ class SetNewPassword extends Component {
             };
             // eslint-disable-next-line react/prop-types
             const values = queryString.parse(this.props.location.search);
-            const url = `http://127.0.0.1/reset_password?token=${values.token}`;
+            let url, redir;
+            if (values.token == undefined) {
+                url = "http://127.0.0.1/users/profile";
+                redir = "http://127.0.0.1:3000/profile";
+            } else {
+                url = `http://127.0.0.1/reset_password?token=${values.token}`;
+                redir = "http://127.0.0.1:3000/login";
+            }
             axios.put(url, newPassword, { withCredentials:true, crossDomain: true }
             ).then( response => {
                 alert(response.data.message);
-                window.location = "http://127.0.0.1:3000/login";
+                window.location = redir;
             }).catch( error => {
                 alert(error.response.data.error);
             });

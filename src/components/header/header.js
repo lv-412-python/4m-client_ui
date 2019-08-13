@@ -7,7 +7,7 @@ class Header extends Component {
 
     state = {
         element1: <a className="nav-link nav-text" href="/registration">Sign up</a>,
-        element2: <a className="nav-link nav-text" href="/login">Sign in</a>,
+        element2: <a className="nav-link nav-text" href="/signin">Sign in</a>,
         element3: undefined,
         element4: undefined
     };
@@ -17,14 +17,14 @@ class Header extends Component {
         if (condition) {
             this.setState({
                 element1: <a className="nav-link nav-text" href="/profile">Profile</a>,
-                element2: <a className="nav-link nav-text" href="/logout">Sign out</a>,
+                element2: <a className="nav-link nav-text" href="/signout">Sign out</a>,
                 element3: <a className="nav-link nav-text" href="/form">Forms</a>,
                 element4: <a className="nav-link nav-text" href="/group">Groups</a>
             });
         } else {
             this.setState({
                 element1: <a className="nav-link nav-text" href="/registration">Sign up</a>,
-                element2: <a className="nav-link nav-text" href="/login">Sign in</a>
+                element2: <a className="nav-link nav-text" href="/signin">Sign in</a>
             });
         }
     }
