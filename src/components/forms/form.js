@@ -54,10 +54,14 @@ class Form extends Component {
         this.setState({form_id: e.target.attributes.value.value});
     };
 
+    setFields = (fields) => {
+        this.setState({selectedItems: fields});
+    };
+
     render() {
         let someComponent;
         if (this.state.getForm) {
-            someComponent = <FormItem edit={this.changeEdit} form_id={this.state.form_id}/>;
+            someComponent = <FormItem edit={this.changeEdit} form_id={this.state.form_id} setFields={this.setFields}/>;
         } else if (this.state.edit) {
             // someComponent = <FormEdit  form_id={this.state.form_id} selectedItems={this.state.selectedItems}
             //                  removeField={this.removeField} owner={this.state.owner}/>;

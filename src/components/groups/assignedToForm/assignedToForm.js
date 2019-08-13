@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import {URL} from 'src/constants';
+
 
 
 class AssignedToForm extends Component {
@@ -30,9 +32,8 @@ class AssignedToForm extends Component {
     }
 
     getOwner = () => {
-        const auth_status_url = `http://127.0.0.1/users/profile`;
-
-        axios.get(auth_status_url, {withCredentials: true}).
+        const AUTH_STATUS_URL = `http://${URL}/users/profile`;
+        axios.get(AUTH_STATUS_URL, {withCredentials: true}).
             then(response => {
                 this.setState({
                 owner_id: response.data.user_id
@@ -43,8 +44,8 @@ class AssignedToForm extends Component {
     };
     
     getForms = () => {
-        const answer_url = `http://127.0.0.1/form?owner=${this.state.owner_id}`;
-        axios.get(answer_url, {crossDomain: true, withCredentials: true}).then(response => {
+        const OWNER_FORM_URL = `http://${URL}/form?owner=${this.state.owner_id}`;
+        axios.get(OWNER_FORM_URL, {crossDomain: true, withCredentials: true}).then(response => {
             const forms = response.data;
             this.setState({forms});
         });
@@ -61,8 +62,8 @@ class AssignedToForm extends Component {
         let data = {
             "assigned_to_forms": this.state.checked_forms
         };
-        const put_url = `http://127.0.0.1/group/${this.state.id}`;
-        axios.put(put_url, data, {withCredentials: true, crossDomain: true}).
+        const GROUP_PUT_URL = `http://${URL}/group/${this.state.id}`; 
+        axios.put(GROUP_PUT_URL, data, {withCredentials: true, crossDomain: true}).
             then(response => {
             // eslint-disable-next-line no-console
                 console.log(response); 

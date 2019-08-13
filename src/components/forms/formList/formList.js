@@ -37,8 +37,8 @@ class FormList extends Component {
     getForms = () => {
         const owner = this.state.owner;
         const forms_url = `http://127.0.0.1/form`;
-        axios.get(forms_url, {params: {owner: owner}
-            , withCredentials: true, crossDomain: true} ).then(response => {
+        axios.get(forms_url, {params: {owner: owner}, withCredentials: true},
+            {withCredentials: true}, {crossDomain: true} ).then(response => {
             const forms = response.data;
             const status = response.status;
             this.setState({status});

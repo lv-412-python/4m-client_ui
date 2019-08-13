@@ -19,8 +19,8 @@ class CreateGroup extends Component {
     };
 
     getForms = () => {
-        const answer_url = `http://${URL}/form?owner=${this.state.owner_id}`;
-        axios.get(answer_url, {crossDomain: true, withCredentials:true}).then(response => {
+        const OWNER_FORMS = `http://${URL}/form?owner=${this.state.owner_id}`;
+        axios.get(OWNER_FORMS, {crossDomain: true, withCredentials:true}).then(response => {
             const forms = response.data;
             this.setState({forms});
         });
@@ -29,9 +29,9 @@ class CreateGroup extends Component {
 
 
     getOwner = () => {
-        const auth_status_url = `http://${URL}/users/profile`;
+        const AUTH_STATUS_URL = `http://${URL}/users/profile`;
 
-        axios.get(auth_status_url, {withCredentials: true}).
+        axios.get(AUTH_STATUS_URL, {withCredentials: true}).
             then(response => {this.setState({
                 owner_id: response.data.user_id
                 }, () => {this.getForms()}); 
@@ -46,7 +46,7 @@ class CreateGroup extends Component {
     }
 
     handleSubmit = (event) =>  {
-        const group_service_url = `http://${URL}/group`;
+        const GROUP_POST_URL = `http://${URL}/group`;
         event.preventDefault();
         let members = [];
         let forms = [...this.state.checked_forms];
@@ -59,7 +59,7 @@ class CreateGroup extends Component {
             members: members,
             assigned_to_forms:forms
         };
-        axios.post(group_service_url, data, {crossDomain: true, withCredentials:true}).
+        axios.post(GROUP_POST_URL, data, {crossDomain: true, withCredentials:true}).
             then(response => { 
              // eslint-disable-next-line no-console
                 console.log(response);
@@ -102,7 +102,8 @@ class CreateGroup extends Component {
     }
 
     getUsers =()=> {
-        axios.get('http://127.0.0.1/users', {withCredentials: true}
+        const GET_USERS_URL = `http://${URL}/users`;
+        axios.get(GET_USERS_URL, {withCredentials: true}
         ).then(response=>{
             this.setState({getUsers:response.data},()=>{this.createList()});
         });
