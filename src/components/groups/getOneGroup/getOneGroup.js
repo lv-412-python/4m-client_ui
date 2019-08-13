@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { AssignedToForm, EditGroup} from 'src/components/groups';
 import { URL } from 'src/constants';
-
+import "./getOneGroup.css";
 
 class GetOneGroup extends Component{
     
@@ -91,9 +91,9 @@ class GetOneGroup extends Component{
 
 
         return(
-            <div>
+            <div className="group_item">
                 {component || <div>
-                <h1>{this.state.title}</h1>
+                <h1 className="title_group">{this.state.title}</h1>
                 <p>Members:</p>
                 {this.state.userEmail && 
                 this.state.userEmail.map(email=>{
@@ -110,8 +110,8 @@ class GetOneGroup extends Component{
                     <li key={form}>{form}</li>);
                 })
                 }
-                <button onClick={this.editGroup}>Edit</button>
-                <button onClick={this.assignedForms}>Assigned to forms</button>
+                <button className="buttons button" onClick={this.editGroup}>Edit</button>
+                <button className="buttons button" onClick={this.assignedForms}>Assigned to forms</button>
         </div>}
             </div>
         );

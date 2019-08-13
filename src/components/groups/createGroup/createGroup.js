@@ -3,7 +3,8 @@ import axios from 'axios';
 import Select from 'react-select';
 import {FormList} from 'src/components/groups';
 import { URL } from 'src/constants';
-
+import {Link} from 'react-router-dom';
+import "./createGroup.css";
 
 class CreateGroup extends Component {
     
@@ -116,19 +117,19 @@ class CreateGroup extends Component {
     render() {
         return (
             <div>
-                <h3>Create Group</h3>
-                <form onSubmit={this.handleSubmit}>
-                    <label>
-                        Group title:
-                        <input type="text" 
-                               name="title" 
-                               onChange={this.handleTitleChange} />
-                    </label>
+                <form className="new_group col align-self-end">
+                    <h3>Create Group</h3>
+                    <p>Group title:</p>
+                    <input type="text" 
+                            name="title"
+                            className="group_input"
+                            onChange={this.handleTitleChange} />
                     <div>
                         <label>Add members</label>
                         <Select
                         options={this.state.usersList}
                         onChange={this.handleChange}
+                        className="select_wight"
                         isMulti
                         />
                         
@@ -136,14 +137,16 @@ class CreateGroup extends Component {
                     <div>
                     <p>Add forms</p>
                         <FormList getForms={this.getForms} 
-                                  key={this.state.title} 
+                                  key={this.state.title}
+                                  className="form_list"
                                   state={this.state} 
                                   handleFormsChange={this.handleFormsChange}/>
                     </div>
-                    <div>
-                        <input type="submit" value="Submit"/>
-                    </div>
                 </form>
+                <Link className='submit' to="/group">
+                    <input className='btn btn-dark submit_btn' type='button' value="Submit"
+                           onClick={this.handleSubmit}/>
+                </Link>
             </div>
         );
     }
