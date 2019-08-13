@@ -1,5 +1,5 @@
 import React from 'react';
-import "./formList.css"
+import "./formList.css";
 const FormList = props => (
 
     <div>

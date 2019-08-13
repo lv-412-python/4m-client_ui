@@ -4,7 +4,7 @@ import Select from 'react-select';
 import {FormList} from 'src/components/groups';
 import { URL } from 'src/constants';
 import {Link} from 'react-router-dom';
-import "./createGroup.css"
+import "./createGroup.css";
 
 class CreateGroup extends Component {
     

@@ -1,10 +1,8 @@
 import React, { Component} from "react";
 import axios from "axios";
-
 import { URL } from 'src/constants';
-
 import {GroupListItem} from 'src/components/groups';
-import "./groupList.css"
+import "./groupList.css";
 
 class GroupList extends Component {
     state = {
