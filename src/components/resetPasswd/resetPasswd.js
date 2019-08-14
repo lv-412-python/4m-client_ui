@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from 'axios';
-import { MAIN, USERS_SERVISE } from 'src/constants';
+import { USERS_SERVISE } from 'src/constants';
 
 class ResetPassword extends Component {
     state = {
@@ -49,7 +49,7 @@ class ResetPassword extends Component {
             axios.post(url, emailData, { withCredentials:true, crossDomain: true }
             ).then( response => {
                 alert(response.data.message);
-                window.location = `${MAIN}/set_new_password`;
+                this.props.history.push("/set_new_password");
             }).catch( error => {
                 alert(error.response.data.error);
             });
@@ -68,7 +68,9 @@ class ResetPassword extends Component {
                         onChange={this.handleChange}
                     />
                 </div>
-                <input id="users-btn"
+                <input
+                    id="users-btn"
+                    className="user-input"
                     disabled={!this.validateForm()}
                     type="button"
                     onClick={this.handleSubmit}

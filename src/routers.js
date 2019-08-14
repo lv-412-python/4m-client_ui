@@ -3,7 +3,6 @@ import {Route, Switch} from 'react-router';
 import {BrowserRouter} from 'react-router-dom';
 
 import Login from './components/login/login';
-import Logout from './components/logout/logout';
 import Profile from './components/profile/profile';
 import Registration from './components/registration/registration';
 import Form from './components/forms/form';
@@ -29,7 +28,6 @@ const Routers = () => {
                 <Switch>
                     <Route path='/' exact component={Main}/>
                     <Route path='/signin' component={Login}/>
-                    <Route path='/signout' component={Logout}/>
                     <Route path='/registration' component={Registration}/>
                     <Route path='/profile' component={Profile}/>
                     <Route path='/reset_password' component={ResetPassword}/>

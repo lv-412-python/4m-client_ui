@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from 'axios';
 import cookie from 'react-cookies';
+import { Link } from "react-router-dom";
 import { MAIN, USERS_SERVISE } from 'src/constants';
 
 
@@ -78,7 +79,9 @@ class Login extends Component {
                         type="password"
                     />
                 </div>
-                <input id="users-btn"
+                <input
+                    id="users-btn"
+                    className="user-input"
                     disabled={!this.validateForm()}
                     type="button"
                     onClick={this.handleSubmit}
@@ -87,12 +90,13 @@ class Login extends Component {
                 <hr className="hr-text" data-content="OR">
                 </hr>
                 <input
+                    className="user-input"
                     type="button"
                     onClick={this.googleAuthLogin}
                     value='Sign in with Google'
                 />
-                <a className="login-link" href="/registration">I am not signed up yet.</a>
-                <a className="login-link" href="/reset_password">I have forgotten my password :(</a>
+                <Link className="login-link" to="/registration">I am not signed up yet.</Link>
+                <Link className="login-link" to="reset_password">I have forgotten my password :(</Link>
             </div>
         );
     }

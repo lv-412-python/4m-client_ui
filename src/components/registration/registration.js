@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { USERS_SERVISE } from 'src/constants';
+import { Link } from "react-router-dom";
+import { MAIN, USERS_SERVISE } from 'src/constants';
 
 import './registration.css';
 
@@ -90,6 +91,7 @@ class Registration extends Component {
             axios.post(url, user, { withCredentials:true }
             ).then( response => {
                 alert(response.data.message);
+                window.location(`${MAIN}`);
             }).catch( error => {
                 alert(error.response.data.error);
             });
@@ -145,6 +147,7 @@ class Registration extends Component {
                 </div>
                 <input
                     id="users-btn"
+                    className="user-input"
                     disabled={!this.validateForm()}
                     type="button"
                     onClick={this.handleSubmit}
@@ -153,11 +156,12 @@ class Registration extends Component {
                 <hr className="hr-text" data-content="OR">
                 </hr>
                 <input
+                    className="user-input"
                     type="button"
                     onClick={this.googleAuthRegister}
                     value='Register with Google'
                 />
-                <a className="login-link" href="/signin">I already have an account.</a>
+                <Link className="login-link" to="/signin">I already have an account.</Link>
             </div>
         );
     }
