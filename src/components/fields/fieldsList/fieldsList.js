@@ -21,7 +21,7 @@ class FieldsList extends Component {
             withCredentials: true}).then(response => {
             const fields = response.data;
             this.setState({fields});
-        });
+        }).catch(() => this.setState({fields:[]}));
     };
 
     setNewFieldFalse = () => {
@@ -58,8 +58,8 @@ class FieldsList extends Component {
                 {this.state.fields.map(field => <FieldItem key={field.id}
                                                            title={field.title}
                                                            id={field.id}
-                                                           setSelectedItems={this.props.setSelectedItems}
-                                                           refresh={this.getData} />).reverse()}
+                                                           refresh={this.getData}
+                                                           setSelectedItems={this.props.setSelectedItems} />).reverse()}
             </div>
         );
     }
