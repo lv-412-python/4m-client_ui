@@ -1,0 +1,15 @@
+.forms_list {
+    background-color: #ffeee6;
+    /* font-size: xx-large; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 20px;
+    color: black;
+    margin-top: 20px;
+}
+
+.qwerty {
+    float: left;
+}

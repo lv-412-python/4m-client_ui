@@ -3,7 +3,6 @@ import axios from 'axios';
 import Select from 'react-select';
 import {FormList} from 'src/components/groups';
 import { URL } from 'src/constants';
-import {Link} from 'react-router-dom';
 import "./createGroup.css";
 
 class CreateGroup extends Component {
@@ -48,7 +47,7 @@ class CreateGroup extends Component {
 
     handleSubmit = (event) =>  {
         const GROUP_POST_URL = `http://${URL}/group`;
-        event.preventDefault();
+        // event.preventDefault();
         let members = [];
         let forms = [...this.state.checked_forms];
         this.state.selectedOption.map(userId=>{
@@ -64,6 +63,7 @@ class CreateGroup extends Component {
             then(response => { 
              // eslint-disable-next-line no-console
                 console.log(response);
+                window.location.href = `/group`;
             }).
             catch(error => { 
                 // eslint-disable-next-line no-console
@@ -143,10 +143,10 @@ class CreateGroup extends Component {
                                   handleFormsChange={this.handleFormsChange}/>
                     </div>
                 </form>
-                <Link className='submit' to="/group">
+                <div className="submit">
                     <input className='btn btn-dark submit_btn' type='button' value="Submit"
-                           onClick={this.handleSubmit}/>
-                </Link>
+                            onClick={this.handleSubmit}/>
+                </div>
             </div>
         );
     }

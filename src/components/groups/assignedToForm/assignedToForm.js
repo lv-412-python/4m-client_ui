@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import {URL} from 'src/constants';
-
+import "./assignedToForm.css"
 
 
 class AssignedToForm extends Component {
@@ -74,7 +74,7 @@ class AssignedToForm extends Component {
 
     render() {
         return (
-            <form>
+            <form className="forms_list">
             {    // eslint-disable-next-line react/prop-types
                 this.state.forms && this.state.forms.map((form) => {
                     if (this.state.checked_forms.indexOf(form.form_id) >= 0) {
@@ -82,8 +82,9 @@ class AssignedToForm extends Component {
                             <div key={form.form_id}>
                                 <input type="checkbox"
                                 checked={true}
+                                className="qwerty"
                                 id={form.form_id} 
-                                value={form.form_id} 
+                                value={form.form_id}
                                 onChange={(
                                     // eslint-disable-next-line react/prop-types
                                         (e) => this.handleFormsChange(form, e)
@@ -97,6 +98,7 @@ class AssignedToForm extends Component {
                                 id={form.form_id} 
                                 value={form.form_id}
                                 checked={false} 
+                                className="qwerty"
                                 onChange={(
                                     // eslint-disable-next-line react/prop-types
                                         (e) => this.handleFormsChange(form, e)
