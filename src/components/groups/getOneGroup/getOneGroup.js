@@ -91,8 +91,8 @@ class GetOneGroup extends Component{
 
 
         return(
-            <div className="group_item">
-                {component || <div>
+            <div>
+                {component || <div className="group_item">
                 <h1 className="title_group">{this.state.title}</h1>
                 <p>Members:</p>
                 {this.state.userEmail && 
@@ -110,8 +110,10 @@ class GetOneGroup extends Component{
                     <li key={form}>{form}</li>);
                 })
                 }
-                <button className="buttons button" onClick={this.editGroup}>Edit</button>
-                <button className="buttons button" onClick={this.assignedForms}>Assigned to forms</button>
+                <div className="buttons">
+                    <button className="button" onClick={this.editGroup}>Edit</button>
+                    <button className="button" onClick={this.assignedForms}>Assigned to forms</button>
+                </div>
         </div>}
             </div>
         );
