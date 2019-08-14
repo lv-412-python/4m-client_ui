@@ -8,16 +8,21 @@ import TextInputField from '../inputComponents/TextInputField';
 class AnswersForm extends Component {
     state = {
         user_id: undefined,
+        form_id: this.props.location.state.form_id,
         form: {},
         fields: [],
         answers: {},
         options: {},
-        result: []
+        result: [],
+        selectedOption: null
     };
 
     getUser = () => {
         const auth_status_url = 'http://127.0.0.1/users/profile';
-        axios.get(auth_status_url, {withCredentials: true}).
+        axios.get(auth_status_url, {
+            crossDomain: true,
+            withCredentials: true
+            }).
             then(response => {this.setState({
                 user_id: response.data.user_id
                 }); 
@@ -26,13 +31,11 @@ class AnswersForm extends Component {
             catch(error => { console.log(error) });
     };
 
-    getForms = (e) => {
-        e.preventDefault();
-        this.getUser();
-        const form_id = e.target.elements.form_id.value;
+    getForms = () => {
+        const form_id = this.state.form_id;
         const forms_url = `http://127.0.0.1/form/${form_id}`;
-        axios.get(forms_url,
-            {crossDomain: true,
+        axios.get(forms_url, {
+            crossDomain: true,
             withCredentials:true
             }).then(response => {
             const form = response.data;
@@ -46,8 +49,9 @@ class AnswersForm extends Component {
     getFields = () => {
         this.state.form.fields.map( field => {
             const fields_url = `http://127.0.0.1/field/${field}`;
-            axios.get(fields_url,
-                {crossDomain: true
+            axios.get(fields_url,{
+                crossDomain: true,
+                withCredentials: true
                 }).then(response => {
                 this.setState({fields: [...this.state.fields, response.data]}, ()=>this.createOptions());
             });
@@ -60,7 +64,7 @@ class AnswersForm extends Component {
             if (field.has_choice === true){
                 let choices = [];
                 field.choices.map( choice => {
-                    choices.push({value: choice.title , label: choice.title});
+                    choices.push({value: choice.title , label: choice.title, fieldId: field.id });
                 });
                 options[field.id] = choices;
                 this.setState({options: options});
@@ -70,7 +74,10 @@ class AnswersForm extends Component {
     
     postAnswers = () => {
         const data = this.state.result;
-        axios.post('http://127.0.0.1/answers', data, {withCredentials:true}).then(function (response) {
+        axios.post('http://127.0.0.1/answers', data,{
+            crossDomain: true,
+            withCredentials: true
+            }).then(function (response) {
             // eslint-disable-next-line no-console
             console.info(response);
             }).catch(function (error) {
@@ -101,15 +108,33 @@ class AnswersForm extends Component {
         this.setState({result}, ()=>this.postAnswers());
     };
 
+    handleSelectChange = (selectedOption) => {
+        const {fieldId , value} = selectedOption;
+        let answers = this.state.answers;
+        answers[fieldId] = 
+        { 
+            "form_id": this.state.form.form_id,
+            "user_id": this.state.user_id,
+            "field_id": fieldId,
+            "reply": value
+        };
+        this.setState({answers});
+    }
+
+    componentDidMount(){
+        this.getForms();
+        this.getUser();
+    }
+
     render(){
         return(
             <div>
-                <form onSubmit={this.getForms}>
+                {/* <form onSubmit={this.getForms}>
                     <input type="number" min="1" name="form_id"></input>
                     <div>
                         <button className='btn btn-light'>Get Forms</button>
                     </div>
-                </form>
+                </form> */}
                 <form onSubmit={this.createAnswersResponseJSON}>
                     { this.state.fields && (
                         <div>
@@ -121,7 +146,9 @@ class AnswersForm extends Component {
                                         <div key = {field.id}>
                                             <label>
                                                 {field.title}
-                                                <Select options={this.state.options[field.id]}/>
+                                                <Select options={this.state.options[field.id]}
+                                                        onChange={this.handleSelectChange}
+                                                        name={field.id}/>
                                             </label>
                                         </div>
                                     );
