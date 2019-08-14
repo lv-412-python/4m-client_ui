@@ -2,13 +2,15 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import Select from 'react-select';
 
+import UserAnswers from '../userAnswers/userAnswers';
 import TextInputField from '../inputComponents/TextInputField';
 
 
 class AnswersForm extends Component {
     state = {
-        user_id: undefined,
+        user_id: this.props.location.state.userId,
         form_id: this.props.location.state.form_id,
+        isAnswered: false,
         form: {},
         fields: [],
         answers: {},
@@ -17,24 +19,28 @@ class AnswersForm extends Component {
         selectedOption: null
     };
 
-    getUser = () => {
-        const auth_status_url = 'http://127.0.0.1/users/profile';
-        axios.get(auth_status_url, {
+    checkFormStatus = () => {
+        const answersURL = 'http://127.0.0.1/answers';
+        axios.get(answersURL, {
             crossDomain: true,
-            withCredentials: true
-            }).
-            then(response => {this.setState({
-                user_id: response.data.user_id
-                }); 
-            }).
-            // eslint-disable-next-line no-console
-            catch(error => { console.log(error) });
-    };
+            withCredentials:true,
+            params: {
+                user_id: this.state.user_id,
+                form_id: this.state.form_id
+            }
+            }).then(response => {
+                const formStatus = response.status === 200 ? true : false;
+                if(formStatus){
+                    this.setState({isAnswered: true});
+                }
+                }
+            );
+    }
 
     getForms = () => {
-        const form_id = this.state.form_id;
-        const forms_url = `http://127.0.0.1/form/${form_id}`;
-        axios.get(forms_url, {
+        const formId = this.state.form_id;
+        const formsURL = `http://127.0.0.1/form/${formId}`;
+        axios.get(formsURL, {
             crossDomain: true,
             withCredentials:true
             }).then(response => {
@@ -123,19 +129,17 @@ class AnswersForm extends Component {
 
     componentDidMount(){
         this.getForms();
-        this.getUser();
+        this.checkFormStatus();
     }
 
     render(){
         return(
             <div>
-                {/* <form onSubmit={this.getForms}>
-                    <input type="number" min="1" name="form_id"></input>
-                    <div>
-                        <button className='btn btn-light'>Get Forms</button>
-                    </div>
-                </form> */}
-                <form onSubmit={this.createAnswersResponseJSON}>
+                { (this.state.isAnswered && <div><UserAnswers userId={this.state.user_id}
+                                                         formId={this.state.form_id}/>
+                                            </div>) 
+                ||
+                (<form onSubmit={this.createAnswersResponseJSON}>
                     { this.state.fields && (
                         <div>
                             <h2>{ this.state.form.title }</h2>
@@ -166,7 +170,8 @@ class AnswersForm extends Component {
                             </div>
                         </div>
                     )}
-                </form>
+                </form>) 
+                }
             </div>
         );
     }

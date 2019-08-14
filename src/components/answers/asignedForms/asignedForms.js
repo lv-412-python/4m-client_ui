@@ -71,6 +71,7 @@ class AsignedForms extends Component {
                                                      title={form.title}
                                                      form_id={form.form_id}
                                                      description={form.description}
+                                                     userId = {this.state.userId}
                             />);
                         })
                         }
