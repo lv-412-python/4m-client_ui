@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import axios from 'axios';
+import { MAIN, USERS_SERVISE } from 'src/constants';
 
 class ResetPassword extends Component {
     state = {
-      'email': "",
-      'emailErr': ""
+      'email': ""
     };
 
     validateForm() {
@@ -12,13 +12,18 @@ class ResetPassword extends Component {
     }
 
     validate = () =>  {
-        let emailErr = "";
+        let emailValid = true;
 
         if (!this.state.email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)) {
-            emailErr = "invalid email";
+            emailValid = false;
+            // eslint-disable-next-line no-undef
+            email.setCustomValidity("Invalid email.");
+        } else {
+            // eslint-disable-next-line no-undef
+            email.setCustomValidity("");
         }
-        if (emailErr) {
-            this.setState( {emailErr} );
+
+        if (!emailValid) {
             return false;
         }
 
@@ -39,18 +44,14 @@ class ResetPassword extends Component {
                 "email": this.state.email
             };
 
-            const url = "http://127.0.0.1/reset_password";
+            const url = `${USERS_SERVISE}/reset_password`;
 
             axios.post(url, emailData, { withCredentials:true, crossDomain: true }
             ).then( response => {
                 alert(response.data.message);
-                window.location = "http://127.0.0.1:3000/login";
+                window.location = `${MAIN}/set_new_password`;
             }).catch( error => {
                 alert(error.response.data.error);
-            });
-
-            this.setState({
-                emailErr: ""
             });
         }
     }
@@ -58,16 +59,16 @@ class ResetPassword extends Component {
     render() {
         return (
             <div className="ResetPassword">
-                <div className="email">
-                    <label>Enter your email:</label><br />
+                <div className="align-profile">
+                    <label className="users" htmlFor="email">Enter your email:</label><br />
                     <input id="email"
+                        className="user-input"
                         type="email"
                         value={this.state['email']}
                         onChange={this.handleChange}
                     />
                 </div>
-                <div className="errorMsg">{this.state.emailErr}</div>
-                <input
+                <input id="users-btn"
                     disabled={!this.validateForm()}
                     type="button"
                     onClick={this.handleSubmit}
