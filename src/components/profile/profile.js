@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import axios from 'axios';
 import cookie from 'react-cookies';
+import { USERS_SERVISE } from 'src/constants';
 
-import ExpandProfile from './expandProfile';
-import SetPassword from './setPassword';
+import ExpandProfile from './expandProfile/expandProfile';
+import SetPassword from './expandProfile/setPassword';
+
+import './profile.css';
 
 class Profile extends Component {
     state = {
@@ -18,7 +21,7 @@ class Profile extends Component {
     };
 
     componentWillMount() {
-        const url = "http://127.0.0.1/users/profile";
+        const url = `${USERS_SERVISE}/users/profile`;
         cookie.remove('email', { path: '/' });
         cookie.remove('url_to', { path: '/' });
         axios.get(url, { withCredentials:true }
@@ -57,38 +60,39 @@ class Profile extends Component {
 
     render() {
         return (
-            <div className="Status">
-                <div className="first_name">
-                    <label>First Name:</label>
-                    &nbsp;<label>{this.state.first_name}</label>
-                    <br />
-                </div>
-                <div className="last_name">
-                    <label>Last Name:</label>
-                    &nbsp;<label>{this.state.last_name}</label>
-                    <br />
-                </div>
-                <div className="email">
-                    <label>Email:</label>
-                    &nbsp;<label>{this.state.email}</label>
-                    <br />
-                </div>
-                <div className="role">
-                    <label>Role:</label>
-                    &nbsp;<label title={this.state.role['role_description']}>
-                        {this.state.role['role_name']}
-                    </label>
-                    <br />
-                </div>
-                <div className="create_date">
-                    <label>Created:</label>
-                    &nbsp;<label>{this.state.create_date.slice(0, 10)}</label>
-                    <br />
-                </div>
-                <div className="google_acc">
-                    <label>Google account binded:</label>
-                    &nbsp;<label>{this.state.google_id ? "yes": "no"}</label>
-                    <br />
+            <div className="Profile">
+                <div className="align-profile">
+                    <div className="one-value">
+                        <label>First Name:</label>
+                        <label className="profile-value">{this.state.first_name}</label>
+                    </div>
+
+                    <div className="one-value">
+                        <label>Last Name:</label>
+                        <label className="profile-value">{this.state.last_name}</label>
+                    </div>
+
+                    <div className="one-value">
+                        <label>Email:</label>
+                        <label className="profile-value">{this.state.email}</label>
+                    </div>
+
+                    <div className="one-value">
+                        <label>Role:</label>
+                        <label className="profile-value" title={this.state.role['role_description']}>
+                            {this.state.role['role_name']}
+                        </label>
+                    </div>
+
+                    <div className="one-value">
+                        <label>Created:</label>
+                        <label className="profile-value">{this.state.create_date.slice(0, 10)}</label>
+                    </div>
+
+                    <div className="one-value">
+                        <label>Google account binded:</label>
+                        <label className="profile-value">{this.state.google_id ? "yes": "no"}</label>
+                    </div>
                 </div>
                 <div className="show_expanding">
                     {this.state.passwd}

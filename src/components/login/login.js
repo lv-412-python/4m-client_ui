@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from 'axios';
 import cookie from 'react-cookies';
+import { MAIN, USERS_SERVISE } from 'src/constants';
 
 
 class Login extends Component {
@@ -27,18 +28,18 @@ class Login extends Component {
           "password": this.state.password
         };
 
-        const url = "http://127.0.0.1/users/login";
+        const url = `${USERS_SERVISE}/users/login`;
 
         axios.post(url, user, { withCredentials:true, crossDomain: true }
         ).then( () => {
-            window.location = "http://127.0.0.1:3000";
+            window.location = `${MAIN}`;
         }).catch( error => {
             alert(error.response.data.error);
         });
     }
 
     googleAuthLogin = () => {
-        const url1 = "http://127.0.0.1/g/login";
+        const url1 = `${USERS_SERVISE}/g/login`;
         const params_login = {
             method: 'login'
         };
@@ -61,35 +62,37 @@ class Login extends Component {
     render() {
         return (
             <div className="Login">
-                <div className="email">
-                    <label>Email</label><br />
+                <div className="align-profile">
+                    <label className="users" htmlFor="email">Email:</label>
                     <input id="email"
+                        className="user-input"
                         type="email"
                         value={this.state['email']}
                         onChange={this.handleChange}
                     />
-                </div>
-                <div className="password">
-                    <label>Password</label><br />
+                    <label className="users" htmlFor="password">Password:</label>
                     <input id="password"
+                        className="user-input"
                         value={this.state['password']}
                         onChange={this.handleChange}
                         type="password"
                     />
                 </div>
-                <input
+                <input id="users-btn"
                     disabled={!this.validateForm()}
                     type="button"
                     onClick={this.handleSubmit}
                     value='Sign in'
                 />
+                <hr className="hr-text" data-content="OR">
+                </hr>
                 <input
                     type="button"
                     onClick={this.googleAuthLogin}
                     value='Sign in with Google'
-                /><br />
-                <a href="/registration">I am not signed up yet.</a><br />
-                <a href="/reset_password">I have forgotten my password :(</a>
+                />
+                <a className="login-link" href="/registration">I am not signed up yet.</a>
+                <a className="login-link" href="/reset_password">I have forgotten my password :(</a>
             </div>
         );
     }

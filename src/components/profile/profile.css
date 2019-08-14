@@ -1,0 +1,9 @@
+.align-profile {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.profile-value {
+    margin-left: 5px;
+}

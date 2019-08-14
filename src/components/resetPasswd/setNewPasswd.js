@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import axios from 'axios';
 import queryString from 'query-string';
+import { MAIN, USERS_SERVISE } from 'src/constants';
 
 class SetNewPassword extends Component {
     state = {
       'password': "",
-      'passwordTwo': "",
-      'passwordErr': "",
-      'passwordTwoErr': ""
+      'passwordTwo': ""
     };
 
     validateForm() {
@@ -15,21 +14,31 @@ class SetNewPassword extends Component {
     }
 
     validate = () => {
-        let passwordErr = "";
-        let passwordTwoErr = "";
+        let passwordValid = true;
+        let passwordTwoValid = true;
 
         if (this.state.password.length < 6) {
-            passwordErr = "password is too short";
+            passwordValid = false;
+            // eslint-disable-next-line no-undef
+            password.setCustomValidity("Password is too short.");
+        } else {
+            // eslint-disable-next-line no-undef
+            password.setCustomValidity("");
         }
         if (this.state.password != this.state.passwordTwo) {
-            passwordTwoErr = "repeat password correctly";
-        }
-        if (passwordErr || passwordTwoErr) {
-            this.setState( {passwordErr, passwordTwoErr} );
-            return false;
+            passwordTwoValid = false;
+            // eslint-disable-next-line no-undef
+            passwordTwo.setCustomValidity("Repeat password correctly.");
+        } else {
+            // eslint-disable-next-line no-undef
+            passwordTwo.setCustomValidity("");
         }
 
-        return true;
+        if (passwordValid && passwordTwoValid) {
+            return true;
+        }
+
+        return false;
     }
 
     handleChange = event => {
@@ -49,11 +58,11 @@ class SetNewPassword extends Component {
             const values = queryString.parse(this.props.location.search);
             let url, redir;
             if (values.token == undefined) {
-                url = "http://127.0.0.1/users/profile";
-                redir = "http://127.0.0.1:3000/profile";
+                url = `${USERS_SERVISE}/users/profile`;
+                redir = `${MAIN}/profile`;
             } else {
-                url = `http://127.0.0.1/reset_password?token=${values.token}`;
-                redir = "http://127.0.0.1:3000/login";
+                url = `${USERS_SERVISE}/reset_password?token=${values.token}`;
+                redir = `${MAIN}/signin`;
             }
             axios.put(url, newPassword, { withCredentials:true, crossDomain: true }
             ).then( response => {
@@ -62,41 +71,34 @@ class SetNewPassword extends Component {
             }).catch( error => {
                 alert(error.response.data.error);
             });
-
-            this.setState({
-                passwordErr: "",
-                passwordTwoErr: "",
-            });
         }
     }
 
     render() {
         return (
             <div className="ResetPassword">
-                <div className="password">
-                    <label>Password</label><br />
+                <div className="align-profile">
+                    <label className="users" htmlFor="password">Password:</label><br />
                     <input id="password"
+                        className="user-input"
                         value={this.state.password}
                         onChange={this.handleChange}
                         type="password"
                     />
-                    <div className="errorMsg">{this.state.passwordErr}</div>
-                </div>
-                <div className="password">
-                    <label>Submit password</label><br />
+                    <label className="users" htmlFor="passwordTwo">Submit password:</label><br />
                     <input id="passwordTwo"
+                        className="user-input"
                         value={this.state.passwordTwo}
                         onChange={this.handleChange}
                         type="password"
                     />
-                    <div className="errorMsg">{this.state.passwordTwoErr}</div>
-                    <input
-                        disabled={!this.validateForm()}
-                        type="button"
-                        onClick={this.handleSubmit}
-                        value='Set new password'
-                    />
                 </div>
+                <input id="users-btn"
+                    disabled={!this.validateForm()}
+                    type="button"
+                    onClick={this.handleSubmit}
+                    value='Set new password'
+                />
             </div>
         );
     }

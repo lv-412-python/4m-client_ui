@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import axios from 'axios';
+import { USERS_SERVISE } from 'src/constants';
 
 class ExpandProfile extends Component {
 
     addGAccount = () => {
-        const url1 = "http://127.0.0.1/g/login";
+        const url1 = `${USERS_SERVISE}/g/login`;
         const params_login = {
             method: 'expand',
             email: this.props.email
@@ -20,7 +21,11 @@ class ExpandProfile extends Component {
     render() {
         return (
             <div className="Expand">
-                <input type="button" onClick={this.addGAccount} value='Add Google account'/>
+                <input
+                    className="user-input"
+                    type="button"
+                    onClick={this.addGAccount}
+                    value='Add Google account'/>
             </div>
         );
     }
