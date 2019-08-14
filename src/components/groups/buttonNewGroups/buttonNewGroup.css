@@ -1,0 +1,11 @@
+.create_new {
+    display: flex;
+    justify-content: center;
+}
+
+.btn_new {
+    background-color: #ff9966;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+}

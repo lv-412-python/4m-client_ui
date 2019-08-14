@@ -1,10 +1,8 @@
 import React, { Component} from "react";
 import axios from "axios";
-
 import { URL } from 'src/constants';
-
 import {GroupListItem} from 'src/components/groups';
-
+import "./groupList.css";
 
 class GroupList extends Component {
     state = {
@@ -42,23 +40,19 @@ class GroupList extends Component {
 
     render() {
         return(
-            <div>
-                <div className='container'>
+            <div className="group_list">
+                {this.state.groups && 
                     <div>
-                        {this.state.groups && 
-                            <div>
-                                {this.state.groups.map(group =>{
-                                    return (<GroupListItem key={group.id}
-                                                        id={group.id}
-                                                        title={group.title}
-                                                        // eslint-disable-next-line react/prop-types
-                                                        getGroup={this.props.getGroup} />);
+                        {this.state.groups.map(group =>{
+                            return (<GroupListItem key={group.id}
+                                                id={group.id}
+                                                title={group.title}
+                                                // eslint-disable-next-line react/prop-types
+                                                getGroup={this.props.getGroup} />);
 
-                                })
-                                }
-                            </div>}
-                    </div>
-                </div>
+                            })
+                        }
+                    </div>}
             </div>
         );
     }
