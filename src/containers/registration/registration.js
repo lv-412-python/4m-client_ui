@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import cookie from 'react-cookies';
 
 class Registration extends Component {
     state = {
@@ -98,6 +99,13 @@ class Registration extends Component {
         });
     }
 
+    componentWillMount() {
+        if (cookie.load('error')) {
+            alert(cookie.load('error'));
+            cookie.remove('error', { path: '/' });
+        }
+    }
+
 
     render() {
         return (
@@ -142,12 +150,12 @@ class Registration extends Component {
                     disabled={!this.validateForm()}
                     type="button"
                     onClick={this.handleSubmit}
-                    value='Register'
+                    value='Sign up'
                 />
                 <input
                     type="button"
                     onClick={this.googleAuthRegister}
-                    value='Register with Google'
+                    value='Sign up with Google'
                 /><br />
                 <a href="/login">I already have an account.</a>
             </div>

@@ -11,7 +11,9 @@ class Logout extends Component {
         ).then( () => {
             cookie.remove('session', { path: '/' });
             cookie.remove('admin', { path: '/' });
-            window.location = "http://127.0.0.1:3000/login";
+            cookie.remove('has_passwd', { path: '/' });
+            cookie.remove('url_to', { path: '/' });
+            window.location = "http://127.0.0.1:3000/signin";
         });
 
         event.preventDefault();
@@ -23,7 +25,7 @@ class Logout extends Component {
             <input
                 type="button"
                 onClick={this.handleSubmit}
-                value='Logout'
+                value='Sign out'
             />
             </div>
         );

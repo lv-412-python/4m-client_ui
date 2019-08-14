@@ -4,7 +4,7 @@ import {BrowserRouter} from 'react-router-dom';
 
 import Login from './containers/login/login';
 import Logout from './containers/login/logout';
-import Status from './containers/login/status';
+import Profile from './containers/profile/profile';
 import Registration from './containers/registration/registration';
 import Form from './components/forms/form';
 import ResetPassword from './containers/resetPasswd/resetPasswd';
@@ -28,10 +28,10 @@ const Routers = () => {
             <div className='container'>
                 <Switch>
                     <Route path='/' exact component={Main}/>
-                    <Route path='/login' component={Login}/>
-                    <Route path='/logout' component={Logout}/>
+                    <Route path='/signin' component={Login}/>
+                    <Route path='/signout' component={Logout}/>
                     <Route path='/registration' component={Registration}/>
-                    <Route path='/profile' component={Status}/>
+                    <Route path='/profile' component={Profile}/>
                     <Route path='/reset_password' component={ResetPassword}/>
                     <Route path='/set_new_password' component={SetNewPassword}/>
                     <Route path="/form/:id" component={FormItem}/>
