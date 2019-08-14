@@ -45,7 +45,7 @@ class CreateGroup extends Component {
         this.getUsers();
     }
 
-    handleSubmit = (event) =>  {
+    handleSubmit = () =>  {
         const GROUP_POST_URL = `http://${URL}/group`;
         // event.preventDefault();
         let members = [];

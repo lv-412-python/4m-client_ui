@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import {URL} from 'src/constants';
-import "./assignedToForm.css"
+import "./assignedToForm.css";
 
 
 class AssignedToForm extends Component {
