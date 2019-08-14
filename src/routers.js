@@ -19,6 +19,7 @@ import AnswersForm from './components/answers/answersForm/answersForm';
 import AsignedForms from './components/answers/asignedForms/asignedForms';
 import Main from './containers/main/main';
 import {EditGroup} from './components/groups';
+import Page403 from "src/components/errorpages/page403";
 
 
 const Routers = () => {
@@ -42,6 +43,7 @@ const Routers = () => {
                     <Route path='/answersForm' component={AnswersForm}/>
                     <Route path='/edit' component={EditGroup} />
                     <Route path='/asignedForms' component={AsignedForms} />
+                    <Route path='/403' component={Page403} />
                 </Switch>
             </div>
             <Footer/>

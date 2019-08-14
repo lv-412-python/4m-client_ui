@@ -54,9 +54,8 @@ class PostField extends Component {
             axios.post(url, data, {withCredentials: true}).then(() => {
                 this.props.newFieldFalse();
                 this.props.refresh();
-            }).catch(error => {
-                // eslint-disable-next-line no-console
-                console.log(error);
+            }).catch(() => {
+                alert("You've entered invalid data, please try again!");
             });
         });
     };

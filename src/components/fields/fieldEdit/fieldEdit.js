@@ -5,9 +5,9 @@ import axios from 'axios';
 class FieldEdit extends Component {
     state = {
         'id': this.props.id,
-        'title': null,
-        'has_choice': null,
-        'is_multichoice': null,
+        'title': undefined,
+        'has_choice': undefined,
+        'is_multichoice': undefined,
         'choices': [],
     };
 
@@ -68,10 +68,9 @@ class FieldEdit extends Component {
                 'owner': owner
             };
             axios.put(url, data, {withCredentials: true}).
-            then(() => { this.props.refresh();
-                        this.props.hideEdit(); }).
-            // eslint-disable-next-line no-console
-            catch(error => { console.log(error) });
+            then(() => { this.props.hideEdit();
+                        this.props.refresh();}).
+            catch(() => { alert("You've entered invalid data, please try again!") });
         });
     };
 

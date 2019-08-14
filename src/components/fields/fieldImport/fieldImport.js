@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import Papa from 'papaparse';
 import axios from 'axios';
 
-import './fieldImport.css';
-
 
 class ImportDropdown extends Component {
 
@@ -29,9 +27,8 @@ class ImportDropdown extends Component {
                 axios.post(url, fields[i], {withCredentials: true}).then(() => {
                     this.props.newFieldFalse();
                     this.props.refresh();
-                }).catch(error => {
-                    // eslint-disable-next-line no-console
-                    console.log(error);
+                }).catch(() => {
+                    alert("You've entered invalid data, please try again!");
                 });
             }
         });
