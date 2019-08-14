@@ -1,30 +1,46 @@
 import React, {Component} from 'react';
+import axios from 'axios';
 import cookie from 'react-cookies';
+import { Link } from "react-router-dom";
+import { MAIN, USERS_SERVISE } from 'src/constants';
 
 import './header.css';
 
 class Header extends Component {
 
     state = {
-        element1: <a className="nav-link nav-text" href="/registration">Sign up</a>,
-        element2: <a className="nav-link nav-text" href="/signin">Sign in</a>,
+        element1: <Link className="nav-link nav-text" to="/registration">Sign up</Link>,
+        element2: <Link className="nav-link nav-text" to="/signin">Sign in</Link>,
         element3: undefined,
         element4: undefined
     };
+
+    signOut = () => {
+        const url = `${USERS_SERVISE}/users/logout`;
+        let signout = confirm("Sure you want to sign out?");
+        if (signout){
+            axios.post(url,  { withCredentials:true }
+            ).then( () => {
+                cookie.remove('session', { path: '/' });
+                cookie.remove('admin', { path: '/' });
+                window.location = `${MAIN}/signin`;
+            });
+        }
+    }
 
     componentWillMount() {
         let condition = cookie.load("session") != undefined;
         if (condition) {
             this.setState({
-                element1: <a className="nav-link nav-text" href="/profile">Profile</a>,
-                element2: <a className="nav-link nav-text" href="/signout">Sign out</a>,
-                element3: <a className="nav-link nav-text" href="/form">Forms</a>,
-                element4: <a className="nav-link nav-text" href="/group">Groups</a>
+                element1: <Link className="nav-link nav-text" to="/profile">Profile</Link>,
+                element2: <Link className="nav-link nav-text" to="#" onClick={this.signOut}>Sign out</Link>,
+                element3: <Link className="nav-link nav-text" to="/form">Forms</Link>,
+                element4: <Link className="nav-link nav-text" to="/group">Groups</Link>,
             });
         } else {
             this.setState({
-                element1: <a className="nav-link nav-text" href="/registration">Sign up</a>,
-                element2: <a className="nav-link nav-text" href="/signin">Sign in</a>
+                element1: <Link className="nav-link nav-text" to="/registration">Sign up</Link>,
+                element2: <Link className="nav-link nav-text" to="/signin">Sign in</Link>
             });
         }
     }

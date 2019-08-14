@@ -93,7 +93,9 @@ class SetNewPassword extends Component {
                         type="password"
                     />
                 </div>
-                <input id="users-btn"
+                <input
+                    className="user-input"
+                    id="users-btn"
                     disabled={!this.validateForm()}
                     type="button"
                     onClick={this.handleSubmit}
