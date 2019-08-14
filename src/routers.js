@@ -19,7 +19,7 @@ import Footer from './components/footer/footer';
 import AnswersForm from './components/answers/answersForm/answersForm';
 import Main from './containers/main/main';
 import {EditGroup} from './components/groups';
-
+import AsignedForms from './components/answers/asignedForms/asignedForms';
 
 const Routers = () => {
     return (
@@ -42,6 +42,7 @@ const Routers = () => {
                     <Route path='/new-group' component={CreateGroup}/>
                     <Route path='/answersForm' component={AnswersForm}/>
                     <Route path='/edit' component={EditGroup} />
+                    <Route path='/asignedForms' component={AsignedForms}/>
                 </Switch>
             </div>
             <Footer/>

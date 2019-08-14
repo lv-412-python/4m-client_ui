@@ -26,7 +26,10 @@ class FieldItem extends Component
 
     getData = () => {
         const url = `http://127.0.0.1/field/${this.state.id}`;
-        axios.get(url, {withCredentials: true}).then(response => {
+        axios.get(url, {
+            crossDomain: true,
+            withCredentials: true
+            }).then(response => {
             const field = response.data;
             let object = null;
             if (field.has_choice)
