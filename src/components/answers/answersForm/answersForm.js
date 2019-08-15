@@ -138,7 +138,8 @@ class AnswersForm extends Component {
         return(
             <div className="answersForm_body">
                 { (this.state.isAnswered && <div><UserAnswers userId={this.state.user_id}
-                                                         formId={this.state.form_id}/>
+                                                              formId={this.state.form_id}
+                                                              fields={this.state.fields}/>
                                             </div>) 
                 ||
                 (<form onSubmit={this.createAnswersResponseJSON}>
