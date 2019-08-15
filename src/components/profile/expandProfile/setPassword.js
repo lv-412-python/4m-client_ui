@@ -1,9 +1,10 @@
 import React, { Component } from "react";
+import { MAIN } from 'src/constants';
 
 class SetPassword extends Component {
 
     setPassword = () => {
-        this.props.history.push("/set_new_password");
+        window.location = `${MAIN}/set_new_password`;
     }
 
     render() {
