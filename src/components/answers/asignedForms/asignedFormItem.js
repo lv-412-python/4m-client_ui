@@ -12,7 +12,8 @@ class AsignedFormItem extends Component {
                     {/* eslint-disable-next-line react/prop-types */}
                     <Link to={{
                         pathname: `/answersForm`,
-                        state: { form_id: this.props.form_id}
+                        state: { form_id: this.props.form_id,
+                                 userId: this.props.userId}
                     }}  value={this.props.form_id}
                           /* eslint-disable-next-line react/prop-types */
                           className='form_title'>{this.props.title}</Link>

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from 'axios';
 import cookie from 'react-cookies';
 import { Link } from "react-router-dom";
-import { MAIN, USERS_SERVISE } from 'src/constants';
+import { MAIN, USERS_SERVISE, ASIGNED_FORMS } from 'src/constants';
 
 
 class Login extends Component {
@@ -33,7 +33,11 @@ class Login extends Component {
 
         axios.post(url, user, { withCredentials:true, crossDomain: true }
         ).then( () => {
-            window.location = `${MAIN}`;
+            if (cookie.load("admin") == "True"){
+                window.location = `${MAIN}`;
+            } else {
+                window.location = `${ASIGNED_FORMS}`;
+            }
         }).catch( error => {
             alert(error.response.data.error);
         });

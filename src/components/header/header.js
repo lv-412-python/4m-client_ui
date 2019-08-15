@@ -30,12 +30,20 @@ class Header extends Component {
 
     componentWillMount() {
         let condition = cookie.load("session") != undefined;
-        if (condition) {
+        let isAdmin = cookie.load("admin") == "True";
+        // console.log("cookie", isAdmin);
+        if (condition && isAdmin) {
             this.setState({
                 element1: <Link className="nav-link nav-text" to="/profile">Profile</Link>,
                 element2: <Link className="nav-link nav-text" to="#" onClick={this.signOut}>Sign out</Link>,
                 element3: <Link className="nav-link nav-text" to="/form">Forms</Link>,
-                element4: <Link className="nav-link nav-text" to="/group">Groups</Link>,
+                element4: <Link className="nav-link nav-text" to="/group">Groups</Link>
+            });
+        } else if (condition){
+            this.setState({
+                element1: <Link className="nav-link nav-text" to="/profile">Profile</Link>,
+                element2: <Link className="nav-link nav-text" to="#" onClick={this.signOut}>Sign out</Link>,
+                element3: <Link className="nav-link nav-text" to="/asignedForms">My Forms</Link>
             });
         } else {
             this.setState({
@@ -49,7 +57,11 @@ class Header extends Component {
         return (
             <div className="header">
                 <nav className='navbar fixed-top navbar-expand-lg'>
-                    <a className='logo' href='/'>4M</a>
+                    { 
+                    (cookie.load("admin") == 'True' &&  <a className='logo' href='/'>4M</a>)
+                    || (cookie.load("admin") == 'False' && <a className='logo' href='/asignedForms'>4M</a>)
+                    || <a className='logo' href='/signin'>4M</a>
+                    }
                     <button className="navbar-toggler" type="button" data-toggle="collapse"
                             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
