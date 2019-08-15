@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import NewFormHeader from './newFormHeader/newFormHeader';
 import FieldsList from '../fields/fieldsList/fieldsList';
 import NewForm from '../forms/newForm/newForm';
+import cookie from 'react-cookies';
+import Page403 from "src/components/errorpages/page403";
 
 class FormField extends Component {
     state = {
@@ -43,15 +45,15 @@ class FormField extends Component {
     };
 
     render() {
-        return (
-            <div>
-                <NewFormHeader/>
-                <div className='new row justify-content-around'>
-                    <FieldsList setSelectedItems = {this.setSelectedItems}/>
-                    <NewForm selectedItems={this.state.selectedItems} removeField={this.removeField} />
-                </div>
+        let admin = cookie.load("admin");
+        return admin === "True"?
+        <div>
+            <NewFormHeader/>
+            <div className='new row justify-content-around'>
+                <FieldsList setSelectedItems = {this.setSelectedItems}/>
+                <NewForm selectedItems={this.state.selectedItems} removeField={this.removeField} />
             </div>
-        );
+        </div>: <Page403 />;
     }
 }
 
