@@ -9,74 +9,78 @@ class ChooseGroup extends Component {
 
     state = {
         group_id: null,
-        title: "",
-        groupTitles: [],
+        groups: [],
         // eslint-disable-next-line react/prop-types
         form_id: this.props.form_id,
-        // eslint-disable-next-line react/prop-types
-        owner_id: null
+        owner_id: null,
+        chart: null
     }
 
     getUser = () => {
-        const userProfileURL = `${USERS_SERVISE}/users/id`;
+        const userProfileURL = `${USERS_SERVISE}/users/profile`;
         axios.get(userProfileURL, {
             crossDomain: true,
             withCredentials: true
             }).then(response => {
-            this.setState({owner_id: response.data.id}});
+            this.setState({owner_id: response.data.user_id}, () => this.getGroupsData());
         }).catch(error => {
             // eslint-disable-next-line no-console
             console.log(error);
         });
     };
 
-    // validateForm() {
-    //     return this.state['title'].length != "";
-    // }
-
     handleSelectChange = (selectedOption) => {
-        this.setState(
-            title = selectedOption,
-            group_id = groupTitles.indexOf(selectedOption)
-        );
+        this.setState({
+            group_id: selectedOption.value
+        }, () => this.handleSubmit() );
     }
 
     getGroupsData = () => {
 
-        const url = `${USERS_SERVISE}/group?owner_id=${this.state.owner_id}`;
+        const url = `${USERS_SERVISE}/group?owner=${this.state.owner_id}`;
 
         axios.get(url, { withCredentials: true, crossDomain: true }
         ).then( response => {
-            let groupTitles = [];
+            let groups = [];
             for (let i = 0; i < response.data.length; i++) {
-                if (response.data[i].assigned_to_forms['form_id'] == this.state.form_id) {
-                    groupTitles.push(response.data[i].title);
+                for (let j = 0; j < response.data[i].assigned_to_forms.length; j++) {
+                    if (response.data[i].assigned_to_forms[j] == this.state.form_id) {
+                        let group = {'value': response.data[i].id, 'label':response.data[i].title};
+                        groups.push(group);
+                        break;
+                    }
                 }
             }
-            this.setState(...groupTitles);
+            this.setState({groups:groups});
         }).catch(error => {
-            alert(error.response.data.error);
+            // eslint-disable-next-line no-console
+            console.log(error);
+        });
+    }
+
+    handleSubmit = () => {
+        this.setState({
+            chart: <PieChartItem
+                        group_id = {this.state.group_id}
+                        form_id = {this.state.form_id}
+                    />
         });
     }
 
     componentWillMount() {
         this.getUser();
-        this.getGroupsData();
     }
 
     render() {
         return (
             <div>
                 <label htmlFor="forms-group">Groups, asigned to this form:</label>
-                <PieChartItem
-                    group_id = {this.state.group_id}
-                    form_id = {this.state.form_id}
-                />
                 <Select
                     id="forms-group"
-                    options={this.state.groupTitles}
+                    options={this.state.groups}
                     onChange={this.handleSelectChange}
                 />
+                {this.state.chart}
             </div>
         );
     }

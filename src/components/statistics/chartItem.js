@@ -18,7 +18,7 @@ class PieChartItem extends Component {
     }
 
     getChartData = () => {
-        const url = `${USERS_SERVISE}/answers/statistics?form_id=${this.state.form_id}&group_id=${this.state.group_id}`;
+        const url = `${USERS_SERVISE}/answers/statistic?form_id=${this.state.form_id}&group_id=${this.state.group_id}`;
 
         axios.get(url, { withCredentials: true, crossDomain: true }
         ).then( response => {
@@ -27,10 +27,11 @@ class PieChartItem extends Component {
                     backgroundColor: ['#0088FE', '#00C49F']
                 }];
 
-                this.setState(...datasets);
+                this.setState({datasets: datasets});
             }
         ).catch(error => {
-            alert(error.response.data.error);
+            // eslint-disable-next-line no-console
+            console.log(error);
         });
 
     }
@@ -44,7 +45,6 @@ class PieChartItem extends Component {
     render() {
         return (
             <div>
-                <label>Group answers:</label>
                 <Pie
                     data={{
                         labels: this.state.labels,
