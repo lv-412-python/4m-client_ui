@@ -57,7 +57,7 @@ class NewForm extends Component {
     render() {
         const {title, description} = this.state;
         return (
-            <div>
+            <div className='new_form_container'>
                 <form className='new_form col align-self-end'>
                     <label>
                         <p>Title:</p>

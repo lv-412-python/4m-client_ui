@@ -28,7 +28,7 @@ class ButtonNewGroup extends Component {
     render() {
         return (
             <div className="create_new">
-                <Link to='/new-group' className="btn_new">New group</Link>
+                <Link to='/new-group' className="btn-outline-dark text-center btn-lg btn_new">New group</Link>
             </div>
         );
     }

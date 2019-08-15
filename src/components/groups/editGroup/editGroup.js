@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import Select from 'react-select';
 import axios from 'axios';
-import { URL } from 'src/constants';
+import {URL} from 'src/constants';
+import "./editGroup.css";
 
 class EditGroup extends Component {
 
@@ -10,20 +11,23 @@ class EditGroup extends Component {
         selectedOption: null,
         getUsers: undefined,
         someList: undefined
-    }
-    createList = ()=>{
-        let someList=[];
-        this.state.getUsers.map(i =>{
+    };
+
+    createList = () => {
+        let someList = [];
+        this.state.getUsers.map(i => {
             someList.push({value: i.user_id, label: i.email});
         });
-        this.setState({someList:someList});
-    }
+        this.setState({someList: someList});
+    };
 
-    getUsers =()=> {
+    getUsers = () => {
         const GET_USERS_URL = `http://${URL}/users`;
         axios.get(GET_USERS_URL, {withCredentials: true}
-        ).then(response=>{
-            this.setState({getUsers:response.data},()=>{this.createList()});
+        ).then(response => {
+            this.setState({getUsers: response.data}, () => {
+                this.createList();
+            });
         });
     };
 
@@ -37,16 +41,16 @@ class EditGroup extends Component {
     editGroup = (e) => {
         e.preventDefault();
         let members = [];
-        this.state.selectedOption.map(userId=>{
+        this.state.selectedOption.map(userId => {
             members.push(userId.value);
         });
         let body = {
-            title:this.state.title,
-            owner_id:this.props.owner,
+            title: this.state.title,
+            owner_id: this.props.owner,
             members: members,
-            assigned_to_forms:this.props.forms
+            assigned_to_forms: this.props.forms
         };
-        const GROUP_PUT_URL = `http://${URL}/group/${this.props.id}`; 
+        const GROUP_PUT_URL = `http://${URL}/group/${this.props.id}`;
         axios.put(GROUP_PUT_URL, body, {withCredentials: true, crossDomain: true}
         ).then((response) => {
             // eslint-disable-next-line no-console
@@ -57,38 +61,41 @@ class EditGroup extends Component {
         });
     };
 
-    componentDidMount(){
+    componentDidMount() {
         this.getUsers();
     }
 
     handleChange = (selectedOption) => {
-        this.setState({ selectedOption });
+        this.setState({selectedOption});
+    };
 
-        // console.log(this.state.someList);
-    }
-
-    render(){
+    render() {
         return (
-            <div>
+            <div className='edit_main_component'>
+                <div className='edit_group_container'>
                 <form onSubmit={this.editGroup}>
-                    <label>
+                    <label className='title_edit'>
                         Title:
-                        <input value={this.state.title} onChange={this.handleTitleChange} />
+                        <div>
+                            <input value={this.state.title} className='group_input' onChange={this.handleTitleChange}/>
+                        </div>
                     </label>
+                    <label className='title_edit'>
+                        Members:
                         <Select
-                        defaultValue={[...this.props.userEmail]}
-                        options={this.state.someList}
-                        onChange={this.handleChange}
-                        isMulti
+                            className='select_wight'
+                            defaultValue={[...this.props.userEmail]}
+                            options={this.state.someList}
+                            onChange={this.handleChange}
+                            isMulti
                         />
-                    <input type="submit" value="Save" />
+                    </label>
+                    <input type="submit" className='btn btn_save' value="Save"/>
                 </form>
+                </div>
             </div>
         );
-    
     }
-
-
 }
 
 export {EditGroup};

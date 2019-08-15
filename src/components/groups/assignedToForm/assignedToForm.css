@@ -1,15 +1,37 @@
 .forms_list {
-    background-color: #ffeee6;
-    /* font-size: xx-large; */
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    border-radius: 20px;
     color: black;
-    margin-top: 20px;
+    font-size: 25px;
+    background-color: #ffeee6;
+    border-radius: 10px;
+    padding: 5px;
 }
 
-.qwerty {
-    float: left;
+.groups {
+    display: flex;
+    align-items: flex-start;
+    text-align: left;
+    justify-content: space-between;
+}
+
+.btn_submit {
+    background-color: #ff9966;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 20px;
+}
+
+.forms {
+    display: flex;
+    align-items: flex-start;
+    align-self: flex-start;
+    flex-direction: row;
+    padding-top: 5px;
+}
+
+.forms_title {
+    text-align: left;
 }

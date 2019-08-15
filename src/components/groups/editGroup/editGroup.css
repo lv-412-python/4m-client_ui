@@ -1,21 +1,25 @@
-.create_group_component {
+.edit_main_component {
     border-radius: 20px;
     background-color: white;
     color: black;
     display: flex;
     width: 550px;
+    text-align: center;
     align-self: center;
     flex-direction: column;
     justify-content: center;
+    padding: 10px;
+    margin: 0;
 }
 
-.new_group {
+.main_component {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-top: 50px;
-    text-align: center;
+    align-self: center;
+    width: 11400px;
+}
+
+.title_edit {
+    font-size: 30px;
 }
 
 .select_wight {
@@ -29,30 +33,12 @@
     font-size: 30px;
 }
 
-.submit_btn {
+.btn_save {
     font-size: 20px;
-    margin-bottom: 40px;
     background-color: #ff9966;
     color: black;
     width: 150px;
     border-radius: 10px;
     padding: 10px;
     text-align: center;
-}
-
-.submit {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-top: 10px;
-}
-
-.title_create_group {
-    font-size: 25px;
-    padding: 10px;
-    margin: 0;
-}
-
-.form_assign {
-    font-size: 20px;
 }

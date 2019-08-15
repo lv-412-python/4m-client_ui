@@ -1,3 +1,8 @@
 .form_list {
     float: left;
 }
+
+.form_assign {
+    display: flex;
+    align-items: flex-start;
+}
