@@ -26,7 +26,7 @@ class UserAnswers extends Component {
     render(){
         return(
             <div>
-                <h1>This form is answered</h1>
+                <h2>Sorry, you already answered this form</h2>
             </div>
         );
     }

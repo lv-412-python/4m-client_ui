@@ -70,7 +70,8 @@ class FieldEdit extends Component {
             axios.put(url, data, {withCredentials: true}).
             then(() => { this.props.hideEdit();
                         this.props.refresh();}).
-            catch(() => { alert("You've entered invalid data, please try again!") });
+            catch(() => {
+                alert("You've entered invalid data, please try again!"); });
         });
     };
 

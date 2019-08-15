@@ -3,8 +3,10 @@ import PropTypes from 'prop-types';
 
 const TextInputField = props => (
     <div>
-        <label>{props.title}:
-            <input type="text" onChange={props.handleInputChange} name={props.field_id}/>
+        <label>{props.title}
+            <div>
+                <input type="text" onChange={props.handleInputChange} name={props.field_id}/>
+            </div>
         </label>
     </div>
 );

@@ -1,0 +1,22 @@
+.answersForm_select{
+    color: black;
+    width: 400px;
+}
+
+.answersForm_body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.button_submit_answers {
+    border-radius: 10px;
+}
+
+.sbm_ans {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+

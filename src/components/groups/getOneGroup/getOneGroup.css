@@ -1,20 +1,18 @@
 .group_item {
     background-color: #ffeee6;
-    /* font-size: xx-large; */
+    border-radius: 15px;
+    color: black;
+    font-size: xx-large;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    border-radius: 20px;
-    color: black;
     margin-top: 20px;
+    padding: 10px;
 }
 
-/* .text_group {
-    text-align: left;
-} */
-
 .title_group {
+    padding-top: 25px;
     font-weight: bold;
 }
 
@@ -24,18 +22,30 @@
     align-items: center;
 }
 
-/* .btn { */
-    /* background-color: #ff9966; */
-    /* border-radius: 10px; */
-    /* padding: 10px; */
-    /* text-align: center; */
-/* } */
-
 .button {
     margin: 20px 20px 40px 20px;
     font-size: 20px;
     background-color: #ff9966;
     color: black;
-    border-radius: 10px !important;
     width: 150px;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+}
+
+.title_one_group {
+    padding-top: 10px;
+}
+
+.list_item {
+    text-align: left;
+    align-items: flex-start;
+    justify-content: space-around;
+}
+
+.main_component {
+    padding: 10px;
+    width: 1140px;
+    align-self: center;
+    justify-content: center;
 }

@@ -29,7 +29,7 @@ class Group extends Component {
         return(
             <div>
                 {someComponent}
-                <ButtonNewGroup createGroup={this.createGroup}/>
+                <ButtonNewGroup className='btn btn-lg align-self-center' createGroup={this.createGroup}/>
             </div>
         );
     }

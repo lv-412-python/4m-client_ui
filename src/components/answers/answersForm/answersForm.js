@@ -5,6 +5,8 @@ import Select from 'react-select';
 import UserAnswers from '../userAnswers/userAnswers';
 import TextInputField from '../inputComponents/TextInputField';
 
+import './answersForm.css';
+
 
 class AnswersForm extends Component {
     state = {
@@ -50,7 +52,7 @@ class AnswersForm extends Component {
             // eslint-disable-next-line no-console
             console.error(error);
         });
-    }
+    };
 
     getFields = () => {
         this.state.form.fields.map( field => {
@@ -90,7 +92,7 @@ class AnswersForm extends Component {
             // eslint-disable-next-line no-console
             console.error(error);
             });
-    }
+    };
 
     handleInputChange = (e) => {
         const {name , value} = e.target;
@@ -125,7 +127,7 @@ class AnswersForm extends Component {
             "reply": value
         };
         this.setState({answers});
-    }
+    };
 
     componentDidMount(){
         this.getForms();
@@ -134,7 +136,7 @@ class AnswersForm extends Component {
 
     render(){
         return(
-            <div>
+            <div className="answersForm_body">
                 { (this.state.isAnswered && <div><UserAnswers userId={this.state.user_id}
                                                          formId={this.state.form_id}/>
                                             </div>) 
@@ -150,7 +152,7 @@ class AnswersForm extends Component {
                                         <div key = {field.id}>
                                             <label>
                                                 {field.title}
-                                                <Select options={this.state.options[field.id]}
+                                                <Select className="answersForm_select" options={this.state.options[field.id]}
                                                         onChange={this.handleSelectChange}
                                                         name={field.id}/>
                                             </label>
@@ -165,8 +167,8 @@ class AnswersForm extends Component {
                                     );
                                 }
                             })}
-                            <div>
-                                <button className='btn btn-light'>Submit Answers</button>
+                            <div className='sbm_ans'>
+                                <button className='button_submit_answers btn btn-dark'>Submit Answers</button>
                             </div>
                         </div>
                     )}
