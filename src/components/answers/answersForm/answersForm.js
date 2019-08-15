@@ -50,7 +50,7 @@ class AnswersForm extends Component {
             // eslint-disable-next-line no-console
             console.error(error);
         });
-    }
+    };
 
     getFields = () => {
         this.state.form.fields.map( field => {
@@ -90,7 +90,7 @@ class AnswersForm extends Component {
             // eslint-disable-next-line no-console
             console.error(error);
             });
-    }
+    };
 
     handleInputChange = (e) => {
         const {name , value} = e.target;
@@ -125,7 +125,7 @@ class AnswersForm extends Component {
             "reply": value
         };
         this.setState({answers});
-    }
+    };
 
     componentDidMount(){
         this.getForms();
@@ -166,7 +166,7 @@ class AnswersForm extends Component {
                                 }
                             })}
                             <div>
-                                <button className='btn btn-light'>Submit Answers</button>
+                                <button className='btn btn-outline-dark'>Submit Answers</button>
                             </div>
                         </div>
                     )}

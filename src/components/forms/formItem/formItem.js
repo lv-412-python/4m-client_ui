@@ -75,7 +75,7 @@ class FormItem extends Component {
 
     render() {
         return (
-            <div>
+            <div className='form_item_container'>
                 <div className='form_item text_form'>
                     <p className='title_form'>{this.state.title}</p>
                     <p>{this.state.description}</p>

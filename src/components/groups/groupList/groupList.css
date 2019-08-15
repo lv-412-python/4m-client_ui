@@ -1,5 +1,11 @@
 .group_list {
     display: flex;
     justify-content: center;
-    /* font-size: xx-large; */
+}
+
+.create_group_container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    align-self: center;
 }

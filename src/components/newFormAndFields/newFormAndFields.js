@@ -13,7 +13,7 @@ class FormField extends Component {
         const {selectedItems} = this.state;
         for (let i = 0; i < selectedItems.length; i++)
         {
-            if (selectedItems[i].id == id)
+            if (selectedItems[i].id === id)
             {
                 index = i;
                 break;
