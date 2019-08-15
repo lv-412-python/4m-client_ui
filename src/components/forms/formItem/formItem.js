@@ -7,6 +7,8 @@ import {confirmAlert} from "react-confirm-alert";
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import './formItem.css';
 
+import  ChooseGroup  from 'src/components/statistics/getFormGroups';
+
 class FormItem extends Component {
 
     state = {
@@ -111,6 +113,9 @@ class FormItem extends Component {
                         <button className='btn btn-dark del_btn' onClick={this.delete} type="button">Delete</button>
                     </Link>
                 </div>
+                <ChooseGroup
+                    form_id={this.state.form_id}
+                />
             </div>
 
         );
