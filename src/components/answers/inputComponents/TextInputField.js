@@ -1,12 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import './TextInputField.css';
+
+
 const TextInputField = props => (
     <div>
-        <label>{props.title}
+        <label className="TextInputField_label">
             <div>
-                <input type="text" onChange={props.handleInputChange} name={props.field_id}/>
+                {props.title}
             </div>
+            <input className="TextInputField_input" type="text" onChange={props.handleInputChange} name={props.field_id}/>
         </label>
     </div>
 );

@@ -144,14 +144,16 @@ class AnswersForm extends Component {
                 (<form onSubmit={this.createAnswersResponseJSON}>
                     { this.state.fields && (
                         <div>
-                            <h2>{ this.state.form.title }</h2>
-                            <p>{ this.state.form.description }</p>
+                            <h2 className="answersForm_title">{ this.state.form.title }</h2>
+                            <p className="answersForm_title">{ this.state.form.description }</p>
                             { this.state.fields.map(field => {
                                 if (field.has_choice === true) {
                                     return(
                                         <div key = {field.id}>
                                             <label>
-                                                {field.title}
+                                                <div className="answersForm_select_label">
+                                                    {field.title}
+                                                </div>
                                                 <Select className="answersForm_select" options={this.state.options[field.id]}
                                                         onChange={this.handleSelectChange}
                                                         name={field.id}/>
