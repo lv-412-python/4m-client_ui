@@ -5,6 +5,8 @@ import Select from 'react-select';
 import UserAnswers from '../userAnswers/userAnswers';
 import TextInputField from '../inputComponents/TextInputField';
 
+import './answersForm.css';
+
 
 class AnswersForm extends Component {
     state = {
@@ -134,23 +136,26 @@ class AnswersForm extends Component {
 
     render(){
         return(
-            <div>
+            <div className="answersForm_body">
                 { (this.state.isAnswered && <div><UserAnswers userId={this.state.user_id}
-                                                         formId={this.state.form_id}/>
+                                                              formId={this.state.form_id}
+                                                              fields={this.state.fields}/>
                                             </div>) 
                 ||
                 (<form onSubmit={this.createAnswersResponseJSON}>
                     { this.state.fields && (
                         <div>
-                            <h2>{ this.state.form.title }</h2>
-                            <p>{ this.state.form.description }</p>
+                            <h2 className="answersForm_title">{ this.state.form.title }</h2>
+                            <p className="answersForm_title">{ this.state.form.description }</p>
                             { this.state.fields.map(field => {
                                 if (field.has_choice === true) {
                                     return(
                                         <div key = {field.id}>
                                             <label>
-                                                {field.title}
-                                                <Select options={this.state.options[field.id]}
+                                                <div className="answersForm_select_label">
+                                                    {field.title}
+                                                </div>
+                                                <Select className="answersForm_select" options={this.state.options[field.id]}
                                                         onChange={this.handleSelectChange}
                                                         name={field.id}/>
                                             </label>
@@ -165,8 +170,8 @@ class AnswersForm extends Component {
                                     );
                                 }
                             })}
-                            <div>
-                                <button className='btn btn-outline-dark'>Submit Answers</button>
+                            <div className='sbm_ans'>
+                                <button className='button_submit_answers btn btn-dark'>Submit Answers</button>
                             </div>
                         </div>
                     )}

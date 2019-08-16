@@ -1,0 +1,13 @@
+.TextInputField_input{
+    width: 450px;
+    height: 50px;
+}
+
+.TextInputField_label{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: flex-start;
+    align-content: flex-start; */
+    align-items: center;
+    margin-bottom: 20px; 
+}

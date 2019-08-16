@@ -2,7 +2,7 @@ footer {
     background-color: #ffeee6;
     color: black;
     margin-top: -100px;
-    height: 50px;
+    height: 35px;
     text-align: center;
     align-self: flex-end;
     flex-shrink: 0;
@@ -14,9 +14,15 @@ a {
 }
 
 .footer_links {
+    font-size: 16px;
+    display: flex;
+    justify-content: space-between;
+    margin: 5px 5px 0px 5px;
+    padding: 5px 5px 0px 5px;
+}
+
+.footer_links a{
     font-weight: bold;
-    margin: 5px;
-    padding: 5px;
 }
 
 a:hover {

@@ -4,7 +4,8 @@ import axios from 'axios';
 
 class UserAnswers extends Component {
     state = {
-        answers: []
+        answers: undefined,
+        fields: undefined
     }
     getUserAnswers(){
         const answersURL = 'http://127.0.0.1/answers';
@@ -17,16 +18,36 @@ class UserAnswers extends Component {
             }
             }).then(response => {
                 const answers = response.data;
-                this.setState({answers});
+                this.setState({answers}, ()=> this.getFieldTitles());
             }
             );
+    }
 
+    getFieldTitles(){
+        let fields = {}
+        this.props.fields.map( field => {
+            console.log(field.id, field.title);
+            fields[field.id] = field.title;
+        });
+        this.setState({fields})
+    }
+
+    componentDidMount(){
+        this.getUserAnswers();
     }
 
     render(){
         return(
             <div>
-                <h1>This form is answered</h1>
+                <h2>Sorry, you already answered this form</h2>
+                { this.state.answers &&
+                    this.state.answers.map( answer => {
+                        <div>
+                            <h4>{answer.field_id}</h4>
+                            <p>{answer.reply}</p>
+                        </div>
+                    })
+                }
             </div>
         );
     }

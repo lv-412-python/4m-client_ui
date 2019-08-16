@@ -1,0 +1,31 @@
+.answersForm_body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.button_submit_answers {
+    border-radius: 10px;
+}
+
+.sbm_ans {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.answersForm_select{
+    color: black;
+    width: 450px;
+    left: 10px;
+}
+
+.answersForm_title{
+    text-align: center;
+}
+
+.answersForm_select_label{
+    text-align: center;
+}
+

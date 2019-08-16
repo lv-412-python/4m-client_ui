@@ -91,7 +91,7 @@ class Registration extends Component {
             axios.post(url, user, { withCredentials:true }
             ).then( response => {
                 alert(response.data.message);
-                window.location(`${MAIN}`);
+                window.location=`${MAIN}`;
             }).catch( error => {
                 alert(error.response.data.error);
             });
